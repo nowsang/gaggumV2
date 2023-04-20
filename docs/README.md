@@ -87,23 +87,23 @@ SSAFY 8기 특화 프로젝트
 
 ### 요구사항 명세서
 
-https://j8b310.notion.site/d2753cc1f7f24088b8c5f95de22ea3ad
+🍀 [요구사항 명세서](https://j8b310.notion.site/d2753cc1f7f24088b8c5f95de22ea3ad)
 
 ### ERD
 
-https://www.erdcloud.com/d/xKgoJL6JpqXwm7Xm3
+🍀 [ERD](https://www.erdcloud.com/d/xKgoJL6JpqXwm7Xm3)
 
 ### API 명세서
 
-//
+🍀 [API명세서](https://j8b310.notion.site/API-aeaeb98744db4d208244063fe19c2048)
 
 ### 와이어 프레임
 
-https://www.figma.com/file/bJj1vEB1RWQ0dVShCkFPyV/B310?node-id=0%3A1&t=Xemtrqym1iqpisXl-1
+🍀 [와이어 프레임](https://www.figma.com/file/bJj1vEB1RWQ0dVShCkFPyV/B310?node-id=0%3A1&t=Xemtrqym1iqpisXl-1)
 
 ### 포팅 매뉴얼
 
-//
+🍀 [포팅매뉴얼]()
 
 ## 🌼 프로젝트 파일 구조
 
