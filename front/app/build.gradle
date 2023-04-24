@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.hyokiz.front'
+    namespace 'com.gaggum'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.hyokiz.front"
+        applicationId "com.gaggum"
         minSdk 24
         targetSdk 33
         versionCode 1
