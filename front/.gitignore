@@ -14,8 +14,8 @@
 .cxx
 local.properties
 
-# Created by https://www.toptal.com/developers/gitignore/api/kotlin,androidstudio
-# Edit at https://www.toptal.com/developers/gitignore?templates=kotlin,androidstudio
+# Created by https://www.toptal.com/developers/gitignore/api/androidstudio,kotlin
+# Edit at https://www.toptal.com/developers/gitignore?templates=androidstudio,kotlin
 
 ### Kotlin ###
 # Compiled class file
@@ -169,4 +169,4 @@ fabric.properties
 
 !/gradle/wrapper/gradle-wrapper.jar
 
-# End of https://www.toptal.com/developers/gitignore/api/kotlin,androidstudio
+# End of https://www.toptal.com/developers/gitignore/api/androidstudio,kotlin

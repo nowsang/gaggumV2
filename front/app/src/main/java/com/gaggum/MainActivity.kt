@@ -1,4 +1,4 @@
-package com.hyokiz.front
+package com.gaggum
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
