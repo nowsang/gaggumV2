@@ -5,67 +5,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/start_background_tulip"
-    tools:context=".JoinActivity">
+    tools:context=".SigninActivity">
 
     <TextView
-        android:id="@+id/joinTitle"
+        android:id="@+id/loginTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="200dp"
         android:gravity="center"
-        android:text="회원가입"
+        android:text="로그인"
         android:textSize="30sp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/bmjua_ttf"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/joinEmailArea"
+        app:layout_constraintBottom_toTopOf="@id/loginEmailArea"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"/>
 
     <EditText
-        android:id="@+id/joinEmailArea"
+        android:id="@+id/loginEmailArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="이메일"
+        android:hint="email"
         android:width="200dp"
         android:layout_margin="8dp"
         android:inputType="textEmailAddress"
         android:fontFamily="@font/bmjua_ttf"
-        app:layout_constraintTop_toBottomOf="@id/joinTitle"
-        app:layout_constraintBottom_toTopOf="@id/joinPasswordArea"
+        app:layout_constraintTop_toBottomOf="@id/loginTitle"
+        app:layout_constraintBottom_toTopOf="@id/loginPasswordArea"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
-        android:id="@+id/joinPasswordArea"
+        android:id="@+id/loginPasswordArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="비밀번호"
+        android:hint="password"
         android:width="200dp"
         android:layout_margin="8dp"
         android:inputType="textPassword"
         android:fontFamily="@font/bmjua_ttf"
-        app:layout_constraintTop_toBottomOf="@id/joinEmailArea"
-        app:layout_constraintBottom_toTopOf="@id/joinBtn"
+        app:layout_constraintTop_toBottomOf="@id/loginEmailArea"
+        app:layout_constraintBottom_toTopOf="@id/loginBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
-        android:id="@+id/joinBtn"
+        android:id="@+id/loginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:text="로그인"
+        android:textStyle="bold"
+        android:layout_margin="8dp"
+        android:background="@drawable/radius_button"
+        android:fontFamily="@font/bmjua_ttf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginPasswordArea"
+        app:layout_constraintBottom_toTopOf="@id/signupBtn"/>
+
+    <Button
+        android:id="@+id/signupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="200dp"
         android:text="회원가입"
-        android:background="@drawable/radius_button"
         android:textStyle="bold"
         android:layout_margin="8dp"
+        android:background="@drawable/radius_button"
         android:fontFamily="@font/bmjua_ttf"
-        app:layout_constraintTop_toBottomOf="@id/joinPasswordArea"
+        app:layout_constraintTop_toBottomOf="@id/loginBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
