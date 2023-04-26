@@ -17,13 +17,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <!--    카카오 로그인 이미지-->
-    <!--    <ImageView-->
-    <!--        android:id="@+id/kakaoLogin"-->
-    <!--        android:src="@drawable/kakao_login_medium_wide"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="240dp"/>-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
