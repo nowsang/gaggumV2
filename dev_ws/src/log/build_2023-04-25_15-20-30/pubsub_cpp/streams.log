@@ -1,0 +1,49 @@
+[0.265s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp': AMENT_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%AMENT_PREFIX_PATH% CMAKE_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%CMAKE_PREFIX_PATH% PYTHONPATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\Lib\site-packages;%PYTHONPATH% Path=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\bin;%Path% C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp
+[0.281s] -- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19045.
+[0.312s] -- Found ament_cmake: 0.8.2 (C:/dev/ros2-windows/share/ament_cmake/cmake)
+[0.375s] -- Using PYTHON_EXECUTABLE: C:/Python37/python.exe
+[0.719s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.765s] -- Found rclcpp: 0.8.4 (C:/dev/ros2-windows/share/rclcpp/cmake)
+[0.797s] -- Found rosidl_adapter: 0.8.2 (C:/dev/ros2-windows/share/rosidl_adapter/cmake)
+[0.875s] -- Found rmw_implementation_cmake: 0.8.1 (C:/dev/ros2-windows/share/rmw_implementation_cmake/cmake)
+[0.875s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.953s] -- Found std_msgs: 0.8.1 (C:/dev/ros2-windows/share/std_msgs/cmake)
+[0.953s] -- Found tutorial_interfaces: 0.0.0 (C:/Users/SSAFY/Desktop/dev_ws/src/install/tutorial_interfaces/share/tutorial_interfaces/cmake)
+[1.000s] -- Found ament_lint_auto: 0.8.1 (C:/dev/ros2-windows/share/ament_lint_auto/cmake)
+[1.172s] -- Added test 'copyright' to check for copyright in CMake / C / C++ / Python code
+[1.187s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.187s] -- Configured cppcheck include dirs: 
+[1.187s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.187s] -- Added test 'lint_cmake' to check CMake code style
+[1.203s] -- Added test 'uncrustify' to check C / C++ code style
+[1.203s] -- Added test 'xmllint' to check XML markup files
+[1.297s] -- Configuring done
+[1.500s] -- Generating done
+[1.515s] -- Build files have been written to: C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp
+[1.515s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp' returned '0': AMENT_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%AMENT_PREFIX_PATH% CMAKE_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%CMAKE_PREFIX_PATH% PYTHONPATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\Lib\site-packages;%PYTHONPATH% Path=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\bin;%Path% C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp
+[1.515s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp': AMENT_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%AMENT_PREFIX_PATH% CL=/MP CMAKE_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%CMAKE_PREFIX_PATH% PYTHONPATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\Lib\site-packages;%PYTHONPATH% Path=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\bin;%Path% C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --build C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp --config Release
+[1.640s] .NET Framework¿ë Microsoft (R) Build Engine ¹öÀü 16.11.2+f32259642
+[1.640s] Copyright (C) Microsoft Corporation. All rights reserved.
+[1.640s] 
+[2.203s]   pub.cpp
+[4.422s]   pub.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pub.exe
+[4.500s]   sub.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\sub.exe
+[4.562s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp' returned '0': AMENT_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%AMENT_PREFIX_PATH% CL=/MP CMAKE_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%CMAKE_PREFIX_PATH% PYTHONPATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\Lib\site-packages;%PYTHONPATH% Path=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\bin;%Path% C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --build C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp --config Release
+[4.562s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp': AMENT_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%AMENT_PREFIX_PATH% CMAKE_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%CMAKE_PREFIX_PATH% PYTHONPATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\Lib\site-packages;%PYTHONPATH% Path=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\bin;%Path% C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --install C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp --config Release
+[4.578s] -- Execute custom install script
+[4.578s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/lib/pubsub_cpp/pub.exe
+[4.609s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/lib/pubsub_cpp/sub.exe
+[4.640s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/ament_index/resource_index/package_run_dependencies/pubsub_cpp
+[4.656s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/ament_index/resource_index/parent_prefix_path/pubsub_cpp
+[4.687s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/pubsub_cpp/environment/ament_prefix_path.bat
+[4.703s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/pubsub_cpp/environment/ament_prefix_path.dsv
+[4.734s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/pubsub_cpp/environment/path.bat
+[4.750s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/pubsub_cpp/environment/path.dsv
+[4.765s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/pubsub_cpp/local_setup.bat
+[4.797s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/pubsub_cpp/local_setup.dsv
+[4.812s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/pubsub_cpp/package.dsv
+[4.844s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/ament_index/resource_index/packages/pubsub_cpp
+[4.859s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/pubsub_cpp/cmake/pubsub_cppConfig.cmake
+[4.890s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/pubsub_cpp/cmake/pubsub_cppConfig-version.cmake
+[4.922s] -- Symlinking: C:/Users/SSAFY/Desktop/dev_ws/src/install/pubsub_cpp/share/pubsub_cpp/package.xml
+[4.953s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp' returned '0': AMENT_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%AMENT_PREFIX_PATH% CMAKE_PREFIX_PATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces;%CMAKE_PREFIX_PATH% PYTHONPATH=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\Lib\site-packages;%PYTHONPATH% Path=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces\bin;%Path% C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --install C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp --config Release

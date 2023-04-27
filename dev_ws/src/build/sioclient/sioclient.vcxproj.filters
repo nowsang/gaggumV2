@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\SSAFY\Desktop\dev_ws\src\socket.io-client-cpp\src\sio_client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\SSAFY\Desktop\dev_ws\src\socket.io-client-cpp\src\sio_socket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\SSAFY\Desktop\dev_ws\src\socket.io-client-cpp\src\internal\sio_client_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\SSAFY\Desktop\dev_ws\src\socket.io-client-cpp\src\internal\sio_packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\SSAFY\Desktop\dev_ws\src\socket.io-client-cpp\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{79D76138-8B51-354F-98BE-B47017007BB7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

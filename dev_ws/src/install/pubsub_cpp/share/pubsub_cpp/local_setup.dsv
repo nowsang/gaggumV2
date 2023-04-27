@@ -1,0 +1,2 @@
+source;share/pubsub_cpp/environment/ament_prefix_path.bat
+source;share/pubsub_cpp/environment/path.bat

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\SSAFY\Desktop\dev_ws\src\build\tutorial_interfaces\rosidl_generator_py\tutorial_interfaces\_tutorial_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\SSAFY\Desktop\dev_ws\src\tutorial_interfaces\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{86883D19-9AF5-314B-9F8F-A177D9823E4C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

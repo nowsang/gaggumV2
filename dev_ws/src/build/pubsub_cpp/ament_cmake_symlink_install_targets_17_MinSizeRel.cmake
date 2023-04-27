@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/MinSizeRel/pub.exe" "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/MinSizeRel/sub.exe" "TARGETS" "pub" "sub" "DESTINATION" "lib/pubsub_cpp")

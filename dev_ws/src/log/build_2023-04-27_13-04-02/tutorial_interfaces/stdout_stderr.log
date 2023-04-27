@@ -1,0 +1,6 @@
+-- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19045.
+-- Found ament_cmake: 0.8.2 (C:/dev/ros2-windows/share/ament_cmake/cmake)
+-- Found PythonInterp: C:/Python37/python.exe (found suitable version "3.7.5", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: C:/Python37/python.exe
+-- Found rosidl_default_generators: 0.8.0 (C:/dev/ros2-windows/share/rosidl_default_generators/cmake)
+-- Found RTI Connext: C:/Program Files/rti_connext_dds-5.3.1

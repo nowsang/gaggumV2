@@ -1,0 +1,28 @@
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\BUILD\PUBSUB_CPP\CMAKEFILES\1C5C5D62A26133D9AD314556B6061DE3\MYMSG_.IDL.RULE
+setlocal
+C:\Python37\python.exe C:/dev/ros2-windows/lib/rosidl_generator_dds_idl/rosidl_generator_dds_idl --additional-service-templates C:/dev/ros2-windows/share/rosidl_typesupport_opensplice_cpp/resource/service_request_wrapper.idl.em C:/dev/ros2-windows/share/rosidl_typesupport_opensplice_cpp/resource/service_response_wrapper.idl.em --generator-arguments-file C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_generator_dds_idl__dds_opensplice__arguments.json --subfolders dds_opensplice --extension rosidl_typesupport_opensplice_cpp.rosidl_generator_dds_idl_extension
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\BUILD\PUBSUB_CPP\CMAKEFILES\64BA19C05298416FDEAD1A20C871E830\PUBSUB_CPP__DDS_OPENSPLICE_IDL.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\PUBSUB_CPP\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp -BC:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp --check-stamp-file C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

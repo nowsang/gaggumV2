@@ -1,0 +1,28 @@
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\BUILD\PUBSUB_CPP\CMAKEFILES\A5B020D8CC9821559CC0255962A1D552\MY_MSG.HPP.RULE
+setlocal
+C:\Python37\python.exe C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../../../lib/rosidl_generator_cpp/rosidl_generator_cpp --generator-arguments-file C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_generator_cpp__arguments.json
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\BUILD\PUBSUB_CPP\CMAKEFILES\64BA19C05298416FDEAD1A20C871E830\PUBSUB_CPP__CPP.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\PUBSUB_CPP\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp -BC:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp --check-stamp-file C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

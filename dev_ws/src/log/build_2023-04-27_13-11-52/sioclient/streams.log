@@ -1,0 +1,12 @@
+[0.125s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\socket.io-client-cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\sioclient
+[0.156s] -- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19045.
+[0.218s] CMake Error at C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/WriteBasicConfigVersionFile.cmake:43 (message):
+[0.218s]   No VERSION specified for WRITE_BASIC_CONFIG_VERSION_FILE()
+[0.218s] Call Stack (most recent call first):
+[0.218s]   C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CMakePackageConfigHelpers.cmake:237 (write_basic_config_version_file)
+[0.218s]   CMakeLists.txt:133 (write_basic_package_version_file)
+[0.218s] 
+[0.218s] 
+[0.218s] -- Configuring incomplete, errors occurred!
+[0.218s] See also "C:/Users/SSAFY/Desktop/dev_ws/src/build/sioclient/CMakeFiles/CMakeOutput.log".
+[0.218s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient' returned '1': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\socket.io-client-cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\sioclient

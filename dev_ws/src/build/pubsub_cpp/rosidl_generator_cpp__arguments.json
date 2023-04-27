@@ -1,0 +1,22 @@
+{
+  "package_name": "pubsub_cpp",
+  "output_dir": "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_generator_cpp/pubsub_cpp",
+  "template_dir": "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../resource",
+  "idl_tuples": [
+    "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_adapter/pubsub_cpp:msg/MyMsg.idl"
+  ],
+  "target_dependencies": [
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../../../lib/rosidl_generator_cpp/rosidl_generator_cpp",
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../../../Lib/site-packages/rosidl_generator_cpp/__init__.py",
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../resource/action__struct.hpp.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../resource/action__traits.hpp.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../resource/idl.hpp.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../resource/idl__struct.hpp.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../resource/idl__traits.hpp.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../resource/msg__struct.hpp.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../resource/msg__traits.hpp.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../resource/srv__struct.hpp.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_cpp/cmake/../resource/srv__traits.hpp.em",
+    "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_adapter/pubsub_cpp/msg/MyMsg.idl"
+  ]
+}

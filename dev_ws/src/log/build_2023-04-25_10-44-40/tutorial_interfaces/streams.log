@@ -1,0 +1,34 @@
+[0.140s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\tutorial_interfaces': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\tutorial_interfaces -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces -G Visual Studio 16 2019
+[0.203s] -- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19045.
+[2.109s] -- The C compiler identification is MSVC 19.29.30148.0
+[3.078s] -- The CXX compiler identification is MSVC 19.29.30148.0
+[3.156s] -- Detecting C compiler ABI info
+[4.093s] -- Detecting C compiler ABI info - done
+[4.109s] -- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe - skipped
+[4.109s] -- Detecting C compile features
+[4.109s] -- Detecting C compile features - done
+[4.140s] -- Detecting CXX compiler ABI info
+[5.078s] -- Detecting CXX compiler ABI info - done
+[5.093s] -- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe - skipped
+[5.093s] -- Detecting CXX compile features
+[5.093s] -- Detecting CXX compile features - done
+[5.109s] -- Found ament_cmake: 0.8.2 (C:/dev/ros2-windows/share/ament_cmake/cmake)
+[5.281s] -- Found PythonInterp: C:/Python37/python.exe (found suitable version "3.7.5", minimum required is "3") 
+[5.281s] -- Using PYTHON_EXECUTABLE: C:/Python37/python.exe
+[5.843s] -- Found rosidl_default_generators: 0.8.0 (C:/dev/ros2-windows/share/rosidl_default_generators/cmake)
+[5.937s] -- Found RTI Connext: C:/Program Files/rti_connext_dds-5.3.1
+[6.328s] -- Found rosidl_adapter: 0.8.2 (C:/dev/ros2-windows/share/rosidl_adapter/cmake)
+[6.750s] -- Found OpenSSL: optimized;C:/OpenSSL-Win64/lib/VC/libeay32MD.lib;debug;C:/OpenSSL-Win64/lib/VC/libeay32MDd.lib (found version "1.0.2u")  
+[6.843s] -- Found FastRTPS: C:/dev/ros2-windows/include  
+[7.000s] -- Found PrismTech OpenSplice: C:/dev/opensplice/HDE/x86_64.win64
+[7.125s] CMake Error at C:/dev/ros2-windows/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:93 (message):
+[7.125s]   rosidl_generate_interfaces() the passed file 'srv/AddThreeInts.srv' doesn't
+[7.125s]   exist relative to the CMAKE_CURRENT_SOURCE_DIR
+[7.125s]   'C:/Users/SSAFY/Desktop/dev_ws/src/tutorial_interfaces'
+[7.125s] Call Stack (most recent call first):
+[7.125s]   CMakeLists.txt:25 (rosidl_generate_interfaces)
+[7.125s] 
+[7.125s] 
+[7.125s] -- Configuring incomplete, errors occurred!
+[7.125s] See also "C:/Users/SSAFY/Desktop/dev_ws/src/build/tutorial_interfaces/CMakeFiles/CMakeOutput.log".
+[7.125s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\tutorial_interfaces' returned '1': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\tutorial_interfaces -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces -G Visual Studio 16 2019

@@ -1,0 +1,164 @@
+[0.265s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp
+[0.281s] -- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19045.
+[0.312s] -- Found ament_cmake: 0.8.2 (C:/dev/ros2-windows/share/ament_cmake/cmake)
+[0.390s] -- Found PythonInterp: C:/Python37/python.exe (found suitable version "3.7.5", minimum required is "3") 
+[0.390s] -- Using PYTHON_EXECUTABLE: C:/Python37/python.exe
+[0.734s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.781s] -- Found rclcpp: 0.8.4 (C:/dev/ros2-windows/share/rclcpp/cmake)
+[0.828s] -- Found rosidl_adapter: 0.8.2 (C:/dev/ros2-windows/share/rosidl_adapter/cmake)
+[0.937s] -- Found rmw_implementation_cmake: 0.8.1 (C:/dev/ros2-windows/share/rmw_implementation_cmake/cmake)
+[0.953s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.031s] -- Found std_msgs: 0.8.1 (C:/dev/ros2-windows/share/std_msgs/cmake)
+[1.047s] -- Found rosidl_default_generators: 0.8.0 (C:/dev/ros2-windows/share/rosidl_default_generators/cmake)
+[1.047s] -- Found RTI Connext: C:/Program Files/rti_connext_dds-5.3.1
+[1.515s] -- Found PrismTech OpenSplice: C:/dev/opensplice/HDE/x86_64.win64
+[1.640s] -- Found PythonInterp: C:/Python37/python.exe (found version "3.7.5") 
+[1.890s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_connext_c;rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c;rosidl_typesupport_opensplice_c
+[1.906s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_connext_cpp;rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp;rosidl_typesupport_opensplice_cpp
+[2.234s] -- Found PythonInterp: C:/Python37/python.exe (found suitable version "3.7.5", minimum required is "3.5") 
+[2.250s] -- Found python_cmake_module: 0.8.0 (C:/dev/ros2-windows/share/python_cmake_module/cmake)
+[2.344s] -- Found PythonLibs: C:/Python37/libs/python37.lib (found suitable version "3.7.5", minimum required is "3.5") 
+[2.344s] -- Using PYTHON_EXECUTABLE: C:/Python37/python.exe
+[2.344s] -- Using PYTHON_INCLUDE_DIRS: C:/Python37/include
+[2.344s] -- Using PYTHON_LIBRARIES: C:/Python37/libs/python37.lib
+[2.406s] -- Found PythonExtra: .pyd  
+[3.078s] -- Using numpy include directory: C:\Python37\lib\site-packages\numpy\core\include
+[3.140s] -- Found ament_lint_auto: 0.8.1 (C:/dev/ros2-windows/share/ament_lint_auto/cmake)
+[3.234s] -- Added test 'copyright' to check for copyright in CMake / C / C++ / Python code
+[3.250s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[3.250s] -- Configured cppcheck include dirs: 
+[3.265s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[3.265s] -- Added test 'lint_cmake' to check CMake code style
+[3.265s] -- Added test 'uncrustify' to check C / C++ code style
+[3.281s] -- Added test 'xmllint' to check XML markup files
+[3.390s] -- Configuring done
+[4.547s] -- Generating done
+[4.562s] -- Build files have been written to: C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp
+[4.578s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp' returned '0': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp
+[4.578s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp': CL=/MP C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --build C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp --config Release
+[4.750s] .NET Framework용 Microsoft (R) Build Engine 버전 16.11.2+f32259642
+[4.750s] Copyright (C) Microsoft Corporation. All rights reserved.
+[4.750s] 
+[5.187s]   Checking Build System
+[5.422s]   Generating C++ code for ROS interfaces
+[5.812s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[5.984s]   Generating C code for ROS interfaces
+[6.328s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[6.531s]   my_msg__functions.c
+[6.875s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_generator_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_generator_c.exp 개체를 생성하고 있습니다.
+[6.953s]   pubsub_cpp__rosidl_generator_c.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_generator_c.dll
+[7.078s]   Generating C type support dispatch for ROS interfaces
+[7.375s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[7.547s]   my_msg__type_support.cpp
+[7.719s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_c.exp 개체를 생성하고 있습니다.
+[7.797s]   pubsub_cpp__rosidl_typesupport_c.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_typesupport_c.dll
+[7.922s]   Generating DDS interfaces
+[8.250s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[8.422s]   Generating C++ type support for RTI Connext (using 'rtiddsgen_server.bat')
+[16.219s]   INFO com.rti.ndds.nddsgen.Main Running rtiddsgen version 2.5.2, please wait ...
+[16.219s]   
+[16.219s]   INFO com.rti.ndds.nddsgen.Main Done
+[16.219s]   
+[16.281s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[16.453s]   my_msg__type_support.cpp
+[16.453s]   MyMsg_.cxx
+[16.453s]   MyMsg_Plugin.cxx
+[16.453s]   MyMsg_Support.cxx
+[18.015s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_connext_cpp.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_connext_cpp.exp 개체를 생성하고 있습니다.
+[18.094s]   pubsub_cpp__rosidl_typesupport_connext_cpp.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_typesupport_connext_cpp.dll
+[18.156s]   Generating C type support for RTI Connext
+[18.469s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[18.656s]   my_msg__type_support_c.cpp
+[18.656s]   MyMsg_.cxx
+[18.656s]   MyMsg_Plugin.cxx
+[18.656s]   MyMsg_Support.cxx
+[19.734s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_connext_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_connext_c.exp 개체를 생성하고 있습니다.
+[19.828s]   pubsub_cpp__rosidl_typesupport_connext_c.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_typesupport_connext_c.dll
+[19.922s]   Generating C++ type support dispatch for ROS interfaces
+[20.203s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[20.359s]   my_msg__type_support.cpp
+[20.703s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_cpp.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_cpp.exp 개체를 생성하고 있습니다.
+[20.781s]   pubsub_cpp__rosidl_typesupport_cpp.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_typesupport_cpp.dll
+[20.875s]   Generating C++ type support for eProsima Fast-RTPS
+[21.234s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[21.375s]   my_msg__type_support.cpp
+[21.859s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_fastrtps_cpp.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_fastrtps_cpp.exp 개체를 생성하고 있습니다.
+[21.937s]   pubsub_cpp__rosidl_typesupport_fastrtps_cpp.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_typesupport_fastrtps_cpp.dll
+[21.984s]   Generating C type support for eProsima Fast-RTPS
+[22.297s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[22.437s]   my_msg__type_support_c.cpp
+[22.906s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_fastrtps_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_fastrtps_c.exp 개체를 생성하고 있습니다.
+[22.984s]   pubsub_cpp__rosidl_typesupport_fastrtps_c.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_typesupport_fastrtps_c.dll
+[23.062s]   Generating C introspection for ROS interfaces
+[23.375s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[23.547s]   my_msg__type_support.c
+[23.687s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_introspection_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_introspection_c.exp 개체를 생성하고 있습니다.
+[23.765s]   pubsub_cpp__rosidl_typesupport_introspection_c.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_typesupport_introspection_c.dll
+[23.859s]   Generating C++ introspection for ROS interfaces
+[24.172s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[24.328s]   my_msg__type_support.cpp
+[24.656s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_introspection_cpp.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_introspection_cpp.exp 개체를 생성하고 있습니다.
+[24.734s]   pubsub_cpp__rosidl_typesupport_introspection_cpp.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_typesupport_introspection_cpp.dll
+[24.922s]   Generating DDS interfaces
+[25.219s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[25.344s]   Generating C++ type support for PrismTech OpenSplice
+[26.062s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[26.234s]   my_msg__type_support.cpp
+[26.234s]   MyMsg_.cpp
+[26.234s]   MyMsg_Dcps.cpp
+[26.250s]   MyMsg_Dcps_impl.cpp
+[26.250s]   MyMsg_SplDcps.cpp
+[26.281s] C:\dev\opensplice\HDE\x86_64.win64\include\dcps\C++\SACPP\sacpp_dds_basic_types.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오. (소스 파일 컴파일 중 C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_opensplice_cpp\pubsub_cpp\msg\dds_opensplice\MyMsg_Dcps.cpp) [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pubsub_cpp__rosidl_typesupport_opensplice_cpp.vcxproj]
+[26.281s] C:\dev\opensplice\HDE\x86_64.win64\include\dcps\C++\SACPP\sacpp_dds_basic_types.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오. (소스 파일 컴파일 중 C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_opensplice_cpp\pubsub_cpp\msg\dds_opensplice\MyMsg_.cpp) [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pubsub_cpp__rosidl_typesupport_opensplice_cpp.vcxproj]
+[26.281s] C:\dev\opensplice\HDE\x86_64.win64\include\dcps\C++\SACPP\sacpp_dds_basic_types.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오. (소스 파일 컴파일 중 C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_opensplice_cpp\pubsub_cpp\msg\dds_opensplice\MyMsg_Dcps_impl.cpp) [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pubsub_cpp__rosidl_typesupport_opensplice_cpp.vcxproj]
+[26.437s] C:\dev\opensplice\HDE\x86_64.win64\include\dcps\C++\SACPP\sacpp_dds_basic_types.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오. (소스 파일 컴파일 중 C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_opensplice_cpp\pubsub_cpp\msg\dds_opensplice\MyMsg_SplDcps.cpp) [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pubsub_cpp__rosidl_typesupport_opensplice_cpp.vcxproj]
+[26.609s] C:\dev\opensplice\HDE\x86_64.win64\include\dcps\C++\SACPP\sacpp_dds_basic_types.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오. (소스 파일 컴파일 중 C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_opensplice_cpp\pubsub_cpp\msg\dds_opensplice\my_msg__type_support.cpp) [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pubsub_cpp__rosidl_typesupport_opensplice_cpp.vcxproj]
+[27.125s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_opensplice_cpp.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_opensplice_cpp.exp 개체를 생성하고 있습니다.
+[27.219s]   pubsub_cpp__rosidl_typesupport_opensplice_cpp.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_typesupport_opensplice_cpp.dll
+[27.281s]   Generating C type support for PrismTech OpenSplice
+[27.609s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[27.781s]   my_msg__type_support_c.cpp
+[27.781s]   MyMsg_.cpp
+[27.781s]   MyMsg_Dcps.cpp
+[27.781s]   MyMsg_Dcps_impl.cpp
+[27.797s]   MyMsg_SplDcps.cpp
+[27.812s] C:\dev\opensplice\HDE\x86_64.win64\include\dcps\C++\SACPP\sacpp_dds_basic_types.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오. (소스 파일 컴파일 중 C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_opensplice_cpp\pubsub_cpp\msg\dds_opensplice\MyMsg_Dcps.cpp) [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pubsub_cpp__rosidl_typesupport_opensplice_c.vcxproj]
+[27.812s] C:\dev\opensplice\HDE\x86_64.win64\include\dcps\C++\SACPP\sacpp_dds_basic_types.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오. (소스 파일 컴파일 중 C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_opensplice_cpp\pubsub_cpp\msg\dds_opensplice\MyMsg_.cpp) [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pubsub_cpp__rosidl_typesupport_opensplice_c.vcxproj]
+[27.812s] C:\dev\opensplice\HDE\x86_64.win64\include\dcps\C++\SACPP\sacpp_dds_basic_types.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오. (소스 파일 컴파일 중 C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_opensplice_cpp\pubsub_cpp\msg\dds_opensplice\MyMsg_Dcps_impl.cpp) [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pubsub_cpp__rosidl_typesupport_opensplice_c.vcxproj]
+[27.922s] C:\dev\opensplice\HDE\x86_64.win64\include\dcps\C++\SACPP\sacpp_dds_basic_types.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오. (소스 파일 컴파일 중 C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_opensplice_cpp\pubsub_cpp\msg\dds_opensplice\MyMsg_SplDcps.cpp) [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pubsub_cpp__rosidl_typesupport_opensplice_c.vcxproj]
+[28.078s] C:\dev\opensplice\HDE\x86_64.win64\include\dcps\C++\SACPP\sacpp_dds_basic_types.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오. (소스 파일 컴파일 중 C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_opensplice_c\pubsub_cpp\msg\dds_opensplice_c\my_msg__type_support_c.cpp) [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pubsub_cpp__rosidl_typesupport_opensplice_c.vcxproj]
+[28.562s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_opensplice_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__rosidl_typesupport_opensplice_c.exp 개체를 생성하고 있습니다.
+[28.640s]   pubsub_cpp__rosidl_typesupport_opensplice_c.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\pubsub_cpp__rosidl_typesupport_opensplice_c.dll
+[28.750s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[28.922s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[29.078s]   pub.cpp
+[29.797s] C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp\src\pub.cpp(11,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'tutorial_interfaces/msg/num.hpp': No such file or directory [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pub.vcxproj]
+[29.953s]   Generating Python code for ROS interfaces
+[30.453s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/pubsub_cpp__py/CMakeLists.txt
+[30.562s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[30.719s]   _my_msg_s.c
+[31.062s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__python.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp__python.exp 개체를 생성하고 있습니다.
+[31.125s]   pubsub_cpp__python.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_generator_py\pubsub_cpp\pubsub_cpp__python.dll
+[31.250s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[31.406s]   _pubsub_cpp_s.ep.rosidl_typesupport_c.c
+[31.625s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp_s__rosidl_typesupport_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp_s__rosidl_typesupport_c.exp 개체를 생성하고 있습니다.
+[31.703s]   pubsub_cpp__rosidl_typesupport_c__pyext.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_generator_py\pubsub_cpp\pubsub_cpp_s__rosidl_typesupport_c.pyd
+[31.797s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[31.937s]   _pubsub_cpp_s.ep.rosidl_typesupport_connext_c.c
+[32.140s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp_s__rosidl_typesupport_connext_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp_s__rosidl_typesupport_connext_c.exp 개체를 생성하고 있습니다.
+[32.234s]   pubsub_cpp__rosidl_typesupport_connext_c__pyext.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_generator_py\pubsub_cpp\pubsub_cpp_s__rosidl_typesupport_connext_c.pyd
+[32.328s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[32.484s]   _pubsub_cpp_s.ep.rosidl_typesupport_fastrtps_c.c
+[32.687s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp_s__rosidl_typesupport_fastrtps_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp_s__rosidl_typesupport_fastrtps_c.exp 개체를 생성하고 있습니다.
+[32.765s]   pubsub_cpp__rosidl_typesupport_fastrtps_c__pyext.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_generator_py\pubsub_cpp\pubsub_cpp_s__rosidl_typesupport_fastrtps_c.pyd
+[32.859s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[33.015s]   _pubsub_cpp_s.ep.rosidl_typesupport_introspection_c.c
+[33.203s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp_s__rosidl_typesupport_introspection_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp_s__rosidl_typesupport_introspection_c.exp 개체를 생성하고 있습니다.
+[33.297s]   pubsub_cpp__rosidl_typesupport_introspection_c__pyext.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_generator_py\pubsub_cpp\pubsub_cpp_s__rosidl_typesupport_introspection_c.pyd
+[33.390s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[33.547s]   _pubsub_cpp_s.ep.rosidl_typesupport_opensplice_c.c
+[33.750s]      C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp_s__rosidl_typesupport_opensplice_c.lib 라이브러리 및 C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/Release/pubsub_cpp_s__rosidl_typesupport_opensplice_c.exp 개체를 생성하고 있습니다.
+[33.844s]   pubsub_cpp__rosidl_typesupport_opensplice_c__pyext.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_generator_py\pubsub_cpp\pubsub_cpp_s__rosidl_typesupport_opensplice_c.pyd
+[33.937s]   Building Custom Rule C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt
+[34.234s]   sub.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\sub.exe
+[34.265s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp' returned '1': CL=/MP C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --build C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp --config Release

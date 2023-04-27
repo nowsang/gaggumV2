@@ -1,0 +1,12 @@
+CMake Error at CMakeLists.txt:13 (set):
+  Syntax error in cmake code at
+
+    C:/Users/SSAFY/Desktop/dev_ws/src/pubsub_cpp/CMakeLists.txt:13
+
+  when parsing string
+
+    C:\Users\SSAFY\Desktop\dev_ws\src\build
+
+  Invalid character escape '\U'.
+
+

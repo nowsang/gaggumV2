@@ -1,0 +1,5 @@
+C:/Users/SSAFY/Desktop/dev_ws/src/build/sioclient/CMakeFiles/sioclient.dir
+C:/Users/SSAFY/Desktop/dev_ws/src/build/sioclient/CMakeFiles/sioclient_tls.dir
+C:/Users/SSAFY/Desktop/dev_ws/src/build/sioclient/CMakeFiles/INSTALL.dir
+C:/Users/SSAFY/Desktop/dev_ws/src/build/sioclient/CMakeFiles/ALL_BUILD.dir
+C:/Users/SSAFY/Desktop/dev_ws/src/build/sioclient/CMakeFiles/ZERO_CHECK.dir

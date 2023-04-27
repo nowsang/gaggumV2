@@ -1,0 +1,30 @@
+[0.281s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp
+[0.297s] -- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19045.
+[0.328s] -- Found ament_cmake: 0.8.2 (C:/dev/ros2-windows/share/ament_cmake/cmake)
+[0.406s] -- Using PYTHON_EXECUTABLE: C:/Python37/python.exe
+[0.766s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.828s] -- Found rclcpp: 0.8.4 (C:/dev/ros2-windows/share/rclcpp/cmake)
+[0.875s] -- Found rosidl_adapter: 0.8.2 (C:/dev/ros2-windows/share/rosidl_adapter/cmake)
+[0.969s] -- Found rmw_implementation_cmake: 0.8.1 (C:/dev/ros2-windows/share/rmw_implementation_cmake/cmake)
+[0.985s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.094s] -- Found std_msgs: 0.8.1 (C:/dev/ros2-windows/share/std_msgs/cmake)
+[1.141s] -- Found ament_lint_auto: 0.8.1 (C:/dev/ros2-windows/share/ament_lint_auto/cmake)
+[1.313s] -- Added test 'copyright' to check for copyright in CMake / C / C++ / Python code
+[1.328s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.328s] -- Configured cppcheck include dirs: 
+[1.328s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.328s] -- Added test 'lint_cmake' to check CMake code style
+[1.344s] -- Added test 'uncrustify' to check C / C++ code style
+[1.344s] -- Added test 'xmllint' to check XML markup files
+[1.422s] -- Configuring done
+[1.641s] -- Generating done
+[1.656s] -- Build files have been written to: C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp
+[1.656s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp' returned '0': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp
+[1.656s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp': CL=/MP C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --build C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp --config Release
+[1.781s] .NET Framework용 Microsoft (R) Build Engine 버전 16.11.2+f32259642
+[1.781s] Copyright (C) Microsoft Corporation. All rights reserved.
+[1.781s] 
+[2.391s]   pub.cpp
+[3.125s] C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp\src\pub.cpp(9,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'tutorial_interfaces/msg/num.hpp': No such file or directory [C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\pub.vcxproj]
+[3.281s]   sub.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\Release\sub.exe
+[3.297s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp' returned '1': CL=/MP C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --build C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp --config Release

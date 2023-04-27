@@ -1,0 +1,26 @@
+[0.141s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\socket.io-client-cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\sioclient
+[0.172s] -- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19045.
+[0.234s] -- Configuring done
+[0.359s] -- Generating done
+[0.359s] -- Build files have been written to: C:/Users/SSAFY/Desktop/dev_ws/src/build/sioclient
+[0.375s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient' returned '0': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\socket.io-client-cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\sioclient
+[0.375s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient': CL=/MP C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --build C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient --config Release
+[0.500s] .NET Framework¿ë Microsoft (R) Build Engine ¹öÀü 16.11.2+f32259642
+[0.500s] Copyright (C) Microsoft Corporation. All rights reserved.
+[0.500s] 
+[1.141s]   sioclient.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient\Release\sioclient.lib
+[1.250s]   sioclient_tls.vcxproj -> C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient\Release\sioclient_tls.lib
+[1.297s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient' returned '0': CL=/MP C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --build C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient --config Release
+[1.328s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --install C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient --config Release
+[1.344s] -- Up-to-date: C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/include/sio_client.h
+[1.344s] -- Up-to-date: C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/include/sio_message.h
+[1.344s] -- Up-to-date: C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/include/sio_socket.h
+[1.344s] -- Up-to-date: C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/lib/sioclient.lib
+[1.344s] -- Up-to-date: C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/lib/sioclient_tls.lib
+[1.344s] -- Old export file "C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/lib/cmake/sioclient/sioclientTargets.cmake" will be replaced.  Removing files [C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/lib/cmake/sioclient/sioclientTargets-release.cmake].
+[1.344s] -- Installing: C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/lib/cmake/sioclient/sioclientTargets.cmake
+[1.359s] -- Installing: C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/lib/cmake/sioclient/sioclientTargets-release.cmake
+[1.359s] -- Up-to-date: C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/lib/cmake/sioclient/sioclientConfig.cmake
+[1.359s] -- Up-to-date: C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/lib/cmake/sioclient/sioclientConfigVersion.cmake
+[1.359s] -- Installing: C:/Users/SSAFY/Desktop/dev_ws/src/install/sioclient/lib/cmake/sioclient/sioclientTargets.cmake
+[1.375s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient' returned '0': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --install C:\Users\SSAFY\Desktop\dev_ws\src\build\sioclient --config Release

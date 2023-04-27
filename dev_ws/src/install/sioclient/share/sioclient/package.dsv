@@ -1,0 +1,3 @@
+source;share\sioclient\hook\cmake_prefix_path.ps1
+source;share\sioclient\hook\cmake_prefix_path.bat
+source;share\sioclient\hook\cmake_prefix_path.dsv

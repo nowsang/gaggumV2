@@ -1,0 +1,96 @@
+[0.622s] [34mcolcon[0m [1;30mDEBUG[0m [32mCommand line arguments: ['C:\\Python37\\Scripts\\colcon', 'build'][0m
+[0.622s] [34mcolcon[0m [1;30mDEBUG[0m [32mParsed command line arguments: Namespace(ament_cmake_args=None, base_paths=['.'], build_base='build', catkin_cmake_args=None, catkin_skip_building_tests=False, cmake_args=None, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, cmake_target=None, cmake_target_skip_unavailable=False, continue_on_error=False, event_handlers=None, executor='parallel', ignore_user_meta=False, install_base='install', log_base=None, log_level=None, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x000002B2B4942648>>, merge_install=False, metas=['./colcon.meta'], packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=None, packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, parallel_workers=12, paths=None, symlink_install=False, test_result_base=None, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x000002B2B4942648>, verb_name='build', verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x000002B2B49D4D48>)[0m
+[0.717s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) check parameters
+[0.717s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) check parameters
+[0.717s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) check parameters
+[0.717s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) check parameters
+[0.717s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) discover
+[0.717s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) discover
+[0.717s] [34mcolcon.colcon_core.package_discovery[0m [1;30mINFO[0m Crawling recursively for packages in 'C:\Users\SSAFY\Desktop\dev_ws\src'
+[0.718s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.718s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore'
+[0.718s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore_ament_install'
+[0.718s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_pkg']
+[0.718s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_pkg'
+[0.718s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_meta']
+[0.718s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_meta'
+[0.718s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ros']
+[0.718s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ros'
+[0.748s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['cmake', 'python']
+[0.748s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'cmake'
+[0.748s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python'
+[0.748s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['python_setup_py']
+[0.748s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python_setup_py'
+[0.749s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.749s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extension 'ignore'
+[0.749s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) ignored
+[0.749s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.749s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extension 'ignore'
+[0.749s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) ignored
+[0.750s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extension 'ignore'
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) ignored
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(pubsub_cpp) by extensions ['ignore', 'ignore_ament_install']
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(pubsub_cpp) by extension 'ignore'
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(pubsub_cpp) by extension 'ignore_ament_install'
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(pubsub_cpp) by extensions ['colcon_pkg']
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(pubsub_cpp) by extension 'colcon_pkg'
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(pubsub_cpp) by extensions ['colcon_meta']
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(pubsub_cpp) by extension 'colcon_meta'
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(pubsub_cpp) by extensions ['ros']
+[0.751s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(pubsub_cpp) by extension 'ros'
+[0.754s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'pubsub_cpp' with type 'ros.ament_cmake' and name 'pubsub_cpp'[0m
+[0.754s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) using defaults
+[0.754s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) discover
+[0.754s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) using defaults
+[0.754s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) discover
+[0.754s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) using defaults
+[0.823s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'pubsub_cpp' build argument 'cmake_args' from command line to 'None'
+[0.823s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'pubsub_cpp' build argument 'cmake_target' from command line to 'None'
+[0.823s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'pubsub_cpp' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.823s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'pubsub_cpp' build argument 'cmake_clean_cache' from command line to 'False'
+[0.823s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'pubsub_cpp' build argument 'cmake_clean_first' from command line to 'False'
+[0.823s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'pubsub_cpp' build argument 'cmake_force_configure' from command line to 'False'
+[0.823s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'pubsub_cpp' build argument 'ament_cmake_args' from command line to 'None'
+[0.823s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'pubsub_cpp' build argument 'catkin_cmake_args' from command line to 'None'
+[0.823s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'pubsub_cpp' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.823s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'pubsub_cpp' with the following arguments: {'ament_cmake_args': None, 'build_base': 'C:\\Users\\SSAFY\\Desktop\\dev_ws\\src\\build\\pubsub_cpp', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': 'C:\\Users\\SSAFY\\Desktop\\dev_ws\\src\\install\\pubsub_cpp', 'merge_install': False, 'path': 'C:\\Users\\SSAFY\\Desktop\\dev_ws\\src\\pubsub_cpp', 'symlink_install': False, 'test_result_base': None}[0m
+[0.827s] [34mcolcon.colcon_core.executor[0m [1;30mINFO[0m Executing jobs using 'parallel' executor
+[0.855s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete[0m
+[0.856s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in 'C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp' with build type 'ament_cmake'
+[0.856s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in 'C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp'
+[0.866s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_core.shell.sh': Not used on Windows systems
+[0.866s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.008s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp[0m
+[2.360s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp' returned '0': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp[0m
+[2.371s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp': CL=/MP C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --build C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp --config Release[0m
+[3.549s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp' returned '1': CL=/MP C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE --build C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp --config Release[0m
+[3.558s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(pubsub_cpp)
+[3.577s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp' for CMake module files
+[3.580s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp' for CMake config files
+[3.583s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('pubsub_cpp', 'cmake_prefix_path')
+[3.590s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\share\pubsub_cpp\hook\cmake_prefix_path.ps1'
+[3.591s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\share\pubsub_cpp\hook\cmake_prefix_path.bat'
+[3.592s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\share\pubsub_cpp\hook\cmake_prefix_path.dsv'
+[3.593s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\bin'
+[3.593s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\bin'
+[3.594s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\lib\pkgconfig\pubsub_cpp.pc'
+[3.594s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\Lib\site-packages'
+[3.594s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\Scripts'
+[3.602s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\share\pubsub_cpp\package.ps1'
+[3.603s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\share\pubsub_cpp\package.bat'
+[3.604s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor 'C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\share\pubsub_cpp\package.dsv'
+[3.605s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp\share\colcon-core\packages\pubsub_cpp)
+[3.625s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete finished with '1'[0m
+[3.625s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoining thread[0m
+[3.638s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.notify2': 'notify2' not found
+[3.639s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.notify_send': Not used on non-Linux systems
+[3.639s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[3.639s] [34mcolcon.colcon_notification.desktop_notification[0m [1;30mINFO[0m Sending desktop notification using 'win32'
+[8.682s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoined thread[0m
+[8.691s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script 'C:\Users\SSAFY\Desktop\dev_ws\src\install\local_setup.ps1'
+[8.693s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module 'C:\Users\SSAFY\Desktop\dev_ws\src\install\_local_setup_util_ps1.py'
+[8.695s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script 'C:\Users\SSAFY\Desktop\dev_ws\src\install\setup.ps1'
+[8.705s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script 'C:\Users\SSAFY\Desktop\dev_ws\src\install\local_setup.bat'
+[8.706s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module 'C:\Users\SSAFY\Desktop\dev_ws\src\install\_local_setup_util_bat.py'
+[8.707s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script 'C:\Users\SSAFY\Desktop\dev_ws\src\install\setup.bat'

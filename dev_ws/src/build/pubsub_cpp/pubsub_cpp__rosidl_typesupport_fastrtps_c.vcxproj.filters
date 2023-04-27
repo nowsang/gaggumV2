@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_fastrtps_c\pubsub_cpp\msg\my_msg__type_support_c.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\rosidl_typesupport_fastrtps_c\pubsub_cpp\msg\my_msg__rosidl_typesupport_fastrtps_c.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp\CMakeFiles\97fb6f21928b6bf441e91ef3a991cac4\my_msg__rosidl_typesupport_fastrtps_c.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{BB20385B-5886-35B9-A50D-EA98B1D063D5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{EEB59D8A-B112-3572-B501-F635B00178F3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{EE7F4CDC-83CD-389A-A717-1CD64818D903}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

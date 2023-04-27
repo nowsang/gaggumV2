@@ -1,0 +1,28 @@
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\BUILD\TUTORIAL_INTERFACES\CMAKEFILES\C7428F90C4E2812443C3C9A50151CE75\NUM_.IDL.RULE
+setlocal
+C:\Python37\python.exe C:/dev/ros2-windows/lib/rosidl_generator_dds_idl/rosidl_generator_dds_idl --additional-service-templates C:/dev/ros2-windows/share/rosidl_typesupport_opensplice_cpp/resource/service_request_wrapper.idl.em C:/dev/ros2-windows/share/rosidl_typesupport_opensplice_cpp/resource/service_response_wrapper.idl.em --generator-arguments-file C:/Users/SSAFY/Desktop/dev_ws/src/build/tutorial_interfaces/rosidl_generator_dds_idl__dds_opensplice__arguments.json --subfolders dds_opensplice --extension rosidl_typesupport_opensplice_cpp.rosidl_generator_dds_idl_extension
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\BUILD\TUTORIAL_INTERFACES\CMAKEFILES\48A66E9A97179ECF6910A46FBED77EC7\TUTORIAL_INTERFACES__DDS_OPENSPLICE_IDL.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\TUTORIAL_INTERFACES\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/SSAFY/Desktop/dev_ws/src/tutorial_interfaces -BC:/Users/SSAFY/Desktop/dev_ws/src/build/tutorial_interfaces --check-stamp-file C:/Users/SSAFY/Desktop/dev_ws/src/build/tutorial_interfaces/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

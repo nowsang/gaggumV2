@@ -1,0 +1,32 @@
+-- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19045.
+-- The C compiler identification is MSVC 19.29.30148.0
+-- The CXX compiler identification is MSVC 19.29.30148.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 0.8.2 (C:/dev/ros2-windows/share/ament_cmake/cmake)
+-- Found PythonInterp: C:/Python37/python.exe (found suitable version "3.7.5", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: C:/Python37/python.exe
+-- Found rosidl_default_generators: 0.8.0 (C:/dev/ros2-windows/share/rosidl_default_generators/cmake)
+-- Found RTI Connext: C:/Program Files/rti_connext_dds-5.3.1
+-- Found rosidl_adapter: 0.8.2 (C:/dev/ros2-windows/share/rosidl_adapter/cmake)
+-- Found OpenSSL: optimized;C:/OpenSSL-Win64/lib/VC/libeay32MD.lib;debug;C:/OpenSSL-Win64/lib/VC/libeay32MDd.lib (found version "1.0.2u")  
+-- Found FastRTPS: C:/dev/ros2-windows/include  
+-- Found PrismTech OpenSplice: C:/dev/opensplice/HDE/x86_64.win64
+CMake Error at C:/dev/ros2-windows/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:93 (message):
+  rosidl_generate_interfaces() the passed file 'srv/AddThreeInts.srv' doesn't
+  exist relative to the CMAKE_CURRENT_SOURCE_DIR
+  'C:/Users/SSAFY/Desktop/dev_ws/src/tutorial_interfaces'
+Call Stack (most recent call first):
+  CMakeLists.txt:25 (rosidl_generate_interfaces)
+
+
+-- Configuring incomplete, errors occurred!
+See also "C:/Users/SSAFY/Desktop/dev_ws/src/build/tutorial_interfaces/CMakeFiles/CMakeOutput.log".

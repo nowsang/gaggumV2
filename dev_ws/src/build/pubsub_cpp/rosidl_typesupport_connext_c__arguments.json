@@ -1,0 +1,22 @@
+{
+  "package_name": "pubsub_cpp",
+  "output_dir": "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_typesupport_connext_c/pubsub_cpp",
+  "template_dir": "C:/dev/ros2-windows/share/rosidl_typesupport_connext_c/resource",
+  "idl_tuples": [
+    "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_adapter/pubsub_cpp:msg/MyMsg.idl"
+  ],
+  "target_dependencies": [
+    "C:/dev/ros2-windows/lib/rosidl_typesupport_connext_c/rosidl_typesupport_connext_c",
+    "C:/dev/ros2-windows/Lib/site-packages/rosidl_typesupport_connext_c/__init__.py",
+    "C:/dev/ros2-windows/share/rosidl_typesupport_connext_c/resource/idl__rosidl_typesupport_connext_c.h.em",
+    "C:/dev/ros2-windows/share/rosidl_typesupport_connext_c/resource/idl__dds_connext__type_support_c.cpp.em",
+    "C:/dev/ros2-windows/share/rosidl_typesupport_connext_c/resource/msg__rosidl_typesupport_connext_c.h.em",
+    "C:/dev/ros2-windows/share/rosidl_typesupport_connext_c/resource/msg__type_support_c.cpp.em",
+    "C:/dev/ros2-windows/share/rosidl_typesupport_connext_c/resource/srv__rosidl_typesupport_connext_c.h.em",
+    "C:/dev/ros2-windows/share/rosidl_typesupport_connext_c/resource/srv__type_support_c.cpp.em",
+    "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_adapter/pubsub_cpp/msg/MyMsg.idl"
+  ],
+  "additional_files": [
+    "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_generator_dds_idl/pubsub_cpp/msg/dds_connext/MyMsg_.idl"
+  ]
+}

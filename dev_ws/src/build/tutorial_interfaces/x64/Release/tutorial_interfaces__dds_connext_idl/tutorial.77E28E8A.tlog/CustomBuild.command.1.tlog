@@ -1,0 +1,28 @@
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\BUILD\TUTORIAL_INTERFACES\CMAKEFILES\D0DCB2139D5566A8F98E2C556DD32C6E\NUM_.IDL.RULE
+setlocal
+C:\Python37\python.exe C:/dev/ros2-windows/lib/rosidl_generator_dds_idl/rosidl_generator_dds_idl --additional-service-templates --generator-arguments-file C:/Users/SSAFY/Desktop/dev_ws/src/build/tutorial_interfaces/rosidl_generator_dds_idl__dds_connext__arguments.json --subfolders dds_connext --extension
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\BUILD\TUTORIAL_INTERFACES\CMAKEFILES\48A66E9A97179ECF6910A46FBED77EC7\TUTORIAL_INTERFACES__DDS_CONNEXT_IDL.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SSAFY\DESKTOP\DEV_WS\SRC\TUTORIAL_INTERFACES\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/SSAFY/Desktop/dev_ws/src/tutorial_interfaces -BC:/Users/SSAFY/Desktop/dev_ws/src/build/tutorial_interfaces --check-stamp-file C:/Users/SSAFY/Desktop/dev_ws/src/build/tutorial_interfaces/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

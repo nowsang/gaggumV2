@@ -1,0 +1,6 @@
+source;share\pubsub_cpp\hook\cmake_prefix_path.ps1
+source;share\pubsub_cpp\hook\cmake_prefix_path.bat
+source;share\pubsub_cpp\hook\cmake_prefix_path.dsv
+source;share/pubsub_cpp/local_setup.bat
+source;share/pubsub_cpp/local_setup.dsv
+source;share/pubsub_cpp/local_setup.ps1

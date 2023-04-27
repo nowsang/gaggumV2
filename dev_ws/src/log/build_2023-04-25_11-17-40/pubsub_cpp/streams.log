@@ -1,0 +1,21 @@
+[0.266s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp
+[0.297s] -- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19045.
+[0.328s] -- Found ament_cmake: 0.8.2 (C:/dev/ros2-windows/share/ament_cmake/cmake)
+[0.391s] -- Using PYTHON_EXECUTABLE: C:/Python37/python.exe
+[0.735s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.782s] -- Found rclcpp: 0.8.4 (C:/dev/ros2-windows/share/rclcpp/cmake)
+[0.844s] -- Found rosidl_adapter: 0.8.2 (C:/dev/ros2-windows/share/rosidl_adapter/cmake)
+[0.938s] -- Found rmw_implementation_cmake: 0.8.1 (C:/dev/ros2-windows/share/rmw_implementation_cmake/cmake)
+[0.938s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.032s] -- Found std_msgs: 0.8.1 (C:/dev/ros2-windows/share/std_msgs/cmake)
+[1.032s] CMake Error at C:/dev/ros2-windows/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake:52 (message):
+[1.032s]   ament_target_dependencies() the passed package name 'tutorial_interfaces'
+[1.032s]   was not found before
+[1.032s] Call Stack (most recent call first):
+[1.032s]   CMakeLists.txt:20 (ament_target_dependencies)
+[1.047s] 
+[1.047s] 
+[1.047s] -- Configuring incomplete, errors occurred!
+[1.047s] See also "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/CMakeFiles/CMakeOutput.log".
+[1.047s] See also "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/CMakeFiles/CMakeError.log".
+[1.047s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\pubsub_cpp' returned '1': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\pubsub_cpp -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\pubsub_cpp

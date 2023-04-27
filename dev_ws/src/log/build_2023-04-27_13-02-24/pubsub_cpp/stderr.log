@@ -1,0 +1,5 @@
+CMake Error at CMakeLists.txt:23 (target_link_libraries):
+  Cannot specify link libraries for target "socket" which is not built by
+  this project.
+
+

@@ -1,0 +1,30 @@
+// generated from rosidl_generator_dds_idl/resource/idl.idl.em
+// with input from pubsub_cpp:msg\MyMsg.idl
+// generated code does not contain a copyright notice
+
+#ifndef __pubsub_cpp__msg__my_msg__idl__
+#define __pubsub_cpp__msg__my_msg__idl__
+
+
+module pubsub_cpp {
+
+module msg {
+
+module dds_ {
+
+
+struct MyMsg_ {
+long num_;
+
+};
+
+#pragma keylist MyMsg_
+
+};  // module dds_
+
+};  // module msg
+
+};  // module pubsub_cpp
+
+
+#endif  // __pubsub_cpp__msg__my_msg__idl__

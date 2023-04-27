@@ -1,0 +1,19 @@
+{
+  "package_name": "pubsub_cpp",
+  "output_dir": "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_generator_dds_idl/pubsub_cpp",
+  "template_dir": "C:/dev/ros2-windows/share/rosidl_generator_dds_idl/resource",
+  "idl_tuples": [
+    "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_adapter/pubsub_cpp:msg/MyMsg.idl"
+  ],
+  "target_dependencies": [
+    "C:/dev/ros2-windows/lib/rosidl_generator_dds_idl/rosidl_generator_dds_idl",
+    "C:/dev/ros2-windows/Lib/site-packages/rosidl_generator_dds_idl/__init__.py",
+    "C:/dev/ros2-windows/share/rosidl_generator_dds_idl/resource/action.idl.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_dds_idl/resource/idl.idl.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_dds_idl/resource/msg.idl.em",
+    "C:/dev/ros2-windows/share/rosidl_generator_dds_idl/resource/srv.idl.em",
+    "C:/dev/ros2-windows/share/rosidl_typesupport_opensplice_cpp/resource/service_request_wrapper.idl.em",
+    "C:/dev/ros2-windows/share/rosidl_typesupport_opensplice_cpp/resource/service_response_wrapper.idl.em",
+    "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/rosidl_adapter/pubsub_cpp/msg/MyMsg.idl"
+  ]
+}
