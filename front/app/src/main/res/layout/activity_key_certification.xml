@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/start_background_tulip"
+    tools:context=".KeyCertificationActivity">
+
+    <TextView
+        android:id="@+id/keyCertTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:gravity="center"
+        android:text="터틀봇 키 인증"
+        android:textSize="30sp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/keyCertInputArea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+    <EditText
+        android:id="@+id/keyCertInputArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:hint="터틀봇 키를 입력해주세요"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/bmjua_ttf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/keyCertTitle"
+        app:layout_constraintBottom_toTopOf="@id/keyCertBtn"/>
+
+    <Button
+        android:id="@+id/keyCertBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:background="@drawable/radius_button"
+        android:fontFamily="@font/bmjua_ttf"
+        android:text="인증"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/keyCertInputArea"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,7 @@ class SigninActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "로그인 성공", Toast.LENGTH_LONG).show()
-                            val intent = Intent(this, MainActivity::class.java)
+                            val intent = Intent(this, KeyCertificationActivity::class.java)
                             startActivity(intent)
                         } else {
                             Toast.makeText(this, "로그인 실패", Toast.LENGTH_LONG).show()
