@@ -1,9 +1,9 @@
 const db = require("./db");
 const helper = require("../helper");
 
-async function getPlants() {
+async function getPlants(userId) {
   try {
-    const rows = await db.query(`SELECT * from plants WHERE plant_isdelete=0`);
+    const rows = await db.query(`SELECT * from plants WHERE plant_isdelete=0 AND user_id = ${userId}`);
     const data = helper.emptyOrRows(rows);
     return {
       data,
