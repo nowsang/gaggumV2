@@ -4,9 +4,10 @@ const plants = require("../servies/plant");
 const s3 = require("../aws/s3");
 
 /* GET plant. */
-router.get("/", async function (req, res, next) {
+router.get("/allplants", async function (req, res, next) {
   try {
-    res.json(await plants.getPlants(req.query.page));
+    let { userId } = req.query;
+    res.json(await plants.getPlants(userId));
   } catch (err) {
     console.error(`Error while getting plant `, err.message);
     next(err);
