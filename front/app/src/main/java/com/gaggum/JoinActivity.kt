@@ -39,11 +39,11 @@ class JoinActivity : AppCompatActivity() {
                     Log.e("task", task.toString())
                     if (task.isSuccessful) {
                         Toast.makeText(this, "회원가입 성공", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this, KeyCertificationActivity::class.java)
+//                        val intent = Intent(this, KeyCertificationActivity::class.java)
+                        val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
                         Toast.makeText(this, "회원가입 실패", Toast.LENGTH_LONG).show()
-
 //                        val intent = Intent(this, SigninActivity::class.java)
 //                        startActivity(intent)
                     }
