@@ -33,17 +33,16 @@ class SigninActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "로그인 성공", Toast.LENGTH_LONG).show()
-//                            val intent = Intent(this, KeyCertificationActivity::class.java)
-                            val intent = Intent(this, MainActivity::class.java)
+                            Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, KeyCertificationActivity::class.java)
+//                            val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                         } else {
-                            Toast.makeText(this, "로그인 실패", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
             }
-
 
         val signupBtn = findViewById<Button>(R.id.signupBtn)
         signupBtn.setOnClickListener {
