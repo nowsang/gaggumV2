@@ -9,7 +9,7 @@ async function getDiaries(turtleId) {
       `select diary_id, diary_title, diary_memo, diary_img, diary_date, diary_isdelete
       from diaries d
       join plants p on d.plant_id = p.plant_id
-      where p.turtle_id = ${turtle_id} and d.diary_isdelete=0
+      where p.turtle_id = ${turtleId} and d.diary_isdelete=0
       order by diary_date desc;`
     );
     const data = helper.emptyOrRows(rows);
