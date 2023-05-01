@@ -16,3 +16,17 @@ data class turtleInfo (
     @SerializedName("turtle_id")
     val turtleId: Int
 )
+
+data class GetAllDiariesResponseBody(
+    @SerializedName("data")
+    val data: List<diaryInfo>
+)
+
+data class diaryInfo (
+    @SerializedName("diary_title")
+    val diaryTitle: String,
+    @SerializedName("diary_memo")
+    val diaryMemo: String
+)
+
+
