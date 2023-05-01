@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_targets("TARGET_FILES" "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/RelWithDebInfo/pub.exe" "C:/Users/SSAFY/Desktop/dev_ws/src/build/pubsub_cpp/RelWithDebInfo/sub.exe" "TARGETS" "pub" "sub" "DESTINATION" "lib/pubsub_cpp")

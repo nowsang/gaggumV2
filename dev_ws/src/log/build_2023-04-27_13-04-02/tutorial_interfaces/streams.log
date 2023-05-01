@@ -1,8 +1,0 @@
-[0.281s] Invoking command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\tutorial_interfaces': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\tutorial_interfaces -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces
-[0.312s] -- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19045.
-[0.343s] -- Found ament_cmake: 0.8.2 (C:/dev/ros2-windows/share/ament_cmake/cmake)
-[0.406s] -- Found PythonInterp: C:/Python37/python.exe (found suitable version "3.7.5", minimum required is "3") 
-[0.406s] -- Using PYTHON_EXECUTABLE: C:/Python37/python.exe
-[0.781s] -- Found rosidl_default_generators: 0.8.0 (C:/dev/ros2-windows/share/rosidl_default_generators/cmake)
-[0.828s] -- Found RTI Connext: C:/Program Files/rti_connext_dds-5.3.1
-[0.906s] Invoked command in 'C:\Users\SSAFY\Desktop\dev_ws\src\build\tutorial_interfaces' returned '3221225786': C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.EXE C:\Users\SSAFY\Desktop\dev_ws\src\tutorial_interfaces -DCMAKE_INSTALL_PREFIX=C:\Users\SSAFY\Desktop\dev_ws\src\install\tutorial_interfaces

@@ -1,9 +1,0 @@
-{
-  "files.associations": {
-    "functional": "cpp",
-    "system_error": "cpp",
-    "xlocale": "cpp",
-    "xlocinfo": "cpp",
-    "xstring": "cpp"
-  }
-}
