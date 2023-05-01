@@ -12,4 +12,13 @@ interface RetrofitService {
     @GET("api/diary")
     fun getAllDiary(@Query("turtleId") turtleId: Int  ) : Call<GetAllDiariesResponseBody>
 
+    @Headers("Content-Type:application/json")
+    @GET("data/2.5/weather")
+    fun getWeatherData(
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
+        @Query("appid") appid: String
+    ) : Call<WeatherResponseBody>
+
+
 }
