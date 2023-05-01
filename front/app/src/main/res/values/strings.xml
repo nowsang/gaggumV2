@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">gaggum</string>
+    <string name="icon_user">&#xf007;</string>
+    <string name="search_icon">&#xf002;</string>
 </resources>

@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-  
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/MainFragment"
+        android:icon="@drawable/photo3"
+        android:title="Main"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/DiaryFragment"
+        android:icon="@drawable/photo1"
+        android:title="Diary"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/RegisterFragment"
+        android:icon="@drawable/photo2"
+        android:title="Register"
+        app:showAsAction="ifRoom" />
 </menu>
+
+
+
+<!--<ImageView-->
+<!--android:id="@+id/image1"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:layout_weight="1"-->
+<!--android:scaleType="fitXY"-->
+<!--android:src="@drawable/photo1" />-->

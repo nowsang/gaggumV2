@@ -49,7 +49,22 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
 
+    //fontawesome
+    implementation 'com.androidhive:fontawesome:0.0.5'
+//    implementation 'com.android.support:appcompat-v7:28.0.0'
+
+    //Material icons
+//    implementation 'com.google.android.material:material:1.5.0'
+
+    //네브바
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+
     // 현재위치
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    //socket.io
+    implementation ('io.socket:socket.io-client:1.0.1') {
+        exclude group: 'org.json', module: 'json' }
 }

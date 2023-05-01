@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/DiaryFragment">
 
+    <fragment
+        android:id="@+id/DiaryFragment"
+        android:name="com.gaggum.DiaryFragment"
+        android:label="Diary Fragment"
+        tools:layout="@layout/fragment_diary" >
+        <action
+            android:id="@+id/action_DiaryFragment_to_RegisterFragment"
+            app:destination="@id/RegisterFragment" />
+        <action
+            android:id="@+id/action_DiaryFragment_to_MainFragment"
+            app:destination="@id/MainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/RegisterFragment"
+        android:name="com.gaggum.RegisterFragment"
+        android:label="Register Fragment"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_RegisterFragment_to_DiaryFragment"
+            app:destination="@id/DiaryFragment" />
+        <action
+            android:id="@+id/action_RegisterFragment_to_MainFragment"
+            app:destination="@id/MainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/MainFragment"
+        android:name="com.gaggum.MainFragment"
+        android:label="Main Fragment"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_MainFragment_to_DiaryFragment"
+            app:destination="@id/DiaryFragment" />
+        <action
+            android:id="@+id/action_MainFragment_to_RegisterFragment"
+            app:destination="@id/RegisterFragment" />
+    </fragment>
 </navigation>
