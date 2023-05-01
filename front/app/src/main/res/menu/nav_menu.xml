@@ -5,17 +5,29 @@
         android:id="@+id/MainFragment"
         android:icon="@drawable/photo3"
         android:title="Main"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+    />
+    <item
+        android:id="@+id/MyPlantFragment"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="MyPlant"
+        app:showAsAction="ifRoom"
+    />
     <item
         android:id="@+id/DiaryFragment"
         android:icon="@drawable/photo1"
         android:title="Diary"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+    />
     <item
         android:id="@+id/RegisterFragment"
         android:icon="@drawable/photo2"
         android:title="Register"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+    />
+
+
+
 </menu>
 
 
