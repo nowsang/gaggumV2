@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/DiaryFragment">
+    app:startDestination="@id/MainFragment">
 
     <fragment
         android:id="@+id/DiaryFragment"
@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_DiaryFragment_to_MainFragment"
             app:destination="@id/MainFragment" />
+        <action
+            android:id="@+id/action_DiaryFragment_to_MyPlantFragment"
+            app:destination="@id/MyPlantFragment" />
     </fragment>
 
     <fragment
@@ -29,6 +32,9 @@
         <action
             android:id="@+id/action_RegisterFragment_to_MainFragment"
             app:destination="@id/MainFragment" />
+        <action
+            android:id="@+id/action_RegisterFragment_to_MyPlantFragment"
+            app:destination="@id/MyPlantFragment" />
     </fragment>
 
     <fragment
@@ -42,5 +48,26 @@
         <action
             android:id="@+id/action_MainFragment_to_RegisterFragment"
             app:destination="@id/RegisterFragment" />
+        <action
+            android:id="@+id/action_MainFragment_to_MyPlantFragment"
+            app:destination="@id/MyPlantFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/MyPlantFragment"
+        android:name="com.gaggum.MyPlantFragment"
+        android:label="My Plant Fragment"
+        tools:layout="@layout/fragment_my_plant"
+        >
+        <action
+            android:id="@+id/action_MyPlantFragment_to_DiaryFragment"
+            app:destination="@id/DiaryFragment" />
+        <action
+            android:id="@+id/action_MyPlantFragment_to_RegisterFragment"
+            app:destination="@id/RegisterFragment" />
+        <action
+            android:id="@+id/action_MyPlantFragment_to_MainFragment"
+            app:destination="@id/MainFragment" />
+    </fragment>
+
 </navigation>
