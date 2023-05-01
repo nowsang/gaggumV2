@@ -6,7 +6,11 @@ const plants = require("../servies/plant");
 async function getDiaries(turtleId) {
   try {
     const rows = await db.query(
-      `SELECT * from diaries WHERE diary_isdelete = 0 ORDER BY diary_date DESC AND turtle_id = ${turtleId}`
+      `select diary_id, diary_title, diary_memo, diary_img, diary_date, diary_isdelete
+      from diaries d
+      join plants p on d.plant_id = p.plant_id
+      where p.turtle_id = ${turtle_id} and d.diary_isdelete=0
+      order by diary_date desc;`
     );
     const data = helper.emptyOrRows(rows);
 
@@ -22,9 +26,11 @@ async function getDiariesByDate(body) {
   try {
     console.log(body);
     const rows = await db.query(
-      `select * from
-      diaries d join plants p ON d.plant_number = p.plant_number
-      WHERE p.turtle_id = ${body.turtle_id} AND d.diary_date LIKE "${body.diary_date}%" AND diary_isdelete = 0 ORDER BY diary_date DESC`
+      `select diary_id, diary_title, diary_memo, diary_img, diary_date, diary_isdelete
+      from diaries d
+      join plants p on d.plant_id = p.plant_id
+      where p.turtle_id = ${body.turtle_id} and d.diary_isdelete=0 and d.diary_date
+      order by diary_date desc;`
     );
     const data = helper.emptyOrRows(rows);
     console.log(rows);
