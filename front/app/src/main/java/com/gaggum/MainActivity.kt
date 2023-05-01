@@ -92,8 +92,6 @@ class MainActivity : AppCompatActivity() {
         /* 위치 권한 체크 및 요청 */
         checkAllPermissions()
 
-        /* 위치 가져오기 */
-        updateUI()
 
     }
 
@@ -142,6 +140,12 @@ class MainActivity : AppCompatActivity() {
 
             if (checkResult) {
                 // 위치값을 가져올 수 있음
+                finish()
+                overridePendingTransition(0, 0)
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(0, 0)
+
             } else {
                 Toast.makeText(this, "Permission 거부", Toast.LENGTH_SHORT).show()
                 finish()
@@ -179,42 +183,5 @@ class MainActivity : AppCompatActivity() {
         builder.create().show()
     }
 
-    private fun updateUI() {
-        locationProvider = LocationProvider(this)
-
-        val latitude : Double? = locationProvider.getLocationLattitude()
-        val longtitude : Double? = locationProvider.getLocationLongitude()
-
-        if (latitude != null || longtitude != null) {
-            // 현재 위치 가져오고 UI 업데이트
-
-        } else {
-            Toast.makeText(this, "위치 정보를 가져올 수 없습니다", Toast.LENGTH_SHORT).show()
-        }
-
-    }
-
-//    private fun getCurrentAddress(latitude : Double, longitude : Double) : Address? {
-//        val geoCoder = Geocoder(this, Locale.KOREA)
-//        val addresses : List<Address>
-//
-//        addresses = try {
-//            geoCoder.getFromLocation(latitude, longitude, 7)
-//
-//        } catch (ioException : IOException) {
-//            Toast.makeText(this, "Geocoder 서비스를 이용 불가합니다.", Toast.LENGTH_SHORT).show()
-//            return null
-//        } catch (illegalArgumentException : java.lang.IllegalArgumentException) {
-//            Toast.makeText(this, "잘못된 위치 정보입니다.", Toast.LENGTH_SHORT).show()
-//            return null
-//        }
-//
-//        if (addresses == null || addresses.size == 0) {
-//            Toast.makeText(this, "주소가 발견되지 않았습니다", Toast.LENGTH_SHORT).show()
-//        }
-//
-//        val address : Address = addresses[0]
-//        return address
-//    }
 
 }

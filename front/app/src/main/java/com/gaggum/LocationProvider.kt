@@ -74,7 +74,7 @@ class LocationProvider( val context : Context ) {
         return location
     }
 
-    fun getLocationLattitude() : Double? {
+    fun getLocationLatitude() : Double? {
         return location?.latitude
     }
 
