@@ -16,11 +16,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         /* 로그아웃 */
         val logoutBtn = view.findViewById<Button>(R.id.logoutBtn)
@@ -30,8 +26,11 @@ class MainFragment : Fragment() {
             startActivity(intent)
         }
 
-        /* 날씨 API */
-        val OPEN_WEATHER_MAP_API_KEY = "be002738467412a6651e4278dd3f8c76"
-        val OPEN_WEATHER_MAP_BASE_URL = "http://api.openweathermap.org/data/2.5/"
+        return view
     }
+
+    /* 날씨 API */
+    val OPEN_WEATHER_MAP_API_KEY = "be002738467412a6651e4278dd3f8c76"
+    val OPEN_WEATHER_MAP_BASE_URL = "http://api.openweathermap.org/data/2.5/"
+
 }
