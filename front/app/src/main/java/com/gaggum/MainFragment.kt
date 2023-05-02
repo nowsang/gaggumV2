@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.gaggum.databinding.FragmentMainBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -92,6 +93,11 @@ class MainFragment : Fragment() {
                             val avgTemp = (response.body()!!.main.temp - 273.15).roundToInt() * 10 / 10.0
 
                             binding.mainTempArea.text = "${avgTemp}도"
+                            Glide
+                                .with(mainActivity)
+                                .load("https://openweathermap.org/img/wn/$icon.png")
+                                .into(binding.mainWeatherIcon)
+
 
                             Log.e("icon", icon.toString())
 

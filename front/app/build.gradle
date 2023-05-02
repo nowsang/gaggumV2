@@ -71,7 +71,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
-
     //socket.io
     implementation ('io.socket:socket.io-client:1.0.1') {
         exclude group: 'org.json', module: 'json' }
@@ -83,4 +82,7 @@ dependencies {
     // OkHttp
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
 }
