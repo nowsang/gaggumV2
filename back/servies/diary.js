@@ -3,10 +3,14 @@ const helper = require("../helper");
 const config = require("../config");
 const plants = require("../servies/plant");
 
-async function getDiaries() {
+async function getDiaries(turtleId) {
   try {
     const rows = await db.query(
-      `SELECT * from diaries WHERE diary_isdelete = 0 ORDER BY diary_date DESC`
+      `select diary_id, diary_title, diary_memo, diary_img, diary_date, diary_isdelete
+      from diaries d
+      join plants p on d.plant_id = p.plant_id
+      where p.turtle_id = ${turtleId} and d.diary_isdelete=0
+      order by diary_date desc;`
     );
     const data = helper.emptyOrRows(rows);
 
@@ -18,12 +22,15 @@ async function getDiaries() {
     throw error;
   }
 }
-async function getDiariesByDate(param) {
+async function getDiariesByDate(body) {
   try {
-    console.log(param);
+    console.log(body);
     const rows = await db.query(
-      `SELECT * from diaries WHERE diary_date LIKE "${param}%"
-       AND diary_isdelete = 0 ORDER BY diary_date DESC`
+      `select diary_id, diary_title, diary_memo, diary_img, diary_date, diary_isdelete
+      from diaries d
+      join plants p on d.plant_id = p.plant_id
+      where p.turtle_id = ${body.turtle_id} and d.diary_isdelete=0 and d.diary_date
+      order by diary_date desc;`
     );
     const data = helper.emptyOrRows(rows);
     console.log(rows);
@@ -41,7 +48,7 @@ async function getDiariesByName(param) {
     const rows = await db.query(
       `select * from
       diaries d join plants p ON d.plant_number = p.plant_number
-      WHERE p.plant_name LIKE "${param}%" AND diary_isdelete = 0 ORDER BY diary_date DESC`
+      WHERE p.turtle_id = ${body.turtle_id} AND p.plant_name LIKE "${body.plant_name}%" AND diary_isdelete = 0 ORDER BY diary_date DESC`
     );
     const data = helper.emptyOrRows(rows);
     console.log(rows);
@@ -58,7 +65,7 @@ async function editDiary(body) {
     const rows = await db.query(
       `UPDATE diaries
         SET diary_title = "${body.diary_title}", diary_memo = "${body.diary_memo}"
-        WHERE diary_number = ${body.diary_number}`
+        WHERE diary_id = ${body.diary_id}`
     );
     const data = helper.emptyOrRows(rows);
     console.log(rows);
@@ -75,7 +82,7 @@ async function deleteDiary(body) {
     const rows = await db.query(
       `UPDATE diaries
         SET diary_isdelete = 1
-        WHERE diary_number = ${body.diary_number}`
+        WHERE diary_id = ${body.diary_id}`
     );
     const data = helper.emptyOrRows(rows);
     console.log(rows);
@@ -98,8 +105,8 @@ async function createDiary(body) {
     console.log("plantData", plantData);
     //await plants.waterPlant(plantData.data[0]);
     const rows = await db.query(
-      `INSERT INTO diaries(plant_number, diary_title, diary_img, diary_memo, diary_date)
-      values (${plantData.data[0].plant_number},"${plantData.data[0].plant_name} ${nmonth}월 ${ndate}일","https://ssafybucket.s3.ap-northeast-2.amazonaws.com/image/diary/${plantData.data[0].plant_original_name}/${nmonth}월${ndate}일","${plantData.data[0].plant_name} 물주기",curdate());
+      `INSERT INTO diaries(plant_id, diary_title, diary_img, diary_memo, diary_date)
+      values (${plantData.data[0].plant_id},"${plantData.data[0].plant_name} ${nmonth}월 ${ndate}일","https://ssafybucket.s3.ap-northeast-2.amazonaws.com/image/diary/${plantData.data[0].plant_detected_name}/${nmonth}월${ndate}일","${plantData.data[0].plant_name} 물주기",curdate());
       `
     );
     const data = helper.emptyOrRows(rows);
