@@ -89,3 +89,14 @@ dependencies {
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    // XML Parser
+    implementation 'com.tickaroo.tikxml:annotation:0.8.13'
+    implementation 'com.tickaroo.tikxml:core:0.8.13'
+    annotationProcessor 'com.tickaroo.tikxml:processor:0.8.13'
+    implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
+    annotationProcessor 'com.tickaroo.tikxml:auto-value-tikxml:0.8.13'
+    annotationProcessor 'com.tickaroo.tikxml:annotation:0.8.13'
+
+
+}
