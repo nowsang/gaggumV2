@@ -5,7 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object WeatherObject {
+object WeatherClient {
     private const val BASE_URL = "http://api.openweathermap.org"
 
     private val okHttpClient: OkHttpClient by lazy {

@@ -2,6 +2,8 @@ package com.gaggum
 
 import retrofit2.Call
 import retrofit2.http.*
+import java.time.LocalDate
+import java.util.Calendar
 
 interface RetrofitService {
     @Headers("Content-Type:application/json")
@@ -19,6 +21,21 @@ interface RetrofitService {
         @Query("lon") lon: String,
         @Query("appid") appid: String
     ) : Call<WeatherResponseBody>
+
+
+    @Headers("Content-Type:application/xml; charset=utf-8")
+    @GET("NihhsTodayFlowerInfo01/selectTodayFlower01")
+    fun getFlowerData(
+        @Query("serviceKey") serviceKey: String,
+        @Query("fMonth") fMonth: Int,
+        @Query("fDay") fDay: Int,
+    ) : Call<FlowerResponseBody>
+
+    @Headers("Content-Type:application/json")
+    @GET("api/plant/needwater")
+    fun getNeedWaterList(
+        @Query("turtleId") turtleId: Int
+    ) : Call<NeedWaterResponseBody>
 
 
 }

@@ -1,6 +1,9 @@
 package com.gaggum
 
 import com.google.gson.annotations.SerializedName
+import com.tickaroo.tikxml.annotation.Element
+import com.tickaroo.tikxml.annotation.PropertyElement
+import com.tickaroo.tikxml.annotation.Xml
 
 data class KeyCertRequestBody (
     @SerializedName("turtle_key")
@@ -50,3 +53,33 @@ data class weatherMain(
     @SerializedName("temp_min") var minTemp : Double,
     @SerializedName("temp_max") var maxTemp : Double
 )
+
+
+@Xml(name = "document")
+data class FlowerResponseBody(
+    @Element(name = "root") val root : flowerRoot?
+)
+
+@Xml(name = "root")
+data class flowerRoot(
+    @PropertyElement(name = "resultCode") var resultCode: Int?,
+    @PropertyElement(name = "resultMsg") var resultMsg: String?,
+    @PropertyElement(name = "repcategory") var repcategory: String?,
+    @Element(name = "result") var result: flowerResult?
+)
+
+@Xml(name = "result")
+data class flowerResult(
+    @PropertyElement(name = "dataNo") var dataNo: String?,
+    @PropertyElement(name = "fMonth") var fMonth: Int?,
+    @PropertyElement(name = "fDay") var fDay: Int?,
+    @PropertyElement(name = "flowNm") var flowNm: String?,
+    @PropertyElement(name = "flowLang") var flowLang: String?,
+    @PropertyElement(name = "imgUrl1") var imgUrl1: String?,
+
+)
+
+data class NeedWaterResponseBody(
+    @SerializedName("data") var data : ArrayList<String>
+)
+

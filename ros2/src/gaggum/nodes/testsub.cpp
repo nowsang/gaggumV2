@@ -1,7 +1,8 @@
 #include <memory>
 
 #include "rclcpp/rclcpp.hpp"
-#include "gaggum_msgs/msg/num.hpp"
+#include "gaggum_msgs/msg/test.hpp"
+
 using std::placeholders::_1;
 
 class MinimalSubscriber : public rclcpp::Node
