@@ -9,7 +9,7 @@ data class KeyCertRequestBody (
 
 data class KeyCertResponseBody (
     @SerializedName("data")
-    val data: List<turtleInfo>
+    val data: ArrayList<turtleInfo>
 )
 
 data class turtleInfo (
@@ -33,4 +33,20 @@ data class diaryInfo (
     val diaryImg: String
 )
 
+data class WeatherResponseBody(
+    @SerializedName("weather") var weather : ArrayList<Weather>,
+    @SerializedName("main") var main : weatherMain,
+)
 
+data class Weather(
+    @SerializedName("id") var id : Int,
+    @SerializedName("main") var main : String?,
+    @SerializedName("description") var description : String?,
+    @SerializedName("icon") var icon : String?
+)
+
+data class weatherMain(
+    @SerializedName("temp") var temp : Double,
+    @SerializedName("temp_min") var minTemp : Double,
+    @SerializedName("temp_max") var maxTemp : Double
+)
