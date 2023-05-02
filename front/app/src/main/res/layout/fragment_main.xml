@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment">
 
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃" />
+
     <!-- 날씨 -->
 
     <ImageView
@@ -63,11 +70,15 @@
 
     <!-- 물이 필요한 식물 이미지 슬라이더 -->
 
-    <Button
-        android:id="@+id/logoutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로그아웃" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/mainViewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/guideline5" />
 
     <!-- 추천 꽃 -->
 
