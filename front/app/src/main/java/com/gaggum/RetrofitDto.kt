@@ -29,7 +29,11 @@ data class diaryInfo (
     @SerializedName("diary_title")
     val diaryTitle: String,
     @SerializedName("diary_memo")
-    val diaryMemo: String
+    val diaryMemo: String,
+    @SerializedName("diary_date")
+    val diaryDate: String,
+    @SerializedName("diary_img")
+    val diaryImg: String
 )
 
 data class WeatherResponseBody(
