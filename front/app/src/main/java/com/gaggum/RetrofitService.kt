@@ -48,4 +48,9 @@ interface RetrofitService {
     ) : Call<GetAllPlantsResponseBody>
 
 
+    @Headers("Content-Type:application/json")
+    @GET("api/plant/number")
+    fun getPlantDetailData(
+        @Query("plantId") plantId: Int
+    ) : Call<GetPlantDetailResponseBody>
 }

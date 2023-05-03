@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
+import java.time.format.DateTimeFormatter
+import java.util.Date
 import java.util.Objects
 
 data class KeyCertRequestBody (
@@ -117,7 +119,26 @@ data class allPlants (
 )
 
 data class GetPlantDetailResponseBody (
-    @SerializedName("data") var data : ArrayList<String>
+    @SerializedName("data") var data : ArrayList<plantDetailData>
+)
+
+data class plantDetailData (
+    @SerializedName("plant_id") var plantId : Int,
+    @SerializedName("turtle_id") var turtleId: Int,
+    @SerializedName("plant_name") var plantName : String,
+    @SerializedName("plant_species") var plantSpecies: String,
+    @SerializedName("plant_memo") var plantMemo : String,
+    @SerializedName("plant_img") var plantImg : String,
+    @SerializedName("plant_isdelete") var plantIsDelete : Int,
+    @SerializedName("plant_create_date") var plantCreateDate : String,
+    @SerializedName("plant_position_x") var plantPositionX : Double,
+    @SerializedName("plant_position_y") var plantPositionY : Double,
+    @SerializedName("plant_watering_cycle") var plantWateringCycle : Int,
+    @SerializedName("plant_watering_amount") var plantWateringAmount : Int,
+    @SerializedName("plant_last_watering_date") var plantLastWateringDate : String,
+    @SerializedName("plant_sunlight") var plantSunlight : Int,
+    @SerializedName("plant_detected_name") var plantDetectedName : String
+
 )
 
 
