@@ -5,7 +5,8 @@ const diraies = require("../servies/diary");
 /* GET diaries. */
 router.get("/", async function (req, res, next) {
   try {
-    let { turtleId } = req.query;
+    let {turtleId} = req.query;
+    console.log(turtleId);
     res.json(await diraies.getDiaries(turtleId));
   } catch (err) {
     console.error(`Error while getting diaries `, err.message);
