@@ -29,9 +29,9 @@ import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 class MainFragment : Fragment() {
-    val onConnect = Emitter.Listener {
-        mSocket.emit("run_mapping","OK")
-    }
+//    val onConnect = Emitter.Listener {
+//        mSocket.emit("run_mapping","OK")
+//    }
     lateinit var mSocket : Socket
     val OPENWEATHER_API_KEY : String = "be002738467412a6651e4278dd3f8c76"
     val FLOWER_API_KEY : String = "XXL2KwjyRGopX8KOKa1BT7gj3em5fLBeqRHJ3xmUpHboTi9da0bZL9fXntQWh63TkQBodm6xHmgeas8K7yBerg=="
@@ -53,24 +53,28 @@ class MainFragment : Fragment() {
 //            mSocket.emit("run_mapping","OK")
 //        }
 
-        try {
-            //핸드폰 유선 연결 시 1.핸드폰이랑 노트북 같은 와이파이 쓸 것 2.IPv4 주소를 아래 주소에 입력
-            mSocket = IO.socket("http://192.168.1.72:3001")
 
-//            mSocket = IO.socket("http://localhost:3001")
-
-            mSocket.connect()
-            Log.d("Connected", "OK")
-        } catch (e: URISyntaxException) {
-            Log.d("ERR", e.toString())
-        }
-        mSocket.on(Socket.EVENT_CONNECT, onConnect)
+//        mSocket.on(Socket.EVENT_CONNECT, onConnect)
 
         // Inflate the layout for this fragment
         val binding = FragmentMainBinding.inflate(inflater, container, false)
 
         // Set the click listener for the button
         binding.mainMapScanBtn.setOnClickListener {
+            try {
+                //핸드폰 유선 연결 시 1.핸드폰이랑 노트북 같은 와이파이 쓸 것 2.IPv4 주소를 아래 주소에 입력
+                mSocket = IO.socket("http://192.168.1.72:3001")
+
+//            mSocket = IO.socket("http://localhost:3001")
+
+                mSocket.connect()
+                Log.d("Connected", "OK")
+            } catch (e: URISyntaxException) {
+                Log.d("ERR", e.toString())
+            }
+
+
+
             mSocket.emit("connectReceive", "OK")
             Log.e("버튼클릭","!!")
         }
