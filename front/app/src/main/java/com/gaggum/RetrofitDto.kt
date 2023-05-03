@@ -25,6 +25,24 @@ data class GetAllDiariesResponseBody(
     val data: List<diaryInfo>
 )
 
+data class editDiaryRequestBody (
+    @SerializedName("diary_id")
+    val diaryId: Int?,
+    @SerializedName("diary_title")
+    val diaryTitle: String?,
+    @SerializedName("diary_memo")
+    val diaryMemo: String?,
+)
+
+data class editDiaryResponseBody (
+    @SerializedName("data")
+    val data:EditDiaryResponseData
+)
+
+data class EditDiaryResponseData(
+    val info: String,
+
+)
 data class diaryInfo (
     @SerializedName("diary_title")
     val diaryTitle: String,
@@ -33,7 +51,9 @@ data class diaryInfo (
     @SerializedName("diary_date")
     val diaryDate: String,
     @SerializedName("diary_img")
-    val diaryImg: String
+    val diaryImg: String,
+    @SerializedName("diary_id")
+    val diaryId: Int
 )
 
 data class WeatherResponseBody(

@@ -1,7 +1,5 @@
 package com.gaggum
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
@@ -35,7 +32,7 @@ class DiaryFragment : Fragment() {
         return view
     }
 
-    private fun getDiariesFromServer(view: View) {
+    fun getDiariesFromServer(view: View) {
         val service = RetrofitObject.service
         service.getAllDiary(1).enqueue(object : Callback<GetAllDiariesResponseBody> {
             override fun onResponse(
@@ -73,12 +70,12 @@ class DiaryFragment : Fragment() {
 
     private fun setUpDiaryViews(diaries: List<diaryInfo>, view: View) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.singRV)
-        recyclerView.adapter = DiaryAdapter(diaries)
+        recyclerView.adapter = DiaryAdapter(diaries, requireContext(), this) // Add requireContext()
 
         val testTitles = diaries.map { it.diaryTitle }.distinct()
         setupSpinner(view, testTitles)
 
-        setupYearMonthSpinners(view) // 인자 diaries를 제거합니다.
+        setupYearMonthSpinners(view)
     }
 
     private fun setupSpinner(view: View, testTitles: List<String>) {
@@ -103,7 +100,7 @@ class DiaryFragment : Fragment() {
                     diaries.filter { it.diaryTitle == selectedTitle }
                 }
                 val recyclerView = view.findViewById<RecyclerView>(R.id.singRV)
-                recyclerView.adapter = DiaryAdapter(filteredDiaries)
+                recyclerView.adapter = DiaryAdapter(filteredDiaries, requireContext(), this@DiaryFragment)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -156,6 +153,6 @@ class DiaryFragment : Fragment() {
                     (it.diaryDate.substring(5, 7) == selectedMonth || selectedMonth == "전체")
         }
         val recyclerView = view?.findViewById<RecyclerView>(R.id.singRV)
-        recyclerView?.adapter = DiaryAdapter(filteredDiaries)
+        recyclerView?.adapter = DiaryAdapter(filteredDiaries, requireContext(), this)
     }
 }
