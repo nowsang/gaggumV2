@@ -14,6 +14,16 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/diaryId"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="96dp"
+            android:text="Diary Id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/diaryTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
