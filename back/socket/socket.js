@@ -50,16 +50,18 @@ function socketStart() {
     });
 
     // 시뮬레이터 환경변수(시간, 날씨), 로봇 위치 정보 전달(백 -> ROS)
-    socket.on("simulator_info", (data) => {
-      console.log("simulator_info", data);
+    socket.on("time_control", (data) => {
+      console.log("time_control", data.hour);      
       // 프론트 페이지로 simulator 전달
       // socket.to(roomName).emit("simulator_info", data);
+      
 
       //현재 시간이 물주는 시간인지 체크
-      if (data.environment.hour == 13) {
+      if (data.hour == 13) {
         (async () => {
           // db에서 물줘야하는 식물 리스트 가져오기
-          let waterNeedPlants = await plants.getWaterNeedPlant();
+          let turtle_id = 1;
+          let waterNeedPlants = await plants.getWaterNeedPlant(turtle_id);
           console.log("물줘야하는 식물들", waterNeedPlants);
           waterNeedPlants.mode = 100;
           // ROS로 급수 필요 식물 리스트 전달
