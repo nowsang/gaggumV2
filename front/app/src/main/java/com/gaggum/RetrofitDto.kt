@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
+import java.util.Objects
 
 data class KeyCertRequestBody (
     @SerializedName("turtle_key")
@@ -82,4 +83,21 @@ data class flowerResult(
 data class NeedWaterResponseBody(
     @SerializedName("data") var data : ArrayList<String>
 )
+
+data class GetAllPlantsResponseBody(
+    @SerializedName("data") var data : ArrayList<allPlants>
+)
+
+data class allPlants (
+    @SerializedName("plant_id") var plantId : Int,
+    @SerializedName("turtle_id") var turtleId : Int,
+    @SerializedName("plant_name") var plantName : String,
+    @SerializedName("plant_species") var plantSpecies : String,
+    @SerializedName("plant_img") var plantImg : String
+)
+
+data class GetPlantDetailResponseBody (
+    @SerializedName("data") var data : ArrayList<String>
+)
+
 

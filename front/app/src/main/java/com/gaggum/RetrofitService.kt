@@ -37,5 +37,11 @@ interface RetrofitService {
         @Query("turtleId") turtleId: Int
     ) : Call<NeedWaterResponseBody>
 
+    @Headers("Content-Type:application/json")
+    @GET("api/plant/allplants")
+    fun getAllPlantsData(
+        @Query("turtleId") turtleId: Int
+    ) : Call<GetAllPlantsResponseBody>
+
 
 }
