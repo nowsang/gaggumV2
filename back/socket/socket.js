@@ -9,8 +9,8 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
     origin: [
-      "http://j8b310.p.ssafy.io:3001",
-      "http://j8b310.p.ssafy.io",
+      "http://k8b101.p.ssafy.io:3001",
+      "http://k8b101.p.ssafy.io",
       "http://localhost:8080",
       "http://localhost:3001",
       "http://localhost:3000",
