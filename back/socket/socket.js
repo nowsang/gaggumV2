@@ -6,6 +6,7 @@ const s3 = require("../aws/s3");
 // 로직 1. WebSocket 서버, WebClient 통신 규약 정의
 const server = require("http").createServer(app);
 
+// const io = require("socket.io")(server)
 const io = require("socket.io")(server, {
   cors: {
     origin: [
@@ -14,6 +15,8 @@ const io = require("socket.io")(server, {
       "http://localhost:8080",
       "http://localhost:3001",
       "http://localhost:3000",
+      "http://192.168.1.72:3000",
+      "http://192.168.1.72:8080",
     ],
     methods: ["GET", "POST"],
     transports: ["websocket", "polling"],
@@ -31,11 +34,16 @@ function socketStart() {
 
   // 터틀봇의 소켓 이름.
   const roomName = "team";
+  
 
   io.on("connection", (socket) => {
     socket.join(roomName);
 
     console.log("connected from server");
+
+    socket.on("connectReceive", (data) => {
+      console.log("connectReceive", data);
+    });
 
     // Map Auto Scan
     socket.on("run_mapping", (data) => {
@@ -50,16 +58,18 @@ function socketStart() {
     });
 
     // 시뮬레이터 환경변수(시간, 날씨), 로봇 위치 정보 전달(백 -> ROS)
-    socket.on("simulator_info", (data) => {
-      console.log("simulator_info", data);
+    socket.on("time_control", (data) => {
+      console.log("time_control", data.hour);      
       // 프론트 페이지로 simulator 전달
       // socket.to(roomName).emit("simulator_info", data);
+      
 
       //현재 시간이 물주는 시간인지 체크
-      if (data.environment.hour == 13) {
+      if (data.hour == 13) {
         (async () => {
           // db에서 물줘야하는 식물 리스트 가져오기
-          let waterNeedPlants = await plants.getWaterNeedPlant();
+          let turtle_id = 1;
+          let waterNeedPlants = await plants.getWaterNeedPlant(turtle_id);
           console.log("물줘야하는 식물들", waterNeedPlants);
           waterNeedPlants.mode = 100;
           // ROS로 급수 필요 식물 리스트 전달
