@@ -1,43 +1,109 @@
 package com.gaggum
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import com.gaggum.R
+import io.socket.client.IO
+import io.socket.client.Socket
+import com.gaggum.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
+    private lateinit var binding: FragmentRegisterBinding
+    private lateinit var socket: Socket
+    private val handler = Handler()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private var upKeyDown = false
+    private var downKeyDown = false
+    private var leftKeyDown = false
+    private var rightKeyDown = false
+
+    private val repeatUpdateRunnable = object : Runnable {
+        override fun run() {
+            if (upKeyDown) logKeyDown("straight", 2)
+            if (downKeyDown) logKeyDown("back", 3)
+            if (leftKeyDown) logKeyDown("left", 1)
+            if (rightKeyDown) logKeyDown("right", 4)
+
+            handler.postDelayed(this, 100)
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_register, container, false)
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        val items = mutableListOf<String>()
-        items.add("노래1")
-        items.add("노래2")
-        items.add("노래3")
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val rv = view.findViewById<RecyclerView>(R.id.singRV)
-        val rvAdapter = RVAdapter(items)
-        rv.adapter = rvAdapter
-        rv.layoutManager = LinearLayoutManager(context)
+        connectSocketIO()
 
-//        val image2 = view.findViewById<ImageView>(R.id.image1)
-//        image2.setOnClickListener {
-//            Navigation.findNavController(it).navigate(R.id.action_RegisterFragment_to_DiaryFragment)
-//        }
+        val upArrow = binding.arrowUp
+        val downArrow = binding.arrowDown
+        val leftArrow = binding.arrowLeft
+        val rightArrow = binding.arrowRight
 
-        return view
+        upArrow.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> upKeyDown = true
+                MotionEvent.ACTION_UP -> upKeyDown = false
+            }
+            true
+        }
+
+        downArrow.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> downKeyDown = true
+                MotionEvent.ACTION_UP -> downKeyDown = false
+            }
+            true
+        }
+
+        leftArrow.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> leftKeyDown = true
+                MotionEvent.ACTION_UP -> leftKeyDown = false
+            }
+            true
+        }
+
+        rightArrow.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> rightKeyDown = true
+                MotionEvent.ACTION_UP -> rightKeyDown = false
+            }
+            true
+        }
+
+        handler.post(repeatUpdateRunnable)
+    }
+
+    private fun connectSocketIO() {
+        socket = IO.socket("http://192.168.1.72:3001")
+        socket.connect()
+    }
+
+    private fun logKeyDown(direction: String, number: Int) {
+        if (socket.connected()) {
+//            socket.emit("go_$direction", mapOf("name" to "go $direction", "data" to number))
+            socket.emit("connectReceive", mapOf("name" to "go $direction", "data" to number))
+
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        handler.removeCallbacks(repeatUpdateRunnable)
+        socket.disconnect()
     }
 }

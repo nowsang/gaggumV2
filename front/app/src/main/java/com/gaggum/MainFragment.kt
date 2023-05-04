@@ -57,7 +57,7 @@ class MainFragment : Fragment() {
 //        mSocket.on(Socket.EVENT_CONNECT, onConnect)
 
         // Inflate the layout for this fragment
-        val binding = FragmentMainBinding.inflate(inflater, container, false)
+        val binding = FragmentMainBinding.inflate(inflater, container,false)
 
         // Set the click listener for the button
         binding.mainMapScanBtn.setOnClickListener {
