@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="@color/background_color"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
@@ -30,6 +31,7 @@
             android:layout_height="0dp"
             android:text="식물 이름"
             android:textSize="30sp"
+            android:textColor="@color/text_color"
             android:fontFamily="@font/bmjua_ttf"
             android:gravity="center|bottom"
             app:layout_constraintLeft_toRightOf="@id/myPlantImg"

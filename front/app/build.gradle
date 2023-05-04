@@ -100,5 +100,8 @@ dependencies {
     annotationProcessor 'com.tickaroo.tikxml:auto-value-tikxml:0.8.13'
     annotationProcessor 'com.tickaroo.tikxml:annotation:0.8.13'
 
+    // dialog
+    implementation 'com.google.android.material:material:1.8.0'
+
 
 }

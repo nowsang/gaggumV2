@@ -4,4 +4,13 @@
     <string name="search_icon">&#xf002;</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- MyPlant -->
+    <string name="my_plant_title">내 식물</string>
+
+    <!-- PlantDetail -->
+    <string name="btn_text">최신화</string>
+    <string name="detail_watering_cycle">급수주기</string>
+    <string name="detail_watering_amount">급수량</string>
+    <string name="detail_watering_date">급수일</string>
 </resources>

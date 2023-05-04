@@ -138,7 +138,10 @@ data class plantDetailData (
     @SerializedName("plant_last_watering_date") var plantLastWateringDate : String,
     @SerializedName("plant_sunlight") var plantSunlight : Int,
     @SerializedName("plant_detected_name") var plantDetectedName : String
+)
 
+data class UpdateWateringDateRequestBody (
+    @SerializedName("plant_id") val plantId : Int
 )
 
 
