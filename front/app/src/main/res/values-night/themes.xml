@@ -3,7 +3,7 @@
     <style name="Theme.Gaggum" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimary">@color/btn_color</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
@@ -13,5 +13,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="android:fontFamily">@font/bmjua_ttf</item>
     </style>
 </resources>

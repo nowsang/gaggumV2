@@ -7,7 +7,9 @@ plugins {
 android {
     namespace 'com.gaggum'
     compileSdk 33
-
+    buildFeatures {
+        viewBinding true
+    }
     defaultConfig {
         applicationId "com.gaggum"
         minSdk 24
