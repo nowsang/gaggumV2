@@ -90,7 +90,6 @@ class MainFragment : Fragment() {
                         response: Response<WeatherResponseBody>
                     ) {
                         if (response.isSuccessful) {
-                            Toast.makeText(mainActivity, "날씨 정보를 받아오는 데 성공하였습니다.", Toast.LENGTH_SHORT).show()
                             val icon = response.body()!!.weather[0].icon
                             val avgTemp = (response.body()!!.main.temp - 273.15).roundToInt() * 10 / 10.0
 
