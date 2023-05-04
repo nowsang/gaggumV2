@@ -16,9 +16,8 @@ public:
   {
     // Connect to the Socket.IO server
     sio_client_.set_open_listener(std::bind(&AutoMoveNode::on_connected, this));
-    sio_client_.connect("http://localhost:3001");
-       
-     z CCCCCCCCCCCCCCCC
+    sio_client_.connect("http://localhost:3001");    
+     
     sio_client_.socket()->on("auto_move", [](sio::event& event) {
     //   std::string data = event.get_message()->get_string();      
       cout << "auto move" << "\n";

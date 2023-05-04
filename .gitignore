@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+socket.io-client-cpp/
 develop-eggs/
 dist/
 downloads/
