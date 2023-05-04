@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
+import java.util.Objects
 
 data class KeyCertRequestBody (
     @SerializedName("turtle_key")
@@ -25,6 +26,24 @@ data class GetAllDiariesResponseBody(
     val data: List<diaryInfo>
 )
 
+data class editDiaryRequestBody (
+    @SerializedName("diary_id")
+    val diaryId: Int?,
+    @SerializedName("diary_title")
+    val diaryTitle: String?,
+    @SerializedName("diary_memo")
+    val diaryMemo: String?,
+)
+
+data class editDiaryResponseBody (
+    @SerializedName("data")
+    val data:EditDiaryResponseData
+)
+
+data class EditDiaryResponseData(
+    val info: String,
+
+)
 data class diaryInfo (
     @SerializedName("diary_title")
     val diaryTitle: String,
@@ -33,7 +52,9 @@ data class diaryInfo (
     @SerializedName("diary_date")
     val diaryDate: String,
     @SerializedName("diary_img")
-    val diaryImg: String
+    val diaryImg: String,
+    @SerializedName("diary_id")
+    val diaryId: Int
 )
 
 data class WeatherResponseBody(
@@ -82,4 +103,21 @@ data class flowerResult(
 data class NeedWaterResponseBody(
     @SerializedName("data") var data : ArrayList<String>
 )
+
+data class GetAllPlantsResponseBody(
+    @SerializedName("data") var data : ArrayList<allPlants>
+)
+
+data class allPlants (
+    @SerializedName("plant_id") var plantId : Int,
+    @SerializedName("turtle_id") var turtleId : Int,
+    @SerializedName("plant_name") var plantName : String,
+    @SerializedName("plant_species") var plantSpecies : String,
+    @SerializedName("plant_img") var plantImg : String
+)
+
+data class GetPlantDetailResponseBody (
+    @SerializedName("data") var data : ArrayList<String>
+)
+
 

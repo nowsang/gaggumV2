@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -16,15 +17,22 @@ import com.bumptech.glide.Glide
 import com.gaggum.databinding.FragmentMainBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import io.socket.client.IO
+import io.socket.client.Socket
+import io.socket.emitter.Emitter
 import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
+import java.net.URISyntaxException
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 class MainFragment : Fragment() {
-
+//    val onConnect = Emitter.Listener {
+//        mSocket.emit("run_mapping","OK")
+//    }
+    lateinit var mSocket : Socket
     val OPENWEATHER_API_KEY : String = "be002738467412a6651e4278dd3f8c76"
     val FLOWER_API_KEY : String = "XXL2KwjyRGopX8KOKa1BT7gj3em5fLBeqRHJ3xmUpHboTi9da0bZL9fXntQWh63TkQBodm6xHmgeas8K7yBerg=="
 
@@ -41,11 +49,42 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+//        val onConnect = Emitter.Listener {
+//            mSocket.emit("run_mapping","OK")
+//        }
+
+
+//        mSocket.on(Socket.EVENT_CONNECT, onConnect)
+
+        // Inflate the layout for this fragment
+        val binding = FragmentMainBinding.inflate(inflater, container, false)
+
+        // Set the click listener for the button
+        binding.mainMapScanBtn.setOnClickListener {
+            try {
+                //핸드폰 유선 연결 시 1.핸드폰이랑 노트북 같은 와이파이 쓸 것 2.IPv4 주소를 아래 주소에 입력
+                mSocket = IO.socket("http://192.168.1.72:3001")
+
+//            mSocket = IO.socket("http://localhost:3001")
+
+                mSocket.connect()
+                Log.d("Connected", "OK")
+            } catch (e: URISyntaxException) {
+                Log.d("ERR", e.toString())
+            }
+
+
+
+            mSocket.emit("connectReceive", "OK")
+            Log.e("버튼클릭","!!")
+        }
+
+
         var lat : String? = null
         var lon : String? = null
 
         // Inflate the layout for this fragment
-        val binding = FragmentMainBinding.inflate(inflater, container, false)
+//        val binding = FragmentMainBinding.inflate(inflater, container, false)
 
         /* 로그아웃 */
         val logoutBtn = binding.logoutBtn
@@ -115,6 +154,9 @@ class MainFragment : Fragment() {
         updateUI()
         getWeather(lat, lon)
         getFlower()
+
+
+
 
         /* ViewPager2 */
 //        binding.mainViewPager.adapter = ViewPagerAdapter(getNeedWaterPlantList())

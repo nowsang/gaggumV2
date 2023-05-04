@@ -6,20 +6,23 @@ const s3 = require("../aws/s3");
 // 로직 1. WebSocket 서버, WebClient 통신 규약 정의
 const server = require("http").createServer(app);
 
-const io = require("socket.io")(server, {
-  cors: {
-    origin: [
-      "http://k8b101.p.ssafy.io:3001",
-      "http://k8b101.p.ssafy.io",
-      "http://localhost:8080",
-      "http://localhost:3001",
-      "http://localhost:3000",
-    ],
-    methods: ["GET", "POST"],
-    transports: ["websocket", "polling"],
-    credentials: true,
-  },
-});
+const io = require("socket.io")(server)
+// const io = require("socket.io")(server, {
+//   cors: {
+//     origin: [
+//       "http://k8b101.p.ssafy.io:3001",
+//       "http://k8b101.p.ssafy.io",
+//       "http://localhost:8080",
+//       "http://localhost:3001",
+//       "http://localhost:3000",
+//       "http://192.168.1.72:3000",
+//       "http://192.168.1.72:8080",
+//     ],
+//     methods: ["GET", "POST"],
+//     transports: ["websocket", "polling"],
+//     credentials: true,
+//   },
+// });
 
 // 로직 2. 포트번호 지정
 function socketStart() {
@@ -32,10 +35,18 @@ function socketStart() {
   // 터틀봇의 소켓 이름.
   const roomName = "team";
 
+  
+
   io.on("connection", (socket) => {
     socket.join(roomName);
 
     console.log("connected from server");
+
+    socket.on("connectReceive", (data) => {
+      console.log("connectReceive", data);
+    });
+
+
 
     // Map Auto Scan
     socket.on("run_mapping", (data) => {

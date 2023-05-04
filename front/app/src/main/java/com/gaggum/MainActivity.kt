@@ -46,7 +46,7 @@ import java.io.IOException
 class MainActivity : AppCompatActivity() {
     //    private lateinit var socket: Socket
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    lateinit var mSocket : Socket
+//    lateinit var mSocket : Socket
     private lateinit var navController: NavController
 
     // 데이터 바인딩
@@ -77,27 +77,26 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
 
         // Socket.io
-        try {
-            //핸드폰 유선 연결 시 1.핸드폰이랑 노트북 같은 와이파이 쓸 것 2.IPv4 주소를 아래 주소에 입력
-            mSocket = IO.socket("http://192.168.217.177:3000")
-            mSocket.connect()
-            Log.d("Connected", "OK")
-        } catch (e: URISyntaxException) {
-            Log.d("ERR", e.toString())
-        }
-        mSocket.on(Socket.EVENT_CONNECT, onConnect)
+//        try {
+//            //핸드폰 유선 연결 시 1.핸드폰이랑 노트북 같은 와이파이 쓸 것 2.IPv4 주소를 아래 주소에 입력
+////            mSocket = IO.socket("http://192.168.217.177:3000")
+//            mSocket = IO.socket("http://localhost:3001")
+//
+//            mSocket.connect()
+//            Log.d("Connected", "OK")
+//        } catch (e: URISyntaxException) {
+//            Log.d("ERR", e.toString())
+//        }
+//        mSocket.on(Socket.EVENT_CONNECT, onConnect)
 
 
 
         /* 위치 권한 체크 및 요청 */
         checkAllPermissions()
 
-
     }
 
-    val onConnect = Emitter.Listener {
-        mSocket.emit("connectReceive","OK")
-    }
+//    Z
 
     private fun checkAllPermissions() {
         if(!isLocationServicesAvailable()) {

@@ -15,6 +15,10 @@ interface RetrofitService {
     fun getAllDiary(@Query("turtleId") turtleId: Int  ) : Call<GetAllDiariesResponseBody>
 
     @Headers("Content-Type:application/json")
+    @POST("api/diary/edit")
+    fun editDiary(@Body diary_id : editDiaryRequestBody ) : Call<editDiaryResponseBody>
+
+    @Headers("Content-Type:application/json")
     @GET("data/2.5/weather")
     fun getWeatherData(
         @Query("lat") lat: String,
@@ -36,6 +40,12 @@ interface RetrofitService {
     fun getNeedWaterList(
         @Query("turtleId") turtleId: Int
     ) : Call<NeedWaterResponseBody>
+
+    @Headers("Content-Type:application/json")
+    @GET("api/plant/allplants")
+    fun getAllPlantsData(
+        @Query("turtleId") turtleId: Int
+    ) : Call<GetAllPlantsResponseBody>
 
 
 }
