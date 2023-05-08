@@ -89,7 +89,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun connectSocketIO() {
-        socket = IO.socket("http://192.168.1.72:3001")
+        socket = IO.socket("https://k8b101.p.ssafy.io:3001")
         socket.connect()
     }
 

@@ -62,7 +62,7 @@ class MainFragment : Fragment() {
         binding.mainMapScanBtn.setOnClickListener {
             try {
                 //핸드폰 유선 연결 시 1.핸드폰이랑 노트북 같은 와이파이 쓸 것 2.IPv4 주소를 아래 주소에 입력
-                mSocket = IO.socket("http://192.168.1.72:3001")
+                mSocket = IO.socket("https://k8b101.p.ssafy.io")
 
 //            mSocket = IO.socket("http://localhost:3001")
 
