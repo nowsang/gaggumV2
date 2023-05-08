@@ -15,7 +15,7 @@ using namespace std;
 class WallTracking : public rclcpp::Node
 {
     public:
-        WallTracking() : Node("wall_tracking_node"), my_int(1)
+        WallTracking() : Node("wall_tracking_node"), my_int(1), is_odom(false), is_path(false), is_status(false)
         {
             cmd_pub = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
             cmd_sub = this->create_subscription<geometry_msgs::msg::Twist>(
@@ -45,7 +45,7 @@ class WallTracking : public rclcpp::Node
 
         void timer_callback()
         {            
-            // cout << my_int + 1 << '\n';
+            cout << is_odom << '\n';
             // my_int = 0;
         }
 
@@ -56,6 +56,9 @@ class WallTracking : public rclcpp::Node
         }
 
         int my_int;
+        bool is_odom;
+        bool is_path;
+        bool is_status;
 
         rclcpp::TimerBase::SharedPtr timer_;        
         rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_pub;        
