@@ -18,6 +18,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import io.socket.client.IO
 import io.socket.client.Socket
+import org.simpleframework.xml.core.Persister
 import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
@@ -148,16 +149,65 @@ class MainFragment : Fragment() {
                 })
         }
 
+        fun getFlower() {
+            val cal = Calendar.getInstance()
+            val month = (cal.get(Calendar.MONTH) + 1)
+            val day = cal.get(Calendar.DATE)
+
+            val service = FlowerClient.service
+            service
+                .getFlowerData(FLOWER_API_KEY, month, day)
+                .enqueue(object : retrofit2.Callback<FlowerResponseBody> {
+                    override fun onResponse(
+                        call: Call<FlowerResponseBody>,
+                        response: Response<FlowerResponseBody>
+                    ) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(mainActivity, "꽃 가져오기 성공", Toast.LENGTH_SHORT).show()
+                            val res = response.body()?.root?.result?.get(0)
+                            val fMonth = res?.fMonth
+                            val fDay = res?.fDay
+                            val flowImg = res?.imgUrl1
+                            val flowName = res?.flowNm
+                            val flowLang = res?.flowLang
+
+                            Glide
+                                .with(mainActivity)
+                                .load(flowImg)
+                                .into(binding.todayFlowerImg)
+
+                            binding.todayFlowerTitle.text = "${fMonth}월 ${fDay}일의 추천 꽃"
+                            binding.todayFlowerName.text = flowName
+                            binding.todayFlowermean.text = flowLang
+
+
+
+                        } else {
+                            Log.e("실패", "실패")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<FlowerResponseBody>, t: Throwable) {
+                        Toast.makeText(mainActivity, "Retrofit 실패", Toast.LENGTH_SHORT).show()
+                        Log.e("call", call.toString())
+                        Log.e("t", t.toString())
+                    }
+
+                })
+
+        }
+
         updateUI()
         getWeather(lat, lon)
         getFlower()
 
+
         /* ViewPager2 */
-        getNeedWaterPlantList()
-        if (needWaterList.size > 0) {
-            binding.mainViewPager.adapter = ViewPagerAdapter(needWaterList)
-            binding.mainViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        }
+//        getNeedWaterPlantList()
+//        if (needWaterList.size > 0) {
+//            binding.mainViewPager.adapter = ViewPagerAdapter(needWaterList)
+//            binding.mainViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//        }
 
         return binding.root
     }
@@ -209,37 +259,6 @@ class MainFragment : Fragment() {
 
         val address : Address = addresses[0]
         return address
-
-    }
-
-    private fun getFlower() {
-        var cal = Calendar.getInstance()
-        var month = (cal.get(Calendar.MONTH) + 1)
-        var day = cal.get(Calendar.DATE)
-
-        val service = FlowerClient.service
-        service
-            .getFlowerData(FLOWER_API_KEY, month, day)
-            .enqueue(object : retrofit2.Callback<FlowerResponseBody> {
-                override fun onResponse(
-                    call: Call<FlowerResponseBody>,
-                    response: Response<FlowerResponseBody>
-                ) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(mainActivity, "꽃 가져오기 성공", Toast.LENGTH_SHORT).show()
-                        Log.e("response", response.toString())
-                    } else {
-                        Log.e("실패", "실패")
-                    }
-                }
-
-                override fun onFailure(call: Call<FlowerResponseBody>, t: Throwable) {
-                    Toast.makeText(mainActivity, "Retrofit 실패", Toast.LENGTH_SHORT).show()
-                    Log.e("call", call.toString())
-                    Log.e("t", t.toString())
-                }
-
-            })
 
     }
 
