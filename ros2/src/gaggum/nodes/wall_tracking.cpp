@@ -5,24 +5,30 @@
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "geometry_msgs/msg/twist.hpp"
+#include "nav_msgs/msg/odometry.hpp"
 
 using std::placeholders::_1;
-using std::placeholders::_2;
+// using std::placeholders::_2;
 using namespace std::chrono_literals;
 using namespace std;
 
 class WallTracking : public rclcpp::Node
 {
     public:
-        WallTracking() : Node("wall_tracking_node")
+        WallTracking() : Node("wall_tracking_node"), my_int(1)
         {
             cmd_pub = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
             cmd_sub = this->create_subscription<geometry_msgs::msg::Twist>(
-            "/cmd_vel", 10, std::bind(&WallTracking::cmd_callback, this, _1)
+                "/cmd_vel", 10, std::bind(&WallTracking::cmd_callback, this, _1)
             );
             lidar_sub = this->create_subscription<sensor_msgs::msg::LaserScan>(
-            "/scan", 10, std::bind(&WallTracking::lidar_callback, this, _1)
+                "/scan", 10, std::bind(&WallTracking::lidar_callback, this, _1)
             );
+            odom_sub = this->create_subscription<nav_msgs::msg::Odometry>(
+                "/odom", 10, std::bind(&WallTracking::odom_callback, this, _1)
+            );
+
+            timer_ = this->create_wall_timer(1000ms, std::bind(&WallTracking::timer_callback, this));
 
         }
     private:
@@ -37,8 +43,24 @@ class WallTracking : public rclcpp::Node
             cout << "cmd_callback" << " " << velocity << '\n';
         }
 
+        void timer_callback()
+        {            
+            // cout << my_int + 1 << '\n';
+            // my_int = 0;
+        }
+
+        void odom_callback(const nav_msgs::msg::Odometry::SharedPtr msg) const
+        {
+            float odom_msg = msg->pose.pose.orientation.w;
+            cout << odom_msg << '\n';
+        }
+
+        int my_int;
+
+        rclcpp::TimerBase::SharedPtr timer_;        
         rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_pub;        
-        rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_sub;
+        rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub;
+        rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_sub;        
         rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr lidar_sub;        
 
 };
