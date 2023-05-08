@@ -103,7 +103,7 @@ data class flowerResult(
 )
 
 data class NeedWaterResponseBody(
-    @SerializedName("data") var data : ArrayList<String>
+    @SerializedName("data") var data : ArrayList<allPlants>
 )
 
 data class GetAllPlantsResponseBody(

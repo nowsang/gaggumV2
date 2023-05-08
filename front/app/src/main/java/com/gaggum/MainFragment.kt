@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -19,13 +18,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import io.socket.client.IO
 import io.socket.client.Socket
-import io.socket.emitter.Emitter
 import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
 import java.net.URISyntaxException
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 class MainFragment : Fragment() {
@@ -38,6 +35,7 @@ class MainFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
     private lateinit var locationProvider: LocationProvider
+    lateinit var needWaterList : ArrayList<allPlants>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -154,40 +152,38 @@ class MainFragment : Fragment() {
         getWeather(lat, lon)
         getFlower()
 
-
-
-
         /* ViewPager2 */
-//        binding.mainViewPager.adapter = ViewPagerAdapter(getNeedWaterPlantList())
-        binding.mainViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
+        getNeedWaterPlantList()
+        if (needWaterList.size > 0) {
+            binding.mainViewPager.adapter = ViewPagerAdapter(needWaterList)
+            binding.mainViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        }
 
         return binding.root
     }
 
     /* ViewPager Items */
-//    private fun getNeedWaterPlantList() : ArrayList<String> {
-//        val service = RetrofitObject.service
-//        service
-//            .getNeedWaterList(1)
-//            .enqueue(object : retrofit2.Callback<NeedWaterResponseBody> {
-//                override fun onResponse(
-//                    call: Call<NeedWaterResponseBody>,
-//                    response: Response<NeedWaterResponseBody>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        val res = response.body()!!
-//                        Log.e("res", res.toString())
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<NeedWaterResponseBody>, t: Throwable) {
-//                    Toast.makeText(mainActivity, "급수 필요한 식물 받아오기 실패", Toast.LENGTH_SHORT).show()
-//                }
-//
-//            })
-//
-//    }
+    private fun getNeedWaterPlantList() {
+        val service = RetrofitObject.service
+        service
+            .getNeedWaterList(1)
+            .enqueue(object : retrofit2.Callback<NeedWaterResponseBody> {
+                override fun onResponse(
+                    call: Call<NeedWaterResponseBody>,
+                    response: Response<NeedWaterResponseBody>
+                ) {
+                    if (response.isSuccessful) {
+                        val res = response.body()!!.data
+                        needWaterList = res
+                    }
+                }
+
+                override fun onFailure(call: Call<NeedWaterResponseBody>, t: Throwable) {
+                    Toast.makeText(mainActivity, "급수 필요한 식물 받아오기 실패", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+    }
 
     /* 날씨 API */
 
