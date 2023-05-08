@@ -16,6 +16,7 @@ find_package(rclcpp REQUIRED)
 find_package(gaggum_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 find_package(sioclient REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 
@@ -48,7 +49,7 @@ ament_target_dependencies(auto_move rclcpp sioclient)
 target_link_libraries(auto_move sioclient Boost::system)
 
 add_executable(wall_tracking nodes/wall_tracking.cpp)
-ament_target_dependencies(wall_tracking rclcpp sensor_msgs geometry_msgs)
+ament_target_dependencies(wall_tracking rclcpp sensor_msgs geometry_msgs nav_msgs)
 
 
 # 실행 파일을 찾을 수 있도록 섹션 추가
