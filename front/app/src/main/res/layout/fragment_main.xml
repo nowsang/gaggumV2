@@ -68,7 +68,20 @@
         app:layout_constraintStart_toEndOf="@+id/mainAddressArea"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
-    <!-- 물이 필요한 식물 이미지 슬라이더 -->
+    <!-- 이미지 슬라이더 -->
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="오늘 물이 필요한 식물"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:fontFamily="@font/bmjua_ttf"
+
+        app:layout_constraintBottom_toTopOf="@+id/mainViewPager"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/guideline4" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/mainViewPager"
@@ -89,6 +102,7 @@
         android:gravity="center"
         android:text="5월 1일의 추천 꽃"
         android:textSize="24sp"
+        android:fontFamily="@font/bmjua_ttf"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
@@ -110,6 +124,7 @@
         android:layout_height="0dp"
         android:text="꽃 이름"
         android:gravity="center"
+        android:fontFamily="@font/bmjua_ttf"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintVertical_weight="1"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -124,6 +139,7 @@
         android:layout_height="0dp"
         android:text="꽃말"
         android:gravity="center"
+        android:fontFamily="@font/bmjua_ttf"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintVertical_weight="2"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
@@ -141,6 +157,7 @@
         android:text="집 스캔"
         android:padding="8dp"
         android:textSize="24sp"
+        android:fontFamily="@font/bmjua_ttf"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
