@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:fillViewport="true"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="4dp">
 
         <ListView
             android:id="@+id/listView"

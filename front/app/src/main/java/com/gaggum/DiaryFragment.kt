@@ -48,7 +48,7 @@ class DiaryFragment : Fragment() {
                 Log.e("결과", response.toString())
                 if (response.isSuccessful) {
                     diaries = response.body()?.data ?: emptyList()
-                    Toast.makeText(context, diaries.toString(), Toast.LENGTH_LONG).show()
+//                    Toast.makeText(context, diaries.toString(), Toast.LENGTH_LONG).show()
                     if (diaries.isNotEmpty()) {
                         setUpDiaryViews(diaries, view)
                     } else {
@@ -86,83 +86,7 @@ class DiaryFragment : Fragment() {
         setupButtons(view, testTitles, years, months)
     }
 
-//    private fun setupSpinner(view: View, testTitles: List<String>) {
-//        val spinner = view.findViewById<Spinner>(R.id.spinner)
-//        val allTitles = listOf("전체보기") + testTitles
-//        val arrayAdapter =
-//            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, allTitles)
-//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        spinner.adapter = arrayAdapter
-//
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(
-//                parent: AdapterView<*>?,
-//                spinnerView: View?,
-//                position: Int,
-//                id: Long
-//            ) {
-//                val selectedTitle = allTitles[position]
-//                val filteredDiaries = if (selectedTitle == "전체보기") {
-//                    diaries
-//                } else {
-//                    diaries.filter { it.diaryTitle == selectedTitle }
-//                }
-//                val recyclerView = view.findViewById<RecyclerView>(R.id.singRV)
-//                recyclerView.adapter = DiaryAdapter(filteredDiaries, requireContext(), this@DiaryFragment)
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//                // Do nothing
-//            }
-//        }
-//    }
 
-//    private fun setupYearMonthSpinners(view: View) {
-//        val years = listOf("전체", "2020", "2021", "2022", "2023", "2024", "2025")
-//        val yearSpinner = view.findViewById<Spinner>(R.id.yearSpinner)
-//        val yearAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, years)
-//        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        yearSpinner.adapter = yearAdapter
-//
-//        val months = listOf("전체", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-//        val monthSpinner = view.findViewById<Spinner>(R.id.monthSpinner)
-//        val monthAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, months)
-//        monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        monthSpinner.adapter = monthAdapter
-//
-//        yearSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>?, spinnerView: View?, position: Int, id: Long) {
-//                val selectedYear = years[position]
-//                val selectedMonth = months[monthSpinner.selectedItemPosition]
-//                filterDiariesByYearAndMonth(selectedYear, selectedMonth, diaries, view)
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//                // Do nothing
-//            }
-//        }
-//
-//        monthSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>?, spinnerView: View?, position: Int, id: Long) {
-//                val selectedYear = years[yearSpinner.selectedItemPosition]
-//                val selectedMonth = months[position]
-//                filterDiariesByYearAndMonth(selectedYear, selectedMonth, diaries, view)
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//                // Do nothing
-//            }
-//        }
-//    }
-
-//    private fun filterDiariesByYearAndMonth(selectedYear: String, selectedMonth: String, diaries: List<diaryInfo>, view: View?) {
-//        val filteredDiaries = diaries.filter {
-//            (it.diaryDate.substring(0, 4) == selectedYear || selectedYear == "전체") &&
-//                    (it.diaryDate.substring(5, 7) == selectedMonth || selectedMonth == "전체")
-//        }
-//        val recyclerView = view?.findViewById<RecyclerView>(R.id.singRV)
-//        recyclerView?.adapter = DiaryAdapter(filteredDiaries, requireContext(), this)
-//    }
     private fun filterDiariesByTitleAndYearAndMonth(
         selectedTitle: String,
         selectedYear: String,
@@ -193,24 +117,7 @@ class DiaryFragment : Fragment() {
                 filterDiariesByTitleAndYearAndMonth(selectedItem, selectedYear, selectedMonth, diaries, view)
             }
         }
-                //이거 두개 교내는 ㅇ그냥 모달
-//        yearButton.setOnClickListener {
-//            showOptionsDialog(years, "전체") { selected ->
-//                yearButton.text = selected
-//                val selectedTitle = titleButton.text.toString()
-//                val selectedMonth = monthButton.text.toString()
-//                filterDiariesByTitleAndYearAndMonth(selectedTitle, selected, selectedMonth, diaries, view)
-//            }
-//        }
-//
-//        monthButton.setOnClickListener {
-//            showOptionsDialog(months, "전체") { selected ->
-//                monthButton.text = selected
-//                val selectedTitle = titleButton.text.toString()
-//                val selectedYear = yearButton.text.toString()
-//                filterDiariesByTitleAndYearAndMonth(selectedTitle, selectedYear, selected, diaries, view)
-//            }
-//        }
+
         yearButton.setOnClickListener {
             val items = years
             showBottomDialog("년도 선택", items) { selectedItem ->
