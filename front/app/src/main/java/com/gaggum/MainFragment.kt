@@ -18,7 +18,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import io.socket.client.IO
 import io.socket.client.Socket
-import org.simpleframework.xml.core.Persister
+//import org.simpleframework.xml.core.Persister
 import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
@@ -60,22 +60,11 @@ class MainFragment : Fragment() {
 
         // Set the click listener for the button
         binding.mainMapScanBtn.setOnClickListener {
-            try {
-                //핸드폰 유선 연결 시 1.핸드폰이랑 노트북 같은 와이파이 쓸 것 2.IPv4 주소를 아래 주소에 입력
-                mSocket = IO.socket("https://k8b101.p.ssafy.io")
-
-//            mSocket = IO.socket("http://localhost:3001")
-
-                mSocket.connect()
-                Log.d("Connected", "OK")
-            } catch (e: URISyntaxException) {
-                Log.d("ERR", e.toString())
-            }
-
-
-
-            mSocket.emit("connectReceive", "OK")
-            Log.e("버튼클릭","!!")
+            //            // MapScanActivity 시작하기 위한 Intent 생성
+                val intent = Intent(requireActivity(), MapScanActivity::class.java)
+            //
+            //    // 액티비티 시작
+                startActivity(intent)
         }
 
 

@@ -1,68 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="@color/background_color"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardBackgroundColor="@color/light_green"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_margin="16dp">
+
+        <ImageView
+            android:id="@+id/diaryImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/photo1"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/diaryId"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="96dp"
             android:text="Diary Id"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:ignore="MissingConstraints" />
 
-        <TextView
+<!--        <TextView-->
+<!--            android:id="@+id/diaryTitle"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Diary Title"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:gravity="bottom"-->
+<!--            app:layout_constraintLeft_toRightOf="@id/diaryImg"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/diaryMemo"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Diary Memo"-->
+<!--            android:textSize="14sp"-->
+<!--            android:gravity="top"-->
+<!--            app:layout_constraintLeft_toRightOf="@id/diaryImg"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/diaryTitle" />-->
+        <EditText
             android:id="@+id/diaryTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Diary Title"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="bottom"
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            app:layout_constraintLeft_toRightOf="@id/diaryImg"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <EditText
             android:id="@+id/diaryMemo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Diary Memo"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/diaryTitle" />
-
+            android:gravity="top"
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            app:layout_constraintLeft_toRightOf="@id/diaryImg"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/diaryTitle" />
         <TextView
             android:id="@+id/diaryDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Diary Memo"
+            android:text="날짜"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/diaryMemo" />
-
-        <TextView
-            android:id="@+id/diaryImg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Diary Memo10"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/diaryDate" />
+            android:gravity="top"
+            app:layout_constraintLeft_toRightOf="@id/diaryImg"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/diaryMemo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>
