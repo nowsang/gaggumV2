@@ -3,10 +3,13 @@ package com.gaggum
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -55,6 +58,7 @@ class DiaryAdapter(private val diaryList: List<diaryInfo>, private val context: 
 
     private fun showDiaryDetailsDialog(context: Context, diary: diaryInfo) {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.diary_detail_modal, null)
+
         dialogView.findViewById<EditText>(R.id.dialog_diary_title).setText(diary.diaryTitle)
         dialogView.findViewById<EditText>(R.id.dialog_diary_memo).setText(diary.diaryMemo)
 
@@ -73,6 +77,8 @@ class DiaryAdapter(private val diaryList: List<diaryInfo>, private val context: 
                 dialog.dismiss()
             }
             .create()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        alertDialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         alertDialog.show()
     }

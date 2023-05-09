@@ -30,29 +30,30 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
 
-    <Spinner
-        android:id="@+id/spinner"
+    <Button
+        android:id="@+id/titleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="전체보기"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
 
-    <Spinner
-        android:id="@+id/yearSpinner"
+    <Button
+        android:id="@+id/yearButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="전체"
         android:layout_marginStart="8dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintStart_toEndOf="@+id/titleButton"
         app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
 
-    <Spinner
-        android:id="@+id/monthSpinner"
+    <Button
+        android:id="@+id/monthButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="전체"
         android:layout_marginStart="8dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/yearSpinner"
+        app:layout_constraintStart_toEndOf="@+id/yearButton"
         app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -61,7 +62,7 @@
         android:layout_height="0dp"
         tools:listitem="@layout/diary_item"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/titleButton" />
 
 
     <androidx.constraintlayout.widget.Guideline

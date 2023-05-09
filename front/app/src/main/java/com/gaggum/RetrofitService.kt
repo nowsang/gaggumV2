@@ -48,4 +48,14 @@ interface RetrofitService {
     ) : Call<GetAllPlantsResponseBody>
 
 
+    @Headers("Content-Type:application/json")
+    @GET("api/plant/number")
+    fun getPlantDetailData(
+        @Query("plantId") plantId: Int
+    ) : Call<GetPlantDetailResponseBody>
+
+    @Headers("Content-Type:application/json")
+    @POST("api/plant/water")
+    fun updateWateringDate( @Body plant_id : UpdateWateringDateRequestBody
+    ) : Call<Any>
 }

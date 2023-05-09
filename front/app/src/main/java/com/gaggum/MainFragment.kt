@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -19,13 +18,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import io.socket.client.IO
 import io.socket.client.Socket
-import io.socket.emitter.Emitter
+import org.simpleframework.xml.core.Persister
 import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
 import java.net.URISyntaxException
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 class MainFragment : Fragment() {
@@ -38,6 +36,7 @@ class MainFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
     private lateinit var locationProvider: LocationProvider
+    lateinit var needWaterList : ArrayList<allPlants>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,7 +46,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
 
 //        val onConnect = Emitter.Listener {
 //            mSocket.emit("run_mapping","OK")
@@ -57,13 +56,13 @@ class MainFragment : Fragment() {
 //        mSocket.on(Socket.EVENT_CONNECT, onConnect)
 
         // Inflate the layout for this fragment
-        val binding = FragmentMainBinding.inflate(inflater, container, false)
+        val binding = FragmentMainBinding.inflate(inflater, container,false)
 
         // Set the click listener for the button
         binding.mainMapScanBtn.setOnClickListener {
             try {
                 //핸드폰 유선 연결 시 1.핸드폰이랑 노트북 같은 와이파이 쓸 것 2.IPv4 주소를 아래 주소에 입력
-                mSocket = IO.socket("http://192.168.1.72:3001")
+                mSocket = IO.socket("https://k8b101.p.ssafy.io")
 
 //            mSocket = IO.socket("http://localhost:3001")
 
@@ -129,7 +128,6 @@ class MainFragment : Fragment() {
                         response: Response<WeatherResponseBody>
                     ) {
                         if (response.isSuccessful) {
-                            Toast.makeText(mainActivity, "날씨 정보를 받아오는 데 성공하였습니다.", Toast.LENGTH_SHORT).show()
                             val icon = response.body()!!.weather[0].icon
                             val avgTemp = (response.body()!!.main.temp - 273.15).roundToInt() * 10 / 10.0
 
@@ -151,44 +149,91 @@ class MainFragment : Fragment() {
                 })
         }
 
+        fun getFlower() {
+            val cal = Calendar.getInstance()
+            val month = (cal.get(Calendar.MONTH) + 1)
+            val day = cal.get(Calendar.DATE)
+
+            val service = FlowerClient.service
+            service
+                .getFlowerData(FLOWER_API_KEY, month, day)
+                .enqueue(object : retrofit2.Callback<FlowerResponseBody> {
+                    override fun onResponse(
+                        call: Call<FlowerResponseBody>,
+                        response: Response<FlowerResponseBody>
+                    ) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(mainActivity, "꽃 가져오기 성공", Toast.LENGTH_SHORT).show()
+                            val res = response.body()?.root?.result?.get(0)
+                            val fMonth = res?.fMonth
+                            val fDay = res?.fDay
+                            val flowImg = res?.imgUrl1
+                            val flowName = res?.flowNm
+                            val flowLang = res?.flowLang
+
+                            Glide
+                                .with(mainActivity)
+                                .load(flowImg)
+                                .into(binding.todayFlowerImg)
+
+                            binding.todayFlowerTitle.text = "${fMonth}월 ${fDay}일의 추천 꽃"
+                            binding.todayFlowerName.text = flowName
+                            binding.todayFlowermean.text = flowLang
+
+
+
+                        } else {
+                            Log.e("실패", "실패")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<FlowerResponseBody>, t: Throwable) {
+                        Toast.makeText(mainActivity, "Retrofit 실패", Toast.LENGTH_SHORT).show()
+                        Log.e("call", call.toString())
+                        Log.e("t", t.toString())
+                    }
+
+                })
+
+        }
+
         updateUI()
         getWeather(lat, lon)
         getFlower()
 
 
-
-
         /* ViewPager2 */
-//        binding.mainViewPager.adapter = ViewPagerAdapter(getNeedWaterPlantList())
-        binding.mainViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
+//        getNeedWaterPlantList()
+//        if (needWaterList.size > 0) {
+//            binding.mainViewPager.adapter = ViewPagerAdapter(needWaterList)
+//            binding.mainViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//        }
 
         return binding.root
     }
 
     /* ViewPager Items */
-//    private fun getNeedWaterPlantList() : ArrayList<String> {
-//        val service = RetrofitObject.service
-//        service
-//            .getNeedWaterList(1)
-//            .enqueue(object : retrofit2.Callback<NeedWaterResponseBody> {
-//                override fun onResponse(
-//                    call: Call<NeedWaterResponseBody>,
-//                    response: Response<NeedWaterResponseBody>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        val res = response.body()!!
-//                        Log.e("res", res.toString())
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<NeedWaterResponseBody>, t: Throwable) {
-//                    Toast.makeText(mainActivity, "급수 필요한 식물 받아오기 실패", Toast.LENGTH_SHORT).show()
-//                }
-//
-//            })
-//
-//    }
+    private fun getNeedWaterPlantList() {
+        val service = RetrofitObject.service
+        service
+            .getNeedWaterList(1)
+            .enqueue(object : retrofit2.Callback<NeedWaterResponseBody> {
+                override fun onResponse(
+                    call: Call<NeedWaterResponseBody>,
+                    response: Response<NeedWaterResponseBody>
+                ) {
+                    if (response.isSuccessful) {
+                        val res = response.body()!!.data
+                        needWaterList = res
+                    }
+                }
+
+                override fun onFailure(call: Call<NeedWaterResponseBody>, t: Throwable) {
+                    Toast.makeText(mainActivity, "급수 필요한 식물 받아오기 실패", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+    }
 
     /* 날씨 API */
 
@@ -214,37 +259,6 @@ class MainFragment : Fragment() {
 
         val address : Address = addresses[0]
         return address
-
-    }
-
-    private fun getFlower() {
-        var cal = Calendar.getInstance()
-        var month = (cal.get(Calendar.MONTH) + 1)
-        var day = cal.get(Calendar.DATE)
-
-        val service = FlowerClient.service
-        service
-            .getFlowerData(FLOWER_API_KEY, month, day)
-            .enqueue(object : retrofit2.Callback<FlowerResponseBody> {
-                override fun onResponse(
-                    call: Call<FlowerResponseBody>,
-                    response: Response<FlowerResponseBody>
-                ) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(mainActivity, "꽃 가져오기 성공", Toast.LENGTH_SHORT).show()
-                        Log.e("response", response.toString())
-                    } else {
-                        Log.e("실패", "실패")
-                    }
-                }
-
-                override fun onFailure(call: Call<FlowerResponseBody>, t: Throwable) {
-                    Toast.makeText(mainActivity, "Retrofit 실패", Toast.LENGTH_SHORT).show()
-                    Log.e("call", call.toString())
-                    Log.e("t", t.toString())
-                }
-
-            })
 
     }
 

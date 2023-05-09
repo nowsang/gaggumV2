@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:menu="@menu/nav_menu"
+        android:fontFamily="@font/bmjua_ttf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

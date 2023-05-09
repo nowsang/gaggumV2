@@ -27,7 +27,7 @@ router.get("/needwater", async function (req, res, next) {
 router.get("/number", async function (req, res, next) {
   let { plantId } = req.query;
   try {
-    res.json(await plants.getPlantByNumber(plantId));
+    res.json(await plants.getPlantById(plantId));
   } catch (err) {
     console.error(`Error while getting plant by number `, err.message);
     next(err);
@@ -51,7 +51,7 @@ router.post("/edit", async function (req, res, next) {
     next(err);
   }
 });
-
+// poopoo ks
 router.post("/delete", async function (req, res, next) {
   try {
     res.json(await plants.deletePlant(req.body));

@@ -3,23 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="8dp"
+    android:background="@drawable/modal_background">
+
+    <!-- 직접 배경 속성 추가 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFFFF"
+        android:padding="16dp">
 
     <EditText
         android:id="@+id/dialog_diary_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize = "20sp"
-        android:textAppearance="?attr/textAppearanceHeadline6" />
+        android:hint="Title"
+        android:textSize="20sp"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:background="@android:color/transparent" />
 
     <EditText
         android:id="@+id/dialog_diary_memo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Memo"
-        android:textSize = "20sp"
+        android:hint="Memo"
+        android:textSize="20sp"
         android:textAppearance="?attr/textAppearanceBody1"
-        android:layout_marginTop="8dp"/>
-
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent" />
 </LinearLayout>
+    </LinearLayout>
