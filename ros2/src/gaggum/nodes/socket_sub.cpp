@@ -27,15 +27,15 @@ public:
       // cout << event.get_message()->get_string() << "\n";
 
       // int
-      // cout << event.get_message()->get_int() << "\n";
+      cout << event.get_message()->get_int() << "\n";
 
       // bool
       // cout << event.get_message()->get_bool() << '\n';
 
       // map
-      auto custom_obj = event.get_message()->get_map();      
-      int plant1_value = custom_obj["plant1"]->get_int();
-      cout << plant1_value << '\n';
+      // auto custom_obj = event.get_message()->get_map();      
+      // int plant1_value = custom_obj["plant1"]->get_int();
+      // cout << plant1_value << '\n';
 
 
     });

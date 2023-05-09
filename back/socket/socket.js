@@ -4,7 +4,7 @@ const plants = require("../servies/plant");
 const diaries = require("../servies/diary");
 const s3 = require("../aws/s3");
 // 로직 1. WebSocket 서버, WebClient 통신 규약 정의
-const server = require("https").createServer(app);
+const server = require("http").createServer(app);
 
 // const io = require("socket.io")(server)
 const io = require("socket.io")(server, {
@@ -44,6 +44,11 @@ function socketStart() {
     socket.on("connectReceive", (data) => {
       console.log("connectReceive", data);
     });
+
+    socket.on("message", (data) => {
+      console.log("server socket test", data);
+      socket.to(roomName).emit("message", data);
+    })
 
     // Map Auto Scan
     socket.on("run_mapping", (data) => {
