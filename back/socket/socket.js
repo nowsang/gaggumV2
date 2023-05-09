@@ -45,6 +45,11 @@ function socketStart() {
       console.log("connectReceive", data);
     });
 
+    socket.on("message", (data) => {
+      console.log("server socket test", data);
+      socket.to(roomName).emit("message", data);
+    })
+
     // Map Auto Scan
     socket.on("run_mapping", (data) => {
       // Front -> Back -> ROS
