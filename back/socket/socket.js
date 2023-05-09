@@ -4,14 +4,15 @@ const plants = require("../servies/plant");
 const diaries = require("../servies/diary");
 const s3 = require("../aws/s3");
 // 로직 1. WebSocket 서버, WebClient 통신 규약 정의
+// const server = require("http").createServer(app);
 const server = require("http").createServer(app);
 
 // const io = require("socket.io")(server)
 const io = require("socket.io")(server, {
   cors: {
     origin: [
-      "https://k8b101.p.ssafy.io:3001",
-      "https://k8b101.p.ssafy.io",
+      "http://k8b101.p.ssafy.io:3001",
+      "http://k8b101.p.ssafy.io",
       "http://localhost:8080",
       "http://localhost:3001",
       "http://localhost:3000",
