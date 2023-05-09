@@ -17,7 +17,7 @@ public:
     // Connect to the Socket.IO server
     sio_client_.set_open_listener(std::bind(&SocketIONode::on_connected, this));
     // sio_client_.connect("http://localhost:3001");
-    sio_client_.connect("https://k8b101.p.ssafy.io/socket");
+    sio_client_.connect("https://k8b101.p.ssafy.io:3001");
 
     // Create a timer to send messages to the server periodically
     timer_ = this->create_wall_timer(std::chrono::seconds(1), std::bind(&SocketIONode::send_message, this));
@@ -39,7 +39,7 @@ private:
     // msg.push("Hello from ROS 2!");    
     
     // int
-    auto int_msg = sio::int_message::create(33);
+    auto int_msg = sio::int_message::create(35);
     msg.push(int_msg);
 
     // bool
