@@ -13,6 +13,7 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
 find_package(gaggum_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
@@ -27,10 +28,10 @@ add_executable(talker nodes/testpub.cpp)
 ament_target_dependencies(talker rclcpp gaggum_msgs)
 
 add_executable(listener nodes/testsub.cpp)
-ament_target_dependencies(listener rclcpp gaggum_msgs)
+ament_target_dependencies(listener rclcpp gaggum_msgs std_msgs)
 
 add_executable(move_turtle nodes/move_turtle.cpp)
-ament_target_dependencies(move_turtle rclcpp geometry_msgs)
+ament_target_dependencies(move_turtle rclcpp std_msgs geometry_msgs)
 
 add_executable(socket_pub nodes/socket_pub.cpp)
 ament_target_dependencies(socket_pub rclcpp sioclient)
