@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.room.Room
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.gaggum.databinding.FragmentMainBinding
@@ -18,6 +19,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import io.socket.client.IO
 import io.socket.client.Socket
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.simpleframework.xml.core.Persister
 import retrofit2.Call
 import retrofit2.Response
@@ -25,6 +30,7 @@ import java.io.IOException
 import java.net.URISyntaxException
 import java.util.*
 import kotlin.math.roundToInt
+import kotlin.properties.Delegates
 
 class MainFragment : Fragment() {
 //    val onConnect = Emitter.Listener {
@@ -36,25 +42,36 @@ class MainFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
     private lateinit var locationProvider: LocationProvider
-    lateinit var needWaterList : ArrayList<allPlants>
+
+    private lateinit var db : ClientDatabase
+    private var turtleId : Int = 0
+    private lateinit var user : String
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         mainActivity = context as MainActivity
+        db = Room.databaseBuilder(context, ClientDatabase::class.java, "ClientDatabase")
+            .build()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        user = Firebase.auth.currentUser!!.uid
+        Log.e("user", user)
 
-//        val onConnect = Emitter.Listener {
-//            mSocket.emit("run_mapping","OK")
-//        }
-
-
-//        mSocket.on(Socket.EVENT_CONNECT, onConnect)
-
+        GlobalScope.launch(Dispatchers.IO) {
+            val retrievedUser = db.clientDao().getTurtleId(user)
+            if (retrievedUser != null) {
+                withContext(Dispatchers.Main) {
+                    turtleId = retrievedUser.turtleId
+                }
+            } else {
+                Log.e("실패", "실패하였습니다.")
+            }
+        }
         // Inflate the layout for this fragment
         val binding = FragmentMainBinding.inflate(inflater, container,false)
 
@@ -197,34 +214,34 @@ class MainFragment : Fragment() {
 
         }
 
-        updateUI()
-        getWeather(lat, lon)
-        getFlower()
-
-
-        /* ViewPager2 */
-//        getNeedWaterPlantList()
-//        if (needWaterList.size > 0) {
-//            binding.mainViewPager.adapter = ViewPagerAdapter(needWaterList)
-//            binding.mainViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-//        }
-
-        return binding.root
-    }
-
-    /* ViewPager Items */
-    private fun getNeedWaterPlantList() {
+    fun getNeedWaterPlantList() {
         val service = RetrofitObject.service
         service
-            .getNeedWaterList(1)
+            .getNeedWaterList(turtleId)
             .enqueue(object : retrofit2.Callback<NeedWaterResponseBody> {
                 override fun onResponse(
                     call: Call<NeedWaterResponseBody>,
                     response: Response<NeedWaterResponseBody>
                 ) {
                     if (response.isSuccessful) {
-                        val res = response.body()!!.data
-                        needWaterList = res
+                        val viewPager = binding.mainViewPager
+                        viewPager.adapter = ViewPagerAdapter(response.body()!!.data, mainActivity)
+                        viewPager.setPageTransformer(ZoomOutPageTransformer())
+
+                        // 여백 너비 정의
+                        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
+                        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth)
+                        val screnWidth = resources.displayMetrics.widthPixels
+                        val offsetPx = screnWidth - pageMarginPx - pagerWidth
+
+                        viewPager.setPageTransformer { page, position ->
+                            page.translationX = position * -offsetPx
+                        }
+
+                        viewPager.offscreenPageLimit = 3
+
+                        Log.e("response", response.body()!!.data.toString())
+
                     }
                 }
 
@@ -234,6 +251,59 @@ class MainFragment : Fragment() {
 
             })
     }
+        updateUI()
+        getWeather(lat, lon)
+        getFlower()
+
+
+        /* ViewPager2 */
+        getNeedWaterPlantList()
+
+
+        return binding.root
+    }
+
+    inner class ZoomOutPageTransformer : ViewPager2.PageTransformer {
+
+        private val MIN_SCALE = 0.85f
+        private val MIN_ALPHA = 0.5f
+        override fun transformPage(view: View, position: Float) {
+            view.apply {
+                val pageWidth = width
+                val pageHeight = height
+                when {
+                    position < -1 -> { // [-Infinity,-1)
+                        // This page is way off-screen to the left.
+                        alpha = 0f
+                    }
+                    position <= 1 -> { // [-1,1]
+                        // Modify the default slide transition to shrink the page as well
+                        val scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position))
+                        val vertMargin = pageHeight * (1 - scaleFactor) / 2
+                        val horzMargin = pageWidth * (1 - scaleFactor) / 2
+                        translationX = if (position < 0) {
+                            horzMargin - vertMargin / 2
+                        } else {
+                            horzMargin + vertMargin / 2
+                        }
+
+                        // Scale the page down (between MIN_SCALE and 1)
+                        scaleX = scaleFactor
+                        scaleY = scaleFactor
+
+                        // Fade the page relative to its size.
+                        alpha = (MIN_ALPHA +
+                                (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA)))
+                    }
+                    else -> { // (1,+Infinity]
+                        // This page is way off-screen to the right.
+                        alpha = 0f
+                    }
+                }
+            }
+        }
+    }
+    /* ViewPager Items */
 
     /* 날씨 API */
 

@@ -1,35 +1,39 @@
 package com.gaggum
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.bumptech.glide.Glide
 
-class ViewPagerAdapter(plants : ArrayList<allPlants>) : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
+class ViewPagerAdapter(private val slides : List<allPlants>, val context: Context) : RecyclerView.Adapter<ViewPagerAdapter.SlideViewHolder>() {
 
-    var plants = plants
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.pv_item, parent, false)
-        return PagerViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.bind(plants[position])
+    inner class SlideViewHolder(view : View) : RecyclerView.ViewHolder(view) {
+        val imageView : ImageView = view.findViewById(R.id.pv_item_img)
+        val textView : TextView = view.findViewById(R.id.pv_item_text)
     }
 
     override fun getItemCount(): Int {
-        return plants.size
+        return slides.size
     }
-    inner class PagerViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        private val plantImg = itemView.findViewById<ImageView>(R.id.pv_item)
-        fun bind(item : allPlants) {
-            Glide
-                .with(itemView)
-                .load(item.plantImg)
-                .into(plantImg)
-        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SlideViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.pv_item, parent, false)
+        return SlideViewHolder(view)
     }
+
+    override fun onBindViewHolder(holder: SlideViewHolder, position: Int) {
+        val slide = slides[position]
+        Glide
+            .with(context)
+            .load(slide.plantImg)
+            .into(holder.imageView)
+        holder.textView.text = slide.plantName
+
+    }
+
 }
