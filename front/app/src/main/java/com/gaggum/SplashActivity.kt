@@ -9,6 +9,10 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SplashActivity : AppCompatActivity() {
 
@@ -30,9 +34,9 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }, 2000)
         } else {
-            Toast.makeText(this, "로그인 완료", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "로그인 성공", Toast.LENGTH_LONG).show()
             Handler().postDelayed({
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, KeyCertificationActivity::class.java))
                 finish()
             }, 2000)
         }
