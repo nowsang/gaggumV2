@@ -15,8 +15,8 @@ public:
   {
     // Connect to the Socket.IO server
     sio_client_.set_open_listener(std::bind(&SocketIOSubNode::on_connected, this));
-    sio_client_.connect("http://localhost:3001");
-    // sio_client_.connect("https://k8b101.p.ssafy.io/socket");
+    // sio_client_.connect("http://localhost:3001");
+    sio_client_.connect("https://k8b101.p.ssafy.io/socket");
     
     sio_client_.socket()->on("message", [](sio::event& event) {
     //   std::string data = event.get_message()->get_string();      
@@ -26,7 +26,7 @@ public:
       // str
       // cout << event.get_message()->get_string() << "\n";
 
-      int
+      // int
       cout << event.get_message()->get_int() << "\n";
 
       // bool
