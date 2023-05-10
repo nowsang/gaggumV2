@@ -2,6 +2,7 @@ const db = require("./db");
 const helper = require("../helper");
 const config = require("../config");
 const plants = require("../servies/plant");
+const s3 = require("../aws/s3");
 
 async function getDiaries(turtleId) {
   try {
