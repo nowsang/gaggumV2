@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.room.Room
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -32,21 +34,20 @@ import java.util.*
 import kotlin.math.roundToInt
 import kotlin.properties.Delegates
 
-class MainFragment : Fragment() {
-//    val onConnect = Emitter.Listener {
-//        mSocket.emit("run_mapping","OK")
-//    }
+class MainFragment() : Fragment() {
+
     lateinit var mSocket : Socket
-    val OPENWEATHER_API_KEY : String = "be002738467412a6651e4278dd3f8c76"
-    val FLOWER_API_KEY : String = "XXL2KwjyRGopX8KOKa1BT7gj3em5fLBeqRHJ3xmUpHboTi9da0bZL9fXntQWh63TkQBodm6xHmgeas8K7yBerg=="
+    val OPENWEATHER_API_KEY : String = BuildConfig.OPENWEATHER_API_KEY
+    val FLOWER_API_KEY : String = BuildConfig.FLOWER_API_KEY
 
     private lateinit var mainActivity: MainActivity
     private lateinit var locationProvider: LocationProvider
 
     private lateinit var db : ClientDatabase
-    private var turtleId : Int = 0
     private lateinit var user : String
+    var turtleId : Int = 1
 
+//    private var turtleId : Int = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -54,26 +55,36 @@ class MainFragment : Fragment() {
         mainActivity = context as MainActivity
         db = Room.databaseBuilder(context, ClientDatabase::class.java, "ClientDatabase")
             .build()
+        user = Firebase.auth.currentUser!!.uid
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        user = Firebase.auth.currentUser!!.uid
-        Log.e("user", user)
 
-        GlobalScope.launch(Dispatchers.IO) {
-            val retrievedUser = db.clientDao().getTurtleId(user)
-            if (retrievedUser != null) {
-                withContext(Dispatchers.Main) {
-                    turtleId = retrievedUser.turtleId
-                }
-            } else {
-                Log.e("실패", "실패하였습니다.")
-            }
-        }
         // Inflate the layout for this fragment
         val binding = FragmentMainBinding.inflate(inflater, container,false)
+
+        val adapter = ViewPagerAdapter(emptyList(), mainActivity)
+        val viewPager = binding.mainViewPager
+        viewPager.adapter = adapter
+
+        if (turtleId == 0) {
+            GlobalScope.launch(Dispatchers.IO) {
+                val retrievedUser = db.clientDao().getTurtleId(user)
+                Log.e("retr", retrievedUser.toString())
+                if (retrievedUser != null) {
+                    withContext(Dispatchers.Main) {
+                        turtleId = retrievedUser.turtleId
+                    }
+                } else {
+                    Log.e("실패", "실패하였습니다.")
+                }
+            }
+        }
+
+
 
         // Set the click listener for the button
         binding.mainMapScanBtn.setOnClickListener {
@@ -169,7 +180,6 @@ class MainFragment : Fragment() {
                         response: Response<FlowerResponseBody>
                     ) {
                         if (response.isSuccessful) {
-                            Toast.makeText(mainActivity, "꽃 가져오기 성공", Toast.LENGTH_SHORT).show()
                             val res = response.body()?.root?.result?.get(0)
                             val fMonth = res?.fMonth
                             val fDay = res?.fDay
@@ -203,51 +213,53 @@ class MainFragment : Fragment() {
 
         }
 
-    fun getNeedWaterPlantList() {
-        val service = RetrofitObject.service
-        service
-            .getNeedWaterList(turtleId)
-            .enqueue(object : retrofit2.Callback<NeedWaterResponseBody> {
-                override fun onResponse(
-                    call: Call<NeedWaterResponseBody>,
-                    response: Response<NeedWaterResponseBody>
-                ) {
-                    if (response.isSuccessful) {
-                        val viewPager = binding.mainViewPager
-                        viewPager.adapter = ViewPagerAdapter(response.body()!!.data, mainActivity)
-                        viewPager.setPageTransformer(ZoomOutPageTransformer())
+        fun getNeedWaterPlantList(turtleId : Int) {
+            val service = RetrofitObject.service
+            service
+                .getNeedWaterList(turtleId)
+                .enqueue(object : retrofit2.Callback<NeedWaterResponseBody> {
+                    override fun onResponse(
+                        call: Call<NeedWaterResponseBody>,
+                        response: Response<NeedWaterResponseBody>
+                    ) {
+                        if (response.isSuccessful) {
+                            val viewPager = binding.mainViewPager
+                            if (response.body()!!.data.size > 0) {
+                                binding.viewPagerText.text = ""
+                            }
 
-                        // 여백 너비 정의
-                        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
-                        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth)
-                        val screnWidth = resources.displayMetrics.widthPixels
-                        val offsetPx = screnWidth - pageMarginPx - pagerWidth
+                            Log.e("response", response.body()!!.data.toString())
 
-                        viewPager.setPageTransformer { page, position ->
-                            page.translationX = position * -offsetPx
+                            adapter.slides = response.body()!!.data
+                            viewPager.setPageTransformer(ZoomOutPageTransformer())
+
+                            // 여백 너비 정의
+                            val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
+                            val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth)
+                            val screnWidth = resources.displayMetrics.widthPixels
+                            val offsetPx = screnWidth - pageMarginPx - pagerWidth
+
+                            viewPager.setPageTransformer { page, position ->
+                                page.translationX = position * -offsetPx
+                            }
+
+                            viewPager.offscreenPageLimit = 3
+
+                            adapter.notifyDataSetChanged()
                         }
-
-                        viewPager.offscreenPageLimit = 3
-
-                        Log.e("response", response.body()!!.data.toString())
-
                     }
-                }
 
-                override fun onFailure(call: Call<NeedWaterResponseBody>, t: Throwable) {
-                    Toast.makeText(mainActivity, "급수 필요한 식물 받아오기 실패", Toast.LENGTH_SHORT).show()
-                }
+                    override fun onFailure(call: Call<NeedWaterResponseBody>, t: Throwable) {
+                        Toast.makeText(mainActivity, "급수 필요한 식물 받아오기 실패", Toast.LENGTH_SHORT).show()
+                    }
 
-            })
-    }
+                })
+            }
+        /* ViewPager2 */
+        getNeedWaterPlantList(turtleId)
         updateUI()
         getWeather(lat, lon)
         getFlower()
-
-
-        /* ViewPager2 */
-        getNeedWaterPlantList()
-
 
         return binding.root
     }

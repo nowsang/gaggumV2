@@ -5,6 +5,9 @@ plugins {
     id 'kotlin-kapt'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     namespace 'com.gaggum'
     compileSdk 33
@@ -19,6 +22,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "OPENWEATHER_API_KEY", "\"${properties['OPENWEATHER_API_KEY']}\""
+        buildConfigField "String", "FLOWER_API_KEY", "\"${properties['FLOWER_API_KEY']}\""
     }
 
     buildTypes {

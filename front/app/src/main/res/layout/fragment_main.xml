@@ -37,7 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="bottom|center"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:fontFamily="@font/bmjua_ttf"
         android:textColor="@color/text_color"
         app:layout_constraintEnd_toStartOf="@id/mainTempArea"
@@ -99,6 +99,19 @@
         app:layout_constraintStart_toEndOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/guideline5" />
 
+    <TextView
+        android:id="@+id/viewPagerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오늘 물이 필요한 식물이 없습니다."
+        android:textSize="24sp"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textColor="@color/text_color"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/guideline5"/>
+
     <!-- 추천 꽃 -->
 
     <TextView
@@ -132,7 +145,6 @@
         android:id="@+id/todayFlowerName"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="꽃 이름"
         android:gravity="center"
         android:fontFamily="@font/bmjua_ttf"
         android:textColor="@color/text_color"
@@ -149,7 +161,6 @@
         android:id="@+id/todayFlowermean"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="꽃말"
         android:gravity="center"
         android:fontFamily="@font/bmjua_ttf"
         android:textColor="@color/text_color"

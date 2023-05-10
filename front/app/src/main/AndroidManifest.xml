@@ -21,9 +21,6 @@
             android:name=".PlantDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".MyPlantActivity"
-            android:exported="false" />
-        <activity
             android:name=".MapScanActivity"
             android:exported="false" />
         <activity
