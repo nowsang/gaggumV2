@@ -106,7 +106,28 @@ async function createDiary(body) {
     //await plants.waterPlant(plantData.data[0]);
     const rows = await db.query(
       `INSERT INTO diaries(plant_id, diary_title, diary_img, diary_memo, diary_date)
-      values (${plantData.data[0].plant_id},"${plantData.data[0].plant_name} ${nmonth}월 ${ndate}일","https://ssafybucket.s3.ap-northeast-2.amazonaws.com/image/diary/${plantData.data[0].plant_detected_name}/${nmonth}월${ndate}일","${plantData.data[0].plant_name} 물주기",curdate());
+      values (${plantData.data[0].plant_id},"${plantData.data[0].plant_name} ${nmonth}월 ${ndate}일","https://ssafybucket.s3.ap-northeast-2.amazonaws.com/image/diary/${plantData.data[0].plant_id}/${nmonth}월${ndate}일","${plantData.data[0].plant_name} 물주기",curdate());
+      `
+    );
+    const data = helper.emptyOrRows(rows);
+    console.log(rows);
+    return {
+      data,
+    };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+async function createDiaryByUser(body) {
+  try {
+    var now = new Date();
+    var ndate = now.getDate();
+    var nmonth = now.getMonth() + 1;
+    s3.uploadDiaryFile(body.plant_id, body.diary_img);
+    const rows = await db.query(
+      `INSERT INTO diaries(plant_id, diary_title, diary_img, diary_memo, diary_date)
+      values (${body.plant_id},"${body.diary_title},"https://ssafybucket.s3.ap-northeast-2.amazonaws.com/image/diary/${body.plant_id}/${nmonth}월${ndate}일","${body.diary_memo}",curdate());
       `
     );
     const data = helper.emptyOrRows(rows);
@@ -126,4 +147,5 @@ module.exports = {
   editDiary,
   deleteDiary,
   createDiary,
+  createDiaryByUser,
 };
