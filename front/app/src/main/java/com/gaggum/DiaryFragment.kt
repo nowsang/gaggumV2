@@ -19,16 +19,47 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.widget.ArrayAdapter
 import android.view.WindowManager
+import androidx.room.Room
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DiaryFragment : Fragment() {
     private lateinit var diaries: List<diaryInfo>
 //    private val fixedYears = listOf("2020", "2021", "2022", "2023", "2024", "2025")
 //    private val fixedMonths = (1..12).map { String.format("%02d", it) }
+
+    // Room DB
+    private lateinit var db : ClientDatabase
+    private var turtleId : Int = 0
+    private lateinit var user : String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_diary, container, false)
+        db = Room.databaseBuilder(context!!, ClientDatabase::class.java, "ClientDatabase")
+            .build()
+        user = Firebase.auth.currentUser!!.uid
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val retrievedUser = db.clientDao().getTurtleId(user)
+            if (retrievedUser != null) {
+                withContext(Dispatchers.Main) {
+                    turtleId = retrievedUser.turtleId
+                    getDiariesFromServer(view)
+
+                }
+            } else {
+                Log.e("실패", "실패하였습니다.")
+            }
+        }
+
+
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.singRV)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -40,7 +71,7 @@ class DiaryFragment : Fragment() {
 
     fun getDiariesFromServer(view: View) {
         val service = RetrofitObject.service
-        service.getAllDiary(1).enqueue(object : Callback<GetAllDiariesResponseBody> {
+        service.getAllDiary(turtleId).enqueue(object : Callback<GetAllDiariesResponseBody> {
             override fun onResponse(
                 call: Call<GetAllDiariesResponseBody>,
                 response: Response<GetAllDiariesResponseBody>
