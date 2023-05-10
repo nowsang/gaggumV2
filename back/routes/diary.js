@@ -37,6 +37,14 @@ router.post("/edit", async function (req, res, next) {
     next(err);
   }
 });
+router.post("/create", async function (req, res, next) {
+  try {
+    res.json(await diraies.createDiaryByUser(req.body));
+  } catch (err) {
+    console.error(`Error while edit diary`, err.message);
+    next(err);
+  }
+});
 router.post("/delete", async function (req, res, next) {
   try {
     res.json(await diraies.deleteDiary(req.body));
