@@ -40,7 +40,13 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.ui.onNavDestinationSelected
+import androidx.room.Room
+import androidx.viewpager.widget.ViewPager
 import com.gaggum.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
@@ -64,11 +70,19 @@ class MainActivity : AppCompatActivity() {
     // 위도, 경도 가져오기
     private lateinit var locationProvider : LocationProvider
 
+    // DB
+    private lateinit var db : ClientDatabase
+    private lateinit var user : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        db = Room.databaseBuilder(this, ClientDatabase::class.java, "ClientDatabase")
+            .build()
+        user = Firebase.auth.currentUser!!.uid
 
         // Set up navigation
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
