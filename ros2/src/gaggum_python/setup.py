@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'yolov5 = gaggum_python.yolov5:main'
+            'image_capture = gaggum_python.image_capture:main',
+            'yolov5 = gaggum_python.yolov5:main',
         ],
     },
 )
