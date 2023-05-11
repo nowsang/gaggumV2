@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 import ros2pkg
 from geometry_msgs.msg import Twist,PoseStamped,Pose,TransformStamped
-from gaggum_msgs.msg import TurtlebotStatus, MapScan
+# from gaggum_msgs.msg import TurtlebotStatus, MapScan
 from sensor_msgs.msg import Imu,LaserScan
 from std_msgs.msg import Float32, Int8MultiArray
 from squaternion import Quaternion
@@ -10,10 +10,12 @@ from nav_msgs.msg import Odometry,Path,OccupancyGrid,MapMetaData
 from math import pi,cos,sin,sqrt
 import tf2_ros
 import os
-import gaggum.utils as utils
+import gaggum_python.utils as utils
 import numpy as np
 import cv2
 import time
+
+from rclpy.qos import qos_profile_sensor_data, QoSProfile
 # mapping node의 전체 로직 순서
 # 1. publisher, subscriber, msg 생성
 # 2. mapping 클래스 생성
@@ -102,14 +104,14 @@ def createLineIterator(P1, P2, img):
                 itbuffer[:,1] = np.arange(P1Y-1,P1Y-dYa-1,-1)
             else:
                 itbuffer[:,1] = np.arange(P1Y+1,P1Y+dYa+1)
-            itbuffer[:,0] = (slope*(itbuffer[:,1]-P1Y)).astype(np.int) + P1X
+            itbuffer[:,0] = (slope*(itbuffer[:,1]-P1Y)).astype(int) + P1X
         else:
             slope = dY.astype(np.float32)/dX.astype(np.float32)
             if negX:
                 itbuffer[:,0] = np.arange(P1X-1,P1X-dXa-1,-1)
             else:
                 itbuffer[:,0] = np.arange(P1X+1,P1X+dXa+1)
-            itbuffer[:,1] = (slope*(itbuffer[:,0]-P1X)).astype(np.int) + P1Y
+            itbuffer[:,1] = (slope*(itbuffer[:,0]-P1X)).astype(int) + P1Y
 
     #Remove points outside of image
     colX = itbuffer[:,0]
@@ -131,7 +133,7 @@ class Mapping:
         self.map_resolution = params_map["MAP_RESOLUTION"]
         self.map_size = np.array(params_map["MAP_SIZE"]) / self.map_resolution
         self.map_center = params_map["MAP_CENTER"]
-        self.map = np.ones((self.map_size[0].astype(np.int), self.map_size[1].astype(np.int)))*0.5
+        self.map = np.ones((self.map_size[0].astype(int), self.map_size[1].astype(int)))*0.5
         self.occu_up = params_map["OCCUPANCY_UP"]
         self.occu_down = params_map["OCCUPANCY_DOWN"]
 
@@ -158,16 +160,16 @@ class Mapping:
 
         ### Original Plot
         for i in range(laser_global.shape[1]):
-            p1 = np.array([pose_x, pose_y]).reshape(-1).astype(np.int)
-            p2 = np.array([laser_global_x[i], laser_global_y[i]]).astype(np.int)
+            p1 = np.array([pose_x, pose_y]).reshape(-1).astype(int)
+            p2 = np.array([laser_global_x[i], laser_global_y[i]]).astype(int)
         
             line_iter = createLineIterator(p1, p2, self.map)
         
             if (line_iter.shape[0] == 0):
                 continue
         
-            avail_x = line_iter[:, 0].astype(np.int)
-            avail_y = line_iter[:, 1].astype(np.int)
+            avail_x = line_iter[:, 0].astype(int)
+            avail_y = line_iter[:, 1].astype(int)
         
             # Empty
             self.map[avail_y[:-1], avail_x[:-1]] = self.map[avail_y[:-1], avail_x[:-1]] + self.occu_down
@@ -195,7 +197,7 @@ class Mapping:
         laser_global_y =  (laser_global[1, :] - self.map_center[1] + (self.map_size[1]*self.map_resolution)/2) / self.map_resolution
 
         for i in range(laser_global.shape[1]):
-            (l_x, l_y) = np.array([laser_global_x[i], laser_global_y[i]]).astype(np.int)
+            (l_x, l_y) = np.array([laser_global_x[i], laser_global_y[i]]).astype(int)
             center = (l_x, l_y)
             cv2.circle(map_bgr, center, 1, (0,255,0), -1)
 
@@ -216,8 +218,8 @@ class Mapper(Node):
         super().__init__('Mapper')
         
         # 로직 1 : publisher, subscriber, msg 생성
-        self.subscription = self.create_subscription(LaserScan,
-        '/scan',self.scan_callback,10)
+        # self.subscription = self.create_subscription(LaserScan,'/scan',self.scan_callback,10)
+        self.subscription = self.create_subscription(LaserScan,'/scan',self.scan_callback,qos_profile=qos_profile_sensor_data)
         self.map_pub = self.create_publisher(OccupancyGrid, '/map', 1)
         
         self.map_msg=OccupancyGrid()
@@ -239,7 +241,7 @@ class Mapper(Node):
         self.map_msg.info=self.map_meta_data
 
         # socket에서 받아온 맵 만들기 실행 여부 정보 받기
-        self.create_map_sub = self.create_subscription(MapScan, '/map_scan', self.map_scan_callback, 100)
+        # self.create_map_sub = self.create_subscription(MapScan, '/map_scan', self.map_scan_callback, 100)
 
         # is_map_create 변수가 True면 mapping 시작, std_msg에서 받아온 값으로 확인
         self.is_map_create = True
@@ -248,9 +250,9 @@ class Mapper(Node):
         self.mapping = Mapping(params_map)
 
 
-    def map_scan_callback(self, msg):
-        # self.is_map_create = msg.map_scan
-        print("runmapping의 데이터 값", msg)
+    # def map_scan_callback(self, msg):
+    #     # self.is_map_create = msg.map_scan
+    #     print("runmapping의 데이터 값", msg)
 
 
     def scan_callback(self, msg):
@@ -288,7 +290,7 @@ class Mapper(Node):
         self.map_msg.data=list_map_data[0]
         self.map_pub.publish(self.map_msg)
 
-def save_map(node,file_path):
+def save_map(node, file_path):
 
     pkg_path =os.getcwd()
     back_folder='..'
