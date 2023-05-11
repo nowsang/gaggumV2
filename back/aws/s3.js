@@ -49,8 +49,27 @@ const uploadDiaryFile = (name, base64) => {
     console.log(`File uploaded successfully. ${data}`);
   });
 };
+const uploadUserDiaryFile = (name,time, base64) => {
+  //const base64Data = new Buffer.from(imgfile.re)
+  console.log("uploadDiaryFile", name, base64);
+  const base64Data = new Buffer.from(base64, "base64");
+  const params = {
+    Bucket: "ssafybucket",
+    Key: "image/diary/" + name + "/" + time,
+    Body: base64Data,
+    ContentType: `image/png`,
+  };
+
+  s3.upload(params, function (err, data) {
+    if (err) {
+      throw err;
+    }
+    console.log(`File uploaded successfully. ${data}`);
+  });
+};
 
 module.exports = {
   uploadFile,
   uploadDiaryFile,
+  uploadUserDiaryFile,
 };

@@ -125,10 +125,12 @@ async function createDiaryByUser(body) {
     var now = new Date();
     var ndate = now.getDate();
     var nmonth = now.getMonth() + 1;
-    s3.uploadDiaryFile(body.plant_id, body.diary_img);
+    var ntime = now.getTime();
+
+    s3.uploadUserDiaryFile(body.plant_id,ntime, body.diary_img);
     const rows = await db.query(
       `INSERT INTO diaries(plant_id, diary_title, diary_img, diary_memo, diary_date)
-      values (${body.plant_id},"${body.diary_title}","https://ssafybucket.s3.ap-northeast-2.amazonaws.com/image/diary/${body.plant_id}/${nmonth}월${ndate}일","${body.diary_memo}",curdate());
+      values (${body.plant_id},"${body.diary_title}","https://ssafybucket.s3.ap-northeast-2.amazonaws.com/image/diary/${body.plant_id}/${ntime}","${body.diary_memo}",curdate());
       `
     );
     const data = helper.emptyOrRows(rows);
