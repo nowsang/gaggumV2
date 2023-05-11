@@ -211,7 +211,7 @@ class Mapping:
 
         
 class Mapper(Node):
-
+    
     def __init__(self):
         super().__init__('Mapper')
         
