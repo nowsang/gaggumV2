@@ -20,6 +20,8 @@ find_package(sensor_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(sioclient REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
+find_package(nav_msgs REQUIRED)
+find_package(nav2_msgs REQUIRED)
 
 include_directories(${sioclient_INCLUDE_DIRS})
 
@@ -52,6 +54,12 @@ target_link_libraries(auto_move sioclient Boost::system)
 add_executable(wall_tracking nodes/wall_tracking.cpp)
 ament_target_dependencies(wall_tracking rclcpp sensor_msgs geometry_msgs nav_msgs)
 
+add_executable(a_star nodes/a_star.cpp)
+ament_target_dependencies(a_star rclcpp nav_msgs)
+
+add_executable(goal nodes/goal.cpp)
+ament_target_dependencies(goal rclcpp nav2_msgs geometry_msgs)
+
 
 # 실행 파일을 찾을 수 있도록 섹션 추가
 install(TARGETS
@@ -63,6 +71,8 @@ install(TARGETS
   time_control
   auto_move
   wall_tracking
+  a_star
+  goal
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
