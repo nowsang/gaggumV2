@@ -2,6 +2,7 @@ package com.gaggum
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Fragment
 import android.content.ContentProviderClient
 import android.content.DialogInterface
 import android.content.Intent
@@ -13,6 +14,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
 import android.util.Log
 import android.widget.Button
@@ -23,6 +25,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -73,6 +76,8 @@ class MainActivity : AppCompatActivity() {
     // DB
     private lateinit var db : ClientDatabase
     private lateinit var user : String
+
+    private var doubleBackToExitPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -196,5 +201,24 @@ class MainActivity : AppCompatActivity() {
         builder.create().show()
     }
 
+//    interface onBackPressedListener {
+//        fun onBackPressed() {
+//            var fragmentList = supportFragmentManager.fragments
+//        }
+//    }
+
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            finishAffinity()
+            System.exit(0)
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+
+    }
 
 }
