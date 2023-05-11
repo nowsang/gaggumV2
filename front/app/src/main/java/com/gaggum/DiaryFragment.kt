@@ -31,8 +31,6 @@ import kotlinx.coroutines.withContext
 
 class DiaryFragment : Fragment() {
     private lateinit var diaries: List<diaryInfo>
-//    private val fixedYears = listOf("2020", "2021", "2022", "2023", "2024", "2025")
-//    private val fixedMonths = (1..12).map { String.format("%02d", it) }
 
     // Room DB
     private lateinit var db : ClientDatabase
@@ -134,6 +132,13 @@ class DiaryFragment : Fragment() {
         diaries: List<diaryInfo>,
         view: View
     ) {
+        Log.e("오류테스트", selectedTitle)
+        Log.e("오류테스트2", selectedYear)
+        Log.e("오류테스트3", selectedMonth)
+        Log.e("오류테스트4", diaries.toString())
+
+
+
         val filteredDiaries = diaries.filter {
             (it.diaryTitle == selectedTitle || selectedTitle == "전체") &&
                     (it.diaryDate.substring(0, 4) == selectedYear || selectedYear == "전체") &&
@@ -141,6 +146,7 @@ class DiaryFragment : Fragment() {
         }
         val recyclerView = view.findViewById<RecyclerView>(R.id.singRV)
         recyclerView.adapter = DiaryAdapter(filteredDiaries, requireContext(), this)
+        Log.e("필터 다이어리", filteredDiaries.toString())
     }
 
     private fun setupButtons(view: View, testTitles: List<String>, years: List<String>, months: List<String>) {
@@ -152,8 +158,8 @@ class DiaryFragment : Fragment() {
             val items = listOf("전체보기") + testTitles
             showBottomDialog("이름 선택", items) { selectedItem ->
                 titleButton.text = selectedItem
-                val selectedYear = yearButton.text.toString()
-                val selectedMonth = monthButton.text.toString()
+                val selectedYear = if (yearButton.text.toString() == "년") "전체" else yearButton.text.toString()
+                val selectedMonth = if (monthButton.text.toString() == "월") "전체" else monthButton.text.toString()
                 filterDiariesByTitleAndYearAndMonth(selectedItem, selectedYear, selectedMonth, diaries, view)
             }
         }
@@ -162,8 +168,8 @@ class DiaryFragment : Fragment() {
             val items = years
             showBottomDialog("년도 선택", items) { selectedItem ->
                 yearButton.text = selectedItem
-                val selectedTitle = titleButton.text.toString()
-                val selectedMonth = monthButton.text.toString()
+                val selectedTitle = if (titleButton.text.toString() == "이름") "전체" else titleButton.text.toString()
+                val selectedMonth = if (monthButton.text.toString() == "월") "전체" else monthButton.text.toString()
                 filterDiariesByTitleAndYearAndMonth(selectedTitle, selectedItem, selectedMonth, diaries, view)
             }
         }
@@ -172,9 +178,11 @@ class DiaryFragment : Fragment() {
             val items = months
             showBottomDialog("월 선택", items) { selectedItem ->
                 monthButton.text = selectedItem
-                val selectedTitle = titleButton.text.toString()
-                val selectedYear = yearButton.text.toString()
+
+                val selectedTitle = if (titleButton.text.toString() == "이름") "전체" else titleButton.text.toString()
+                val selectedYear = if (yearButton.text.toString() == "년") "전체" else yearButton.text.toString()
                 filterDiariesByTitleAndYearAndMonth(selectedTitle, selectedYear, selectedItem, diaries, view)
+
             }
         }
 

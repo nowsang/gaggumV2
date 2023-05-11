@@ -71,7 +71,6 @@
         android:layout_marginStart="8dp"
         android:background="@drawable/diary_button"
         android:text="월"
-
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toEndOf="@+id/yearButton"

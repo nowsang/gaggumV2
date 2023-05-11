@@ -3,6 +3,7 @@ package com.gaggum
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -195,14 +196,13 @@ class ImagePreviewActivity : AppCompatActivity() {
     private fun sendPlantDataToApi(plantId: Int, plantName: String, memoContent: String, base64Image: String) {
         val service = RetrofitObject.service
 
-        val requestBody = createDiaryRequestBody(plantId, plantName, memoContent, base64Image)
 
         service.createDiary(createDiaryRequestBody(plantId, plantName, memoContent, base64Image)).enqueue(object : Callback<createDiaryResponseBody> {
             override fun onResponse(
                 call: Call<createDiaryResponseBody>,
                 response: Response<createDiaryResponseBody>
             ) {
-                Toast.makeText(this@ImagePreviewActivity, "생성 완료", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@ImagePreviewActivity, "생성 완료", Toast.LENGTH_SHORT).show()
                 Log.e("base64", base64Image)
                 Log.e("plantId", plantId.toString())
                 Log.e("plantName", plantName)
@@ -212,7 +212,9 @@ class ImagePreviewActivity : AppCompatActivity() {
                 Log.e("메세지", msg.toString())
 
                 if (response.isSuccessful) {
-                    Toast.makeText(this@ImagePreviewActivity, "생성 완료", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ImagePreviewActivity, "생성 완료2", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@ImagePreviewActivity, MainActivity::class.java)
+                    startActivity(intent)
                 } else {
                     Toast.makeText(this@ImagePreviewActivity, "생성에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
