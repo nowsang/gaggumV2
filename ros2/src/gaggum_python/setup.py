@@ -23,6 +23,7 @@ setup(
             'image_capture = gaggum_python.image_capture:main',
             'yolov5 = gaggum_python.yolov5:main',
             'scan_read = gaggum_python.scan_read:main',
+            'run_mapping = gaggum_python.run_mapping:main',
         ],
     },
 )
