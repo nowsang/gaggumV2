@@ -1,7 +1,9 @@
 package com.gaggum
 
+
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -65,10 +67,17 @@ class DiaryFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         getDiariesFromServer(view)
+        setupCameraButton(view)
 
         return view
     }
+    private fun setupCameraButton(view: View) {
+        val btnStartCamera = view.findViewById<Button>(R.id.btn_start_camera)
+        btnStartCamera.setOnClickListener {
+            startActivity(Intent(requireContext(), CameraActivity::class.java))
 
+        }
+    }
     fun getDiariesFromServer(view: View) {
         val service = RetrofitObject.service
         service.getAllDiary(turtleId).enqueue(object : Callback<GetAllDiariesResponseBody> {
@@ -126,7 +135,7 @@ class DiaryFragment : Fragment() {
         view: View
     ) {
         val filteredDiaries = diaries.filter {
-            (it.diaryTitle == selectedTitle || selectedTitle == "전체보기") &&
+            (it.diaryTitle == selectedTitle || selectedTitle == "전체") &&
                     (it.diaryDate.substring(0, 4) == selectedYear || selectedYear == "전체") &&
                     (it.diaryDate.substring(5, 7) == selectedMonth || selectedMonth == "전체")
         }
