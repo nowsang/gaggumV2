@@ -23,7 +23,7 @@ class detection_net_class():
         os_file_path = os.path.abspath(__file__)
         print(os_file_path) #/home/sangwon/Desktop/S08P31B101/ros2/build/gaggum_python/gaggum_python/yolov5.py
         full_path = os_file_path.replace('build/gaggum_python/gaggum_python/yolov5.py', 
-                                        'src/gaggum_python/gaggum_python/model_weights/gaggum_weight_turtle.pt')
+                                        'src/gaggum_python/gaggum_python/model_weights/gaggum_weight_turtle_final.pt')
         # remote_yolov5_path = "ultralytics/yolov5"
         print(full_path)
         local_yolov5_path = os_file_path.replace('build/gaggum_python/gaggum_python/yolov5.py', 'src/yolov5')
