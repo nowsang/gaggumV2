@@ -21,7 +21,7 @@ class detection_net_class():
         # yolo v5
         os_file_path = os.path.abspath(__file__)
         full_path = os_file_path.replace('install\\gaggum_python\\Lib\\site-packages\\gaggum_python\\yolov5.py', 
-                                        'src\\gaggum_python\\gaggum_python\\model_weights\\gaggum_weight_final.pt')
+                                        'src\\gaggum_python\\gaggum_python\\model_weights\\gaggum_weight_turtle.pt')
         # remote_yolov5_path = "ultralytics/yolov5"
         local_yolov5_path = os_file_path.replace('install\\gaggum_python\\Lib\\site-packages\\gaggum_python\\yolov5.py', 'src\\yolov5')
         
@@ -160,7 +160,7 @@ def main(args=None):
                         detections.distance.append(relative_x)
                         detections.cx.append(cx)
                         detections.cy.append(cy)
-                        detections.object_class.append(info_result[k][5])
+                        detections.object_class.append(info_result[k][3])
 
                 publisher_detect.publish(detections)
 
