@@ -1,12 +1,16 @@
 package com.gaggum
 
 import com.google.gson.annotations.SerializedName
-import com.tickaroo.tikxml.annotation.Element
+//import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
-import java.time.format.DateTimeFormatter
-import java.util.Date
-import java.util.Objects
+import org.simpleframework.xml.Element
+import org.simpleframework.xml.ElementArray
+import org.simpleframework.xml.ElementList
+import org.simpleframework.xml.ElementMap
+import org.simpleframework.xml.Root
+import org.simpleframework.xml.Text
+
 
 data class KeyCertRequestBody (
     @SerializedName("turtle_key")
@@ -41,7 +45,20 @@ data class editDiaryResponseBody (
     @SerializedName("data")
     val data:EditDiaryResponseData
 )
-
+data class createDiaryRequestBody (
+    @SerializedName("plant_id")
+    val plantId: Int?,
+    @SerializedName("diary_title")
+    val diaryTitle: String?,
+    @SerializedName("diary_memo")
+    val diaryMemo: String?,
+    @SerializedName("diary_img")
+    val diaryImg: String?,
+)
+data class createDiaryResponseBody (
+    @SerializedName("data")
+    val data:EditDiaryResponseData
+)
 data class EditDiaryResponseData(
     val info: String,
 
@@ -78,32 +95,88 @@ data class weatherMain(
 )
 
 
-@Xml(name = "document")
-data class FlowerResponseBody(
-    @Element(name = "root") val root : flowerRoot?
-)
+@Root(name = "document", strict = false)
+data class FlowerResponseBody @JvmOverloads constructor(
+    @field:Element(name = "root")
+    var root : flowerRoot? = null
+) {
+    @Root(name = "root", strict = false)
+    data class flowerRoot @JvmOverloads constructor(
+        @field:Element(name = "resultCode")
+        var resultCode: Int? = null,
 
-@Xml(name = "root")
-data class flowerRoot(
-    @PropertyElement(name = "resultCode") var resultCode: Int?,
-    @PropertyElement(name = "resultMsg") var resultMsg: String?,
-    @PropertyElement(name = "repcategory") var repcategory: String?,
-    @Element(name = "result") var result: flowerResult?
-)
+        @field:Element(name = "resultMsg")
+        var resultMsg: String? = null,
 
-@Xml(name = "result")
-data class flowerResult(
-    @PropertyElement(name = "dataNo") var dataNo: String?,
-    @PropertyElement(name = "fMonth") var fMonth: Int?,
-    @PropertyElement(name = "fDay") var fDay: Int?,
-    @PropertyElement(name = "flowNm") var flowNm: String?,
-    @PropertyElement(name = "flowLang") var flowLang: String?,
-    @PropertyElement(name = "imgUrl1") var imgUrl1: String?,
+        @field:Element(name = "repcategory")
+        var repcategory: String? = null,
 
-)
+        @field:ElementList(name = "result", required = false, inline = true)
+        var result: ArrayList<flowerResult>? = null
+    )
+
+    @Root(name = "result", strict = false)
+    data class flowerResult @JvmOverloads constructor(
+        @field:Element(name = "dataNo", required = false)
+        var dataNo: Int? = null,
+
+        @field:Element(name = "fMonth", required = false)
+        var fMonth: Int? = null,
+
+        @field:Element(name = "fDay", required = false)
+        var fDay: Int? = null,
+
+        @field:Element(name = "flowNm", required = false)
+        var flowNm: String? = null,
+
+        @field:Element(name = "fSctNm", required = false)
+        var fSctNm: String? = null,
+
+        @field:Element(name = "fEngNm", required = false)
+        var fEngNm: String? = null,
+
+        @field:Element(name = "flowLang", required = false)
+        var flowLang: String? = null,
+
+        @field:Element(name = "fContent", required = false)
+        var fContent: String? = null,
+
+        @field:Element(name = "fUse", required = false)
+        var fUse: String? = null,
+
+        @field:Element(name = "fGrow", required = false)
+        var fGrow: String? = null,
+
+        @field:Element(name = "fType", required = false)
+        var fType: String? = null,
+
+        @field:Element(name = "fileName1", required = false)
+        var fileName1: String? = null,
+
+        @field:Element(name = "fileName2", required = false)
+        var fileName2: String? = null,
+
+        @field:Element(name = "fileName3", required = false)
+        var fileName3: String? = null,
+
+        @field:Element(name = "imgUrl1", required = false)
+        var imgUrl1: String? = null,
+
+        @field:Element(name = "imgUrl2", required = false)
+        var imgUrl2: String? = null,
+
+        @field:Element(name = "imgUrl3", required = false)
+        var imgUrl3: String? = null,
+
+        @field:Element(name = "publishOrg", required = false)
+        var publishOrg: String? = null,
+
+    )
+}
+
 
 data class NeedWaterResponseBody(
-    @SerializedName("data") var data : ArrayList<String>
+    @SerializedName("data") var data : ArrayList<allPlants>
 )
 
 data class GetAllPlantsResponseBody(

@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Gaggum" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-<!--        <item name="windowNoTitle">true</item>-->
+        <!--        <item name="windowNoTitle">true</item>-->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -13,5 +13,16 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!--        <item name="android:fontFamily">@font/bmjua_ttf</item>-->
+        <item name="android:windowAnimationStyle">@style/BottomDialogAnimation</item>
+    </style>
+    <!-- 새로운 BottomDialogStyle 스타일 -->
+    <style name="BottomDialogStyle" parent="@style/Theme.Gaggum">
+        <item name="android:windowAnimationStyle">@style/BottomDialogAnimation</item>
+    </style>
+
+    <style name="BottomDialogAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_down</item>
     </style>
 </resources>

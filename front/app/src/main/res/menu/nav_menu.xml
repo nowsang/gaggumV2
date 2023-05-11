@@ -3,26 +3,30 @@
 
     <item
         android:id="@+id/MainFragment"
-        android:icon="@drawable/photo3"
-        android:title="Main"
+        android:icon="@drawable/nav_home"
+        android:title="HOME"
+        android:fontFamily="@font/bmjua_ttf"
         app:showAsAction="ifRoom"
     />
     <item
         android:id="@+id/MyPlantFragment"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="MyPlant"
+        android:icon="@drawable/nav_my_plant"
+        android:title="내 식물"
+        android:fontFamily="@font/bmjua_ttf"
         app:showAsAction="ifRoom"
     />
     <item
         android:id="@+id/DiaryFragment"
-        android:icon="@drawable/photo1"
-        android:title="Diary"
+        android:icon="@drawable/nav_diary"
+        android:title="식물 일지"
+        android:fontFamily="@font/bmjua_ttf"
         app:showAsAction="ifRoom"
     />
     <item
         android:id="@+id/RegisterFragment"
-        android:icon="@drawable/photo2"
-        android:title="Register"
+        android:icon="@drawable/nav_register"
+        android:title="식물 등록"
+        android:fontFamily="@font/bmjua_ttf"
         app:showAsAction="ifRoom"
     />
 

@@ -19,6 +19,10 @@ interface RetrofitService {
     fun editDiary(@Body diary_id : editDiaryRequestBody ) : Call<editDiaryResponseBody>
 
     @Headers("Content-Type:application/json")
+    @POST("api/diary/create")
+    fun createDiary(@Body diary_id : createDiaryRequestBody ) : Call<createDiaryResponseBody>
+
+    @Headers("Content-Type:application/json")
     @GET("data/2.5/weather")
     fun getWeatherData(
         @Query("lat") lat: String,

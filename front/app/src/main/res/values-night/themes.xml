@@ -1,9 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Gaggum" parent="Theme.AppCompat.Light.NoActionBar">
+<!--        상단 시계 색깔-->
+        <item name="android:windowLightStatusBar">true</item>
         <!-- Primary brand color. -->
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimary">@color/btn_color</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
@@ -11,7 +13,9 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/white</item>
         <!-- Customize your theme here. -->
+
+        <item name="android:fontFamily">@font/bmjua_ttf</item>
     </style>
 </resources>

@@ -1,0 +1,28 @@
+.App {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-family: "bmjua";
+
+  background-image: url("./assets/app/background_bg.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.gaggum__logo {
+  width: 30%;
+}
+
+.gaggum__title {
+  font-size: 40px;
+}
+
+@font-face {
+  font-family: "bmjua";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./assets/fonts/BMJUA_ttf.ttf")
+}

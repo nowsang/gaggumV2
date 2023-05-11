@@ -3,26 +3,37 @@ package com.gaggum
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import retrofit2.Response
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class DiaryAdapter(private val diaryList: List<diaryInfo>, private val context: Context, private val diaryFragment: DiaryFragment) :
     RecyclerView.Adapter<DiaryAdapter.DiaryViewHolder>() {
-
+    fun getItem(position: Int): diaryInfo {
+        return diaryList[position]
+    }
     class DiaryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val diaryTitle: TextView = itemView.findViewById(R.id.diaryTitle)
-        val diaryMemo: TextView = itemView.findViewById(R.id.diaryMemo)
+        val diaryTitle: EditText = itemView.findViewById(R.id.diaryTitle)
+        val diaryMemo: EditText = itemView.findViewById(R.id.diaryMemo)
         val diaryDate: TextView = itemView.findViewById(R.id.diaryDate)
-        val diaryImg: TextView = itemView.findViewById(R.id.diaryImg)
+        val diaryImg: ImageView = itemView.findViewById(R.id.diaryImg)
         val diaryId: TextView = itemView.findViewById(R.id.diaryId)
     }
 
@@ -31,14 +42,23 @@ class DiaryAdapter(private val diaryList: List<diaryInfo>, private val context: 
         return DiaryViewHolder(itemView)
     }
 
+
     @SuppressLint("NewApi")
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
-        val currentItem = diaryList[position]
+        val currentItem = getItem(position)
 
-        holder.diaryTitle.text = currentItem.diaryTitle
-        holder.diaryMemo.text = currentItem.diaryMemo
-        holder.diaryImg.text = currentItem.diaryImg
-        holder.diaryId.text = currentItem.diaryId.toString() //이렇게돼도 인트맞나..
+        holder.diaryTitle.setText(currentItem.diaryTitle)
+        holder.diaryMemo.setText(currentItem.diaryMemo)
+        // 이미지 로딩
+        val imageUrl = currentItem.diaryImg
+        Glide.with(context)
+            .load(imageUrl)
+            .centerCrop()
+            .placeholder(R.drawable.nav_my_plant) // 기본 이미지를 설정합니다. 필요한 경우 파일 이름을 바꿔주세요.
+            .error(R.drawable.nav_my_plant) // 이미지 로딩에 실패한 경우 표시할 이미지를 설정합니다. 필요한 경우 파일 이름을 바꿔주세요.
+            .into(holder.diaryImg)
+
+        holder.diaryId.text = currentItem.diaryId.toString() // 이렇게 해도 Int 형이 맞습니다.
 
         val dateString = currentItem.diaryDate
         val formatter = DateTimeFormatter.ISO_DATE_TIME
@@ -46,15 +66,53 @@ class DiaryAdapter(private val diaryList: List<diaryInfo>, private val context: 
         val formattedDate = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         holder.diaryDate.text = formattedDate
 
-        holder.itemView.setOnClickListener {
-            showDiaryDetailsDialog(holder.itemView.context, currentItem)
+
+        val titleHandler = Handler(Looper.getMainLooper())
+        val titleRunnable = Runnable {
+            val updatedTitle = holder.diaryTitle.text.toString()
+            updateDiaryOnServer(currentItem.diaryId, updatedTitle, currentItem.diaryMemo)
         }
+
+        holder.diaryTitle.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                titleHandler.removeCallbacks(titleRunnable)
+                titleHandler.postDelayed(titleRunnable, 500) // 1000ms delay
+            }
+        })
+
+        val memoHandler = Handler(Looper.getMainLooper())
+        val memoRunnable = Runnable {
+            val updatedMemo = holder.diaryMemo.text.toString()
+            updateDiaryOnServer(currentItem.diaryId, currentItem.diaryTitle, updatedMemo)
+        }
+
+        holder.diaryMemo.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                memoHandler.removeCallbacks(memoRunnable)
+                memoHandler.postDelayed(memoRunnable, 500) // 1000ms delay
+            }
+        })
+
+        // 추가 작업을 수행하십시오 (예: 삭제 버튼 설정, 작성 날짜 표시 등)
     }
 
     override fun getItemCount() = diaryList.size
 
     private fun showDiaryDetailsDialog(context: Context, diary: diaryInfo) {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.diary_detail_modal, null)
+
         dialogView.findViewById<EditText>(R.id.dialog_diary_title).setText(diary.diaryTitle)
         dialogView.findViewById<EditText>(R.id.dialog_diary_memo).setText(diary.diaryMemo)
 
@@ -73,6 +131,8 @@ class DiaryAdapter(private val diaryList: List<diaryInfo>, private val context: 
                 dialog.dismiss()
             }
             .create()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        alertDialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         alertDialog.show()
     }
@@ -95,8 +155,8 @@ class DiaryAdapter(private val diaryList: List<diaryInfo>, private val context: 
                 val msg = response.body()?.data
                 Log.e("메세지",msg.toString())
                 if (response.isSuccessful) {
-                    Toast.makeText(context, "수정 완료", Toast.LENGTH_SHORT).show()
-                    diaryFragment.getDiariesFromServer(diaryFragment.requireView())
+//                    Toast.makeText(context, "수정 완료", Toast.LENGTH_SHORT).show()
+//                    diaryFragment.getDiariesFromServer(diaryFragment.requireView())
                 } else {
                     Toast.makeText(context, "수정에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }

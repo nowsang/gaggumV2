@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiaryFragment">
+    tools:context=".DiaryFragment"
+    >
 
     <TextView
         android:id="@+id/diaryTitle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/white"
+        android:fontFamily="@font/bmjua_ttf"
         android:gravity="center"
         android:text="다이어리"
-        android:fontFamily="@font/bmjua_ttf"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -30,38 +31,62 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
 
-    <Spinner
-        android:id="@+id/spinner"
+    <Button
+        android:id="@+id/btn_start_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/diary_button"
+        android:text="+"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="parent"
+ />
+
+    <Button
+        android:id="@+id/titleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/diary_button"
+        android:text="이름"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/yearButton"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
 
-    <Spinner
-        android:id="@+id/yearSpinner"
+    <Button
+        android:id="@+id/yearButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
+        android:background="@drawable/diary_button"
+        android:text="년"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
 
-    <Spinner
-        android:id="@+id/monthSpinner"
+    <Button
+        android:id="@+id/monthButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/yearSpinner"
+        android:background="@drawable/diary_button"
+        android:text="월"
+
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toEndOf="@+id/yearButton"
         app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/singRV"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        tools:listitem="@layout/diary_item"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/titleButton"
+        tools:listitem="@layout/diary_item" />
 
 
     <androidx.constraintlayout.widget.Guideline

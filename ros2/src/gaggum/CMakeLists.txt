@@ -13,9 +13,11 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
 find_package(gaggum_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 find_package(sioclient REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(nav_msgs REQUIRED)
@@ -28,10 +30,10 @@ add_executable(talker nodes/testpub.cpp)
 ament_target_dependencies(talker rclcpp gaggum_msgs)
 
 add_executable(listener nodes/testsub.cpp)
-ament_target_dependencies(listener rclcpp gaggum_msgs)
+ament_target_dependencies(listener rclcpp gaggum_msgs std_msgs)
 
 add_executable(move_turtle nodes/move_turtle.cpp)
-ament_target_dependencies(move_turtle rclcpp geometry_msgs)
+ament_target_dependencies(move_turtle rclcpp std_msgs geometry_msgs)
 
 add_executable(socket_pub nodes/socket_pub.cpp)
 ament_target_dependencies(socket_pub rclcpp sioclient)
@@ -50,7 +52,7 @@ ament_target_dependencies(auto_move rclcpp sioclient)
 target_link_libraries(auto_move sioclient Boost::system)
 
 add_executable(wall_tracking nodes/wall_tracking.cpp)
-ament_target_dependencies(wall_tracking rclcpp sensor_msgs geometry_msgs)
+ament_target_dependencies(wall_tracking rclcpp sensor_msgs geometry_msgs nav_msgs)
 
 add_executable(a_star nodes/a_star.cpp)
 ament_target_dependencies(a_star rclcpp nav_msgs)

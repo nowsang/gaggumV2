@@ -12,7 +12,10 @@
         android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그아웃" />
+        android:text="로그아웃"
+        android:background="@drawable/radius_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- 날씨 -->
 
@@ -34,8 +37,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="bottom|center"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:fontFamily="@font/bmjua_ttf"
+        android:textColor="@color/text_color"
         app:layout_constraintEnd_toStartOf="@id/mainTempArea"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@id/mainWeatherIcon"
@@ -49,6 +53,7 @@
         android:gravity="top|center"
         android:textSize="24sp"
         android:fontFamily="@font/bmjua_ttf"
+        android:textColor="@color/text_color"
         app:layout_constraintStart_toEndOf="@id/mainWeatherIcon"
         app:layout_constraintEnd_toStartOf="@id/mainTempArea"
         app:layout_constraintBottom_toTopOf="@id/guideline4"
@@ -68,17 +73,44 @@
         app:layout_constraintStart_toEndOf="@+id/mainAddressArea"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
-    <!-- 물이 필요한 식물 이미지 슬라이더 -->
+    <!-- 이미지 슬라이더 -->
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="오늘 물이 필요한 식물"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textColor="@color/text_color"
+        app:layout_constraintBottom_toTopOf="@+id/mainViewPager"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/guideline4" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/mainViewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@id/guideline2"
         app:layout_constraintStart_toEndOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/guideline5" />
+
+    <TextView
+        android:id="@+id/viewPagerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오늘 물이 필요한 식물이 없습니다."
+        android:textSize="24sp"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textColor="@color/text_color"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/guideline5"/>
 
     <!-- 추천 꽃 -->
 
@@ -87,8 +119,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="5월 1일의 추천 꽃"
         android:textSize="24sp"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textColor="@color/text_color"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
@@ -97,9 +132,11 @@
         android:id="@+id/todayFlowerImg"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@id/todayFlowerName"
-        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/todayFlowerTitle"
         app:layout_constraintVertical_weight="1" />
@@ -108,8 +145,10 @@
         android:id="@+id/todayFlowerName"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="꽃 이름"
         android:gravity="center"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textColor="@color/text_color"
+        android:textSize="24sp"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintVertical_weight="1"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -122,8 +161,10 @@
         android:id="@+id/todayFlowermean"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="꽃말"
         android:gravity="center"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textColor="@color/text_color"
+        android:textSize="20sp"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintVertical_weight="2"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
@@ -141,6 +182,7 @@
         android:text="집 스캔"
         android:padding="8dp"
         android:textSize="24sp"
+        android:fontFamily="@font/bmjua_ttf"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -208,20 +250,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
