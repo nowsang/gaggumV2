@@ -9,9 +9,10 @@ import base64
 
 from rclpy.node import Node
 
-from sensor_msgs.msg import CompressedImage
+from sensor_msgs.msg import CompressedImage, Imu
 from gaggum_msgs.msg import Detection
 from nav_msgs.msg import Odometry
+from std_msgs.msg import Int32
 
 from squaternion import Quaternion
 
@@ -20,11 +21,13 @@ class detection_net_class():
     def __init__(self):
         # yolo v5
         os_file_path = os.path.abspath(__file__)
-        full_path = os_file_path.replace('install\\gaggum_python\\Lib\\site-packages\\gaggum_python\\yolov5.py', 
-                                        'src\\gaggum_python\\gaggum_python\\model_weights\\gaggum_weight_final.pt')
+        print(os_file_path) #/home/sangwon/Desktop/S08P31B101/ros2/build/gaggum_python/gaggum_python/yolov5.py
+        full_path = os_file_path.replace('build/gaggum_python/gaggum_python/yolov5.py', 
+                                        'src/gaggum_python/gaggum_python/model_weights/gaggum_weight_turtle_final.pt')
         # remote_yolov5_path = "ultralytics/yolov5"
-        local_yolov5_path = os_file_path.replace('install\\gaggum_python\\Lib\\site-packages\\gaggum_python\\yolov5.py', 'src\\yolov5')
-        
+        print(full_path)
+        local_yolov5_path = os_file_path.replace('build/gaggum_python/gaggum_python/yolov5.py', 'src/yolov5')
+        print(local_yolov5_path)
         self.model = torch.hub.load(local_yolov5_path, 'custom', path=full_path, source='local', force_reload=True)
 
         self.model.conf = 0.75
@@ -70,12 +73,31 @@ def odom_callback(msg):
     global odom_msg
     global loc_x,loc_y,loc_z
     global is_odom
-    is_status = True
-
-    loc_x = msg.twist.angular.x
-    loc_y = msg.twist.angular.y
+    is_odom = True
+    # pose_x = odom_msg.pose.pose.position.x
+    # pose_y = odom_msg.pose.pose.position.y
+    loc_x = msg.pose.pose.position.x
+    loc_y = msg.pose.pose.position.y
     loc_z = 0.0
     odom_msg = msg
+
+def imu_callback(msg):
+    global is_imu
+    is_imu = True
+    '''
+    로직 3. IMU 에서 받은 quaternion을 euler angle로 변환해서 사용(라디안 단위)
+    각도(도) = 라디안 * 180/π
+    '''
+    global robot_yaw
+    imu_q= Quaternion(msg.orientation.w,msg.orientation.x,msg.orientation.y,msg.orientation.z)
+    _,_,robot_yaw = imu_q.to_euler()
+    # print(f"robot_yaw : {robot_yaw}")
+
+def sonar_callback(msg):
+    global is_sonar
+    global distance_sonar
+    is_sonar = True
+    distance_sonar = msg.data
 
 
 def main(args=None):
@@ -87,16 +109,27 @@ def main(args=None):
 
     global is_img_bgr
     global is_odom
+    global is_imu
+    global is_sonar
 
     is_img_bgr = False
     is_odom = False
+    is_imu = False
+    is_sonar = False
+
+    global loc_x
+    global loc_y
+    global distance_sonar
 
     rclpy.init(args=args)
     g_node = rclpy.create_node('tf_detector')
 
     subscription_img = g_node.create_subscription(CompressedImage, 'camera/image_raw/compressed', img_callback, 3)
     subscription_odom = g_node.create_subscription(Odometry,'/odom', odom_callback, 10)
+    subscription_imu = g_node.create_subscription(Imu,'/imu',imu_callback,10)
+    subscription_sonar = g_node.create_subscription(Int32,'/sonar',sonar_callback,10)
     publisher_detect = g_node.create_publisher(Detection, "/yolo_detected", 10)
+
 
     while rclpy.ok():
 
@@ -106,7 +139,9 @@ def main(args=None):
             rclpy.spin_once(g_node)
 
         detections = Detection()
-        if is_img_bgr and is_odom:
+        print("-------------------before is logic----------------------")
+        print("is_img_bgr : {}, is_odom : {}, is_imu : {}, is_sonar : {}".format(is_img_bgr, is_odom, is_imu, is_sonar))
+        if is_img_bgr and is_odom and is_imu and is_sonar:
             image_process, boxes_detect, classes_pick, info_result = yolov5.inference(img_bgr)
             print("--------------------new_frame--------------------")
 
@@ -150,14 +185,14 @@ def main(args=None):
                         cx = int(x + (w / 2))
                         cy = int(y + (h / 2))
 
-                        # x2 = loc_x + relative_x * math.cos(robot_yaw)
-                        # y2 = loc_y + relative_x * math.sin(robot_yaw)
+                        x2 = loc_x + distance_sonar * math.cos(robot_yaw)
+                        y2 = loc_y + distance_sonar * math.sin(robot_yaw)
                         angles.append(robot_yaw * 180.0 / math.pi)
 
                         detections.num_index = len(info_result)
                         detections.x.append(x2)
                         detections.y.append(y2)
-                        detections.distance.append(relative_x)
+                        detections.distance.append(distance_sonar)
                         detections.cx.append(cx)
                         detections.cy.append(cy)
                         detections.object_class.append(info_result[k][5])
