@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    Z
+
 
     private fun checkAllPermissions() {
         if(!isLocationServicesAvailable()) {

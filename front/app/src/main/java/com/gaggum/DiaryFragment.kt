@@ -70,7 +70,7 @@ class DiaryFragment : Fragment() {
         return view
     }
     private fun setupCameraButton(view: View) {
-        val btnStartCamera = view.findViewById<Button>(R.id.btn_start_camera)
+        val btnStartCamera = view.findViewById<ImageButton>(R.id.btn_start_camera)
         btnStartCamera.setOnClickListener {
             startActivity(Intent(requireContext(), CameraActivity::class.java))
 
@@ -90,11 +90,11 @@ class DiaryFragment : Fragment() {
                     if (diaries.isNotEmpty()) {
                         setUpDiaryViews(diaries, view)
                     } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "다이어리 목록이 없습니다.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "다이어리 목록이 없습니다.",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
                     }
                 } else {
                     Toast.makeText(requireContext(), "다이어리 목록을 가져오는 데 실패했습니다.", Toast.LENGTH_SHORT)
@@ -155,7 +155,7 @@ class DiaryFragment : Fragment() {
         val monthButton = view.findViewById<Button>(R.id.monthButton)
 
         titleButton.setOnClickListener {
-            val items = listOf("전체보기") + testTitles
+            val items = listOf("전체") + testTitles
             showBottomDialog("이름 선택", items) { selectedItem ->
                 titleButton.text = selectedItem
                 val selectedYear = if (yearButton.text.toString() == "년") "전체" else yearButton.text.toString()
@@ -166,7 +166,7 @@ class DiaryFragment : Fragment() {
 
         yearButton.setOnClickListener {
             val items = years
-            showBottomDialog("년도 선택", items) { selectedItem ->
+            showBottomDialog("연도 선택", items) { selectedItem ->
                 yearButton.text = selectedItem
                 val selectedTitle = if (titleButton.text.toString() == "이름") "전체" else titleButton.text.toString()
                 val selectedMonth = if (monthButton.text.toString() == "월") "전체" else monthButton.text.toString()

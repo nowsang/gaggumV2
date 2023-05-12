@@ -3,6 +3,7 @@ package com.gaggum
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Handler
@@ -49,13 +50,20 @@ class DiaryAdapter(private val diaryList: List<diaryInfo>, private val context: 
     @SuppressLint("NewApi")
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         val currentItem = getItem(position)
-        holder.deleteBtn.setOnClickListener {
-            deleteDiaryOnServer(currentItem.diaryId)
-            // 여기서 position을 사용하여 로컬 목록에서 해당 항목을 제거하고 목록이 갱신되도록 합니다.
-            (diaryList as ArrayList).removeAt(position)
-            notifyItemRemoved(position)
-            notifyItemRangeChanged(position, diaryList.size)
+
+        holder.diaryImg.setOnClickListener {
+            val imageUrl = currentItem.diaryImg
+            val intent = Intent(it.context, ImageViewActivity::class.java)
+            intent.putExtra(ImageViewActivity.ARG_IMAGE_URL, imageUrl)
+            it.context.startActivity(intent)
         }
+
+        holder.deleteBtn.setOnClickListener {
+            onDeletePressed(currentItem.diaryId, position)
+            // 여기서 position을 사용하여 로컬 목록에서 해당 항목을 제거하고 목록이 갱신되도록 합니다.
+        }
+
+
 
         holder.diaryTitle.setText(currentItem.diaryTitle)
         holder.diaryMemo.setText(currentItem.diaryMemo)
@@ -214,4 +222,30 @@ class DiaryAdapter(private val diaryList: List<diaryInfo>, private val context: 
 
         })
     }
+
+    private fun onDeletePressed(diaryId: Int, position: Int) {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.delete_diary_dialog, null)
+
+        val dialogTitle = dialogView.findViewById<TextView>(R.id.dialog_title)
+        val dialogMessage = dialogView.findViewById<TextView>(R.id.dialog_message)
+        val positiveButton = dialogView.findViewById<Button>(R.id.dialog_positive_button)
+        val negativeButton = dialogView.findViewById<Button>(R.id.dialog_negative_button)
+
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(context)
+            .setView(dialogView)
+            .show()
+
+        positiveButton.setOnClickListener {
+            deleteDiaryOnServer(diaryId)
+            (diaryList as ArrayList).removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, diaryList.size)
+            alertDialog.dismiss()
+        }
+
+        negativeButton.setOnClickListener {
+            alertDialog.dismiss()
+        }
+    }
+
 }

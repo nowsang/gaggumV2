@@ -96,7 +96,7 @@ class RegisterFragment : Fragment() {
     private fun logKeyDown(direction: String, number: Int) {
         if (socket.connected()) {
 //            socket.emit("go_$direction", mapOf("name" to "go $direction", "data" to number))
-            socket.emit("connectReceive", mapOf("name" to "go $direction", "data" to number))
+            socket.emit("run_walltracking", mapOf("name" to "go $direction", "data" to number))
 
         }
     }

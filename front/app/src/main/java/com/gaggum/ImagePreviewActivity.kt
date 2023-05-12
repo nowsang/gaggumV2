@@ -118,7 +118,7 @@ class ImagePreviewActivity : AppCompatActivity() {
         val plantNames = allPlantsList.map { it.plantName }
 
         titleButton.setOnClickListener {
-            val items = listOf("전체보기") + plantNames
+            val items = listOf("전체") + plantNames
             showPlantNameBottomDialog("이름 선택", items) { selectedItem ->
                 titleButton.text = selectedItem
             }
