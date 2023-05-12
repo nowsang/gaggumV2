@@ -16,8 +16,8 @@ public:
   {
     // Connect to the Socket.IO server
     sio_client_.set_open_listener(std::bind(&SocketIONode::on_connected, this));
-    // sio_client_.connect("http://localhost:3001");
-    sio_client_.connect("https://k8b101.p.ssafy.io:3001");
+    sio_client_.connect("http://localhost:3001");
+    // sio_client_.connect("https://k8b101.p.ssafy.io:3001");
 
     // Create a timer to send messages to the server periodically
     timer_ = this->create_wall_timer(std::chrono::seconds(1), std::bind(&SocketIONode::send_message, this));
@@ -39,8 +39,8 @@ private:
     // msg.push("Hello from ROS 2!");    
     
     // int
-    auto int_msg = sio::int_message::create(35);
-    msg.push(int_msg);
+    auto scan_msg = sio::int_message::create(1);
+    msg.push(scan_msg);
 
     // bool
     // auto bool_msg = sio::bool_message::create(false);
@@ -56,7 +56,7 @@ private:
     // msg.push(obj_msg);
 
 
-    sio_client_.socket()->emit("message", msg);
+    sio_client_.socket()->emit("run_walltracking", msg);
 
     // Log the sent message
     RCLCPP_INFO(this->get_logger(), "Sent message to Socket.IO server: 'Hello from ROS 2!'");

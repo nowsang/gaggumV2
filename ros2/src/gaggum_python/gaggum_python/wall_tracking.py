@@ -6,6 +6,7 @@ from gaggum_msgs.msg import MapScan
 from squaternion import Quaternion
 from nav_msgs.msg import Odometry,Path
 from sensor_msgs.msg import LaserScan, PointCloud
+from rclpy.qos import qos_profile_sensor_data, QoSProfile
 
 
 class wallTracking(Node):
@@ -14,14 +15,14 @@ class wallTracking(Node):
 
         super().__init__('wall_Tracking')
         self.cmd_pub = self.create_publisher(Twist,'cmd_vel',10)
-        self.lidar_sub = self.create_subscription(LaserScan,'/scan',self.lidar_callback,10)
+        self.lidar_sub = self.create_subscription(LaserScan,'/scan',self.lidar_callback, qos_profile_sensor_data)
         self.subscription = self.create_subscription(Odometry,'/odom',self.odom_callback,10)
         self.twist_sub= self.create_subscription(Twist,'/cmd_vel',self.twist_callback,10)
 
         # 맵 만들 때 필요한 변수를 저장하는 주소 publish
         self.map_scan_publisher = self.create_publisher(MapScan, '/map_scan', 100)
         # socket에서 받아온 맵 만들기 실행 여부 정보 받기
-        self.create_map_sub = self.create_subscription(MapScan, '/map_scan', self.map_scan_callback, 100)
+        self.create_map_sub = self.create_subscription(MapScan, '/MapScan', self.map_scan_callback, 100)
 
         self.cmd_msg = Twist()
         time_period = 0.1
@@ -51,16 +52,16 @@ class wallTracking(Node):
         self.collision = False
 
         # wall_following 시작 조건
-        self.is_start = True
+        self.is_start = False
 
 
     # wall_tracking 작동하기 위한 함수
     def map_scan_callback(self, msg):
 
         # map_scan은 0 or 1로 들어옴
-        # self.is_start = msg.map_scan
+        self.is_start = msg.run
 
-        print("wall_tracking 데이터 값", msg)
+        print("wall_tracking 데이터 값", msg.run)
    
     def timer_callback(self):
         # 맵핑 종료 조건
@@ -93,7 +94,7 @@ class wallTracking(Node):
         elif self.is_mapping_end:
             print("맵 스캔이 종료되었습니다!!!")
             msg = MapScan()
-            msg.map_scan = -1
+            msg.run = -1
             self.map_scan_publisher.publish(msg)
             
             self.is_mapping_end = False
@@ -136,18 +137,18 @@ class wallTracking(Node):
 
     def find_wall(self):
 
-        self.cmd_msg.linear.x = 0.3
-        self.cmd_msg.angular.z = -0.3
+        self.cmd_msg.linear.x = 0.06
+        self.cmd_msg.angular.z = -0.2
 
     
     def turn_right(self):
 
-        self.cmd_msg.angular.z = 0.5
+        self.cmd_msg.angular.z = 0.2
 
     
     def follow_the_wall(self):
 
-        self.cmd_msg.linear.x = 0.3
+        self.cmd_msg.linear.x = 0.06
 
     
     def odom_callback(self, msg):
@@ -163,7 +164,8 @@ class wallTracking(Node):
 
 
     def lidar_callback(self, msg):
-
+        
+        print("lidar_msg", msg)
         self.lidar_msg = msg
         self.regions = {
             'front': min(msg.ranges[345:358]+msg.ranges[:15]),

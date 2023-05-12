@@ -42,24 +42,20 @@ function socketStart() {
 
     console.log("connected from server");
 
-    socket.on("connectReceive", (data) => {
-      console.log("connectReceive", data);
-    });
-
     socket.on("message", (data) => {
       console.log("server socket test", data);
       socket.to(roomName).emit("message", data);
     })
 
     // Map Auto Scan
-    socket.on("run_mapping", (data) => {
+    socket.on("run_walltracking", (data) => {
       // Front -> Back -> ROS
-      socket.to(roomName).emit("run_mapping", data);
-      console.log("run_mapping", data);
+      socket.to(roomName).emit("run_walltracking", data);
+      console.log("run_walltracking", data);
 
       if (data == -1) {
         console.log("맵 종료 됨");
-        socket.emit("run_mapping", data);
+        socket.emit("run_walltracking", data);
       }
     });
 
