@@ -125,8 +125,12 @@ class MainFragment() : Fragment() {
                 val address = getCurrentAddress(latitude, longitude)
 
                 address?.let {
-                    binding.mainAddressArea.text = "${it.adminArea}"
-                    binding.mainAddressArea2.text = "${it.thoroughfare}"
+                    binding.mainAddressArea.text = it.adminArea
+                    if (it.thoroughfare != null) {
+                        binding.mainAddressArea2.text = it.thoroughfare
+                    } else {
+                        binding.mainAddressArea2.text = ""
+                    }
                 }
 
             } else {
@@ -196,6 +200,8 @@ class MainFragment() : Fragment() {
                             binding.todayFlowerName.text = flowName
                             binding.todayFlowermean.text = flowLang
 
+                            binding.todayFlowerImg.clipToOutline = true
+
 
 
                         } else {
@@ -204,7 +210,7 @@ class MainFragment() : Fragment() {
                     }
 
                     override fun onFailure(call: Call<FlowerResponseBody>, t: Throwable) {
-                        Toast.makeText(mainActivity, "Retrofit 실패", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mainActivity, "추천 꽃을 받아오는데 실패했습니다. 다시 시도해주세요", Toast.LENGTH_SHORT).show()
                         Log.e("call", call.toString())
                         Log.e("t", t.toString())
                     }
@@ -263,6 +269,13 @@ class MainFragment() : Fragment() {
 
         return binding.root
     }
+
+//    override fun onBackPressed() {
+//        if (this is FirstFragment) {
+//            activity?.finish()
+//        }
+//        parentFragmentManager.beginTransaction().remove(this).commit()
+//    }
 
     inner class ZoomOutPageTransformer : ViewPager2.PageTransformer {
 
@@ -334,3 +347,5 @@ class MainFragment() : Fragment() {
     }
 
 }
+
+
