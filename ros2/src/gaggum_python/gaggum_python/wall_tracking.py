@@ -44,7 +44,7 @@ class wallTracking(Node):
             'front_right': 0,
             'right': 0,
             'left': 0,
-            'right_back': 0,
+            'right_turn_check': 0,
         }
         # 장애물 충돌여부
         self.collision = False
@@ -83,7 +83,7 @@ class wallTracking(Node):
         print('front  :', self.regions['front'])
         print('f_right:', self.regions['front_right'])
         print('right  :', self.regions['right'])
-        print('r_back :', self.regions['right_back'])
+        print('r_t_c  :', self.regions['right_turn_check'])
         print('left   :', self.regions['left'])
         print('=================================================')
 
@@ -126,21 +126,19 @@ class wallTracking(Node):
 
     def take_action(self):
         
-        if self.regions['front'] > 0.4:             # 전방이 크면
-            if self.regions['front_right'] < 0.3:   # 전방 오른쪽이 작으면
-                self.change_state(1)                # 왼쪽으로 돌아라(집게 충돌 방지)
+        if self.regions['front'] > 0.4:                         # 전방이 크면
+            if self.regions['front_right'] < 0.3:               # 전방 오른쪽이 작으면
+                self.change_state(1)                            # 왼쪽으로 돌아라(집게 충돌 방지)
             else:
-                if self.regions['right'] > 0.6:     # 오른쪽이 크면
+                if self.regions['right'] > 0.6:                 # 오른쪽이 크면
                     self.change_state(0)
-                    if self.regions['right_back'] > 0.3:
-                        self.change_state(3)
-                    # else:
-                    #     self.change_state(2)
+                    if self.regions['right_turn_check'] > 0.1:  # 오른쪽에 벽이 없으면
+                        self.change_state(3)                    # 오른쪽으로 돌아라
                 else:
                     self.change_state(2)            
         elif self.regions['front'] < 0.4:           # 전방이 작으면
             self.change_state(1)                    # 왼쪽으로 돌아라
-            if self.regions['right'] > 0.4:         # 오른쪽이 크면
+            if self.regions['right'] > 1.0 and self.regions['left'] < 0.3:         # 오른쪽이 크면
                 self.change_state(3)
 
         else:
@@ -160,10 +158,9 @@ class wallTracking(Node):
     
     def follow_the_wall(self):
 
-        self.cmd_msg.linear.x = 0.1
+        self.cmd_msg.linear.x = 0.2
 
     def turn_right(self):
-        self.cmd_msg.linear.x = 0.01
         self.cmd_msg.angular.z = -0.22
     
     def odom_callback(self, msg):
@@ -183,8 +180,8 @@ class wallTracking(Node):
         self.lidar_msg = msg
         self.regions = {
             'front': min(msg.ranges[:11] + msg.ranges[350:360]),
-            'front_right': min(msg.ranges[300:350]),
-            'right_back': min(msg.ranges[250:270]),
+            'front_right': min(msg.ranges[320:350]),
+            'right_turn_check': min(msg.ranges[180:360]),
             'right': min(msg.ranges[270:280]),
             'left': min(msg.ranges[70:90]),
         }
