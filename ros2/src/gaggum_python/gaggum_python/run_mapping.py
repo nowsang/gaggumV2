@@ -129,6 +129,7 @@ class Mapping:
     Mapping Class
     """
     def __init__(self, params_map):
+        self.odom_msg = Odometry()
 
         self.map_resolution = params_map["MAP_RESOLUTION"]
         self.map_size = np.array(params_map["MAP_SIZE"]) / self.map_resolution
@@ -213,7 +214,7 @@ class Mapping:
 
         
 class Mapper(Node):
-    
+
     def __init__(self):
         super().__init__('Mapper')
         
@@ -221,13 +222,13 @@ class Mapper(Node):
         # self.subscription = self.create_subscription(LaserScan,'/scan',self.scan_callback,10)
         self.subscription = self.create_subscription(LaserScan,'/scan',self.scan_callback,qos_profile=qos_profile_sensor_data)
         self.map_pub = self.create_publisher(OccupancyGrid, '/map', 1)
+        self.odom_sub = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
         
         self.map_msg=OccupancyGrid()
         self.map_msg.header.frame_id="map"
         self.map_size=int(params_map["MAP_SIZE"][0]\
             /params_map["MAP_RESOLUTION"]*params_map["MAP_SIZE"][1]/params_map["MAP_RESOLUTION"])
         
-
         m = MapMetaData()
         m.resolution = params_map["MAP_RESOLUTION"]
         m.width = int(params_map["MAP_SIZE"][0]/params_map["MAP_RESOLUTION"])
@@ -249,46 +250,65 @@ class Mapper(Node):
         # 로직 2 : mapping 클래스 생성
         self.mapping = Mapping(params_map)
 
+        self.is_odom = False
+
 
     # def map_scan_callback(self, msg):
     #     # self.is_map_create = msg.map_scan
     #     print("runmapping의 데이터 값", msg)
 
+    def odom_callback(self, msg):
+        self.odom_pose_x = msg.pose.pose.position.x
+        self.odom_pose_y = msg.pose.pose.position.y
+        self.odom_heading = msg.pose.pose.orientation.w
+        
+
+        self.is_odom = True
+
 
     def scan_callback(self, msg):
         print("들어온다!!!000")
-        print(msg)
-        pose_x=msg.range_min
-        pose_y=msg.scan_time
-        heading=msg.time_increment
-        Distance = np.array(msg.ranges)
-        Distance[np.isinf(Distance)] = 0
-        print(Distance)
-        x = Distance * np.cos(np.linspace(0, 2 * np.pi, 360))
-        y = Distance * np.sin(np.linspace(0, 2 * np.pi, 360))
-        laser = np.vstack((x.reshape((1, -1)), y.reshape((1, -1))))
+        # print(msg)
+        # pose_x=msg.range_min
+        # pose_y=msg.scan_time
+        # heading=msg.time_increment
 
-        pose = np.array([[pose_x],[pose_y],[heading]])
+        if self.is_odom:
+            print("들어온다!!!")
 
-        # 소켓에서 들어온 map_create 변수가 1일 경우에만 lidar 이용해 mapping시작 
-   
-        print("123123")            
-        self.mapping.update(pose, laser)
+            pose_x = self.odom_pose_x
+            pose_y = self.odom_pose_y
+            heading = self.odom_heading
+            print("pose   ", pose_x, pose_y, heading)
 
-        np_map_data=self.mapping.map.reshape(1,self.map_size) 
-        list_map_data=np_map_data.tolist()
-        for i in range(self.map_size):
-            list_map_data[0][i]=100-int(list_map_data[0][i]*100)
-            if list_map_data[0][i] >100 :
-                list_map_data[0][i]=100
+            Distance = np.array(msg.ranges)
+            Distance[np.isinf(Distance)] = 0
+            # print(Distance)
+            x = Distance * np.cos(np.linspace(0, 2 * np.pi, 360))
+            y = Distance * np.sin(np.linspace(0, 2 * np.pi, 360))
+            laser = np.vstack((x.reshape((1, -1)), y.reshape((1, -1))))
 
-            if list_map_data[0][i] <0 :
-                list_map_data[0][i]=0
+            pose = np.array([[pose_x],[pose_y],[heading]])
+
+            # 소켓에서 들어온 map_create 변수가 1일 경우에만 lidar 이용해 mapping시작 
+
+            print("123123")            
+            self.mapping.update(pose, laser)
+
+            np_map_data=self.mapping.map.reshape(1,self.map_size) 
+            list_map_data=np_map_data.tolist()
+            for i in range(self.map_size):
+                list_map_data[0][i]=100-int(list_map_data[0][i]*100)
+                if list_map_data[0][i] >100 :
+                    list_map_data[0][i]=100
+
+                if list_map_data[0][i] <0 :
+                    list_map_data[0][i]=0
 
 
-        self.map_msg.header.stamp =rclpy.clock.Clock().now().to_msg()
-        self.map_msg.data=list_map_data[0]
-        self.map_pub.publish(self.map_msg)
+            self.map_msg.header.stamp =rclpy.clock.Clock().now().to_msg()
+            self.map_msg.data=list_map_data[0]
+            self.map_pub.publish(self.map_msg)
 
 def save_map(node, file_path):
 
