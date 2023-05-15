@@ -37,6 +37,7 @@ class wallTracking(Node):
 
         self.is_comback = False
         self.is_mapping_end = False
+        self.lidar_msg = LaserScan()
 
         # 영역별 장애물과의 거리
         self.regions = {
@@ -130,7 +131,7 @@ class wallTracking(Node):
             if self.regions['front_right'] < 0.3:               # 전방 오른쪽이 작으면
                 self.change_state(1)                            # 왼쪽으로 돌아라(집게 충돌 방지)
             else:
-                if self.regions['right'] > 0.6:                 # 오른쪽이 크면
+                if self.regions['right'] > 0.8:                 # 오른쪽이 크면
                     self.change_state(0)
                     if self.regions['right_turn_check'] > 0.1:  # 오른쪽에 벽이 없으면
                         self.change_state(3)                    # 오른쪽으로 돌아라
@@ -138,7 +139,7 @@ class wallTracking(Node):
                     self.change_state(2)            
         elif self.regions['front'] < 0.4:           # 전방이 작으면
             self.change_state(1)                    # 왼쪽으로 돌아라
-            if self.regions['right'] > 1.0 and self.regions['left'] < 0.3:         # 오른쪽이 크면
+            if self.regions['right'] > 1.3 and self.regions['left'] < 0.3:         # 오른쪽이 크면
                 self.change_state(3)
 
         else:
@@ -147,21 +148,21 @@ class wallTracking(Node):
 
     def find_wall(self):
 
-        self.cmd_msg.linear.x = 0.22
+        self.cmd_msg.linear.x = 1.0
         self.cmd_msg.angular.z = -0.1
 
     
     def turn_left(self):
 
-        self.cmd_msg.angular.z = 0.22
+        self.cmd_msg.angular.z = 1.0
 
     
     def follow_the_wall(self):
 
-        self.cmd_msg.linear.x = 0.2
+        self.cmd_msg.linear.x = 0.1
 
     def turn_right(self):
-        self.cmd_msg.angular.z = -0.22
+        self.cmd_msg.angular.z = -1.0
     
     def odom_callback(self, msg):
 
@@ -180,10 +181,10 @@ class wallTracking(Node):
         self.lidar_msg = msg
         self.regions = {
             'front': min(msg.ranges[:11] + msg.ranges[350:360]),
-            'front_right': min(msg.ranges[320:350]),
-            'right_turn_check': min(msg.ranges[180:360]),
-            'right': min(msg.ranges[270:280]),
-            'left': min(msg.ranges[70:90]),
+            'front_right': min(r for r in msg.ranges[320:350] if r > 0),
+            'right_turn_check': min(r for r in msg.ranges[180:360] if r > 0),
+            'right': min(r for r in msg.ranges[270:280] if r > 0),
+            'left': min(r for r in msg.ranges[70:90] if r > 0),
         }
 
         self.take_action()
