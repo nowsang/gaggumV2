@@ -51,7 +51,7 @@ ament_target_dependencies(auto_move rclcpp sioclient)
 target_link_libraries(auto_move sioclient Boost::system)
 
 add_executable(gaggum_socket nodes/gaggum_socket.cpp)
-ament_target_dependencies(gaggum_socket rclcpp sioclient gaggum_msgs)
+ament_target_dependencies(gaggum_socket rclcpp sioclient gaggum_msgs std_msgs)
 target_link_libraries(gaggum_socket sioclient Boost::system)
 
 
