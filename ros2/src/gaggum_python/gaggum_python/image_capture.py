@@ -13,7 +13,7 @@ class IMGParser(Node):
         self.img_bgr = None
         self.timer_period = 0.1
         self.timer = self.create_timer(self.timer_period, self.timer_callback)
-        self.img_counter = 1
+        self.img_counter = 601
         
     def img_callback(self, msg):
         np_arr = np.frombuffer(msg.data, np.uint8)
