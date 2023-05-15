@@ -32,6 +32,8 @@ setup(
             'utils = gaggum_python.utils:main',
             'load_map = gaggum_python.load_map:main',
             'navigation = gaggum_python.navigation:main',
+            'hand_control = gaggum_python.hand_control:main',
+            'water = gaggum_python.water:main',
         ],
     },
 )
