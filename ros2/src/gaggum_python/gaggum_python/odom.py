@@ -2,7 +2,6 @@ import rclpy
 from rclpy.node import Node
 
 from geometry_msgs.msg import Twist
-from gaggum_msgs.msg import TurtlebotStatus
 from sensor_msgs.msg import Imu
 from squaternion import Quaternion
 from nav_msgs.msg import Odometry
@@ -28,9 +27,11 @@ class odom(Node):
         super().__init__('odom')
         
         # 로직 1. publisher, subscriber, broadcaster 만들기
+
         self.subscription = self.create_subscription(Twist,'/cmd_vel',self.listener_callback,10)
         self.imu_sub = self.create_subscription(Imu,'/imu',self.imu_callback,10)
         self.odom_publisher = self.create_publisher(Odometry, 'odom', 10)
+        self.twist_publisher = self.create_publisher(Twist, '/cmd_vel', 10)
         self.broadcaster = tf2_ros.StaticTransformBroadcaster(self)
 
 
@@ -85,7 +86,7 @@ class odom(Node):
             self.theta = e[2]
             
     def listener_callback(self, msg):
-        print('linear_vel : {}  angular_vel : {}'.format(msg.twist.linear.x,-msg.twist.angular.z))
+        print('linear_vel : {}  angular_vel : {}'.format(msg.linear.x,-msg.angular.z))
         if self.is_imu == True:
             if self.is_status == False :
                 self.is_status = True
@@ -96,8 +97,8 @@ class odom(Node):
                 # 계산 주기를 저장한 변수 입니다. 단위는 초(s)
                 self.period=(self.current_time-self.prev_time).nanoseconds/1000000000
                 # 로봇의 선속도, 각속도를 저장하는 변수, 시뮬레이터에서 주는 각 속도는 방향이 반대이므로 (-)를 붙여줍니다.
-                linear_x = msg.twist.linear.x
-                angular_z = -msg.twist.angular.z
+                linear_x = msg.linear.x
+                angular_z = -msg.angular.z
                 '''
                 로직 3. 로봇 위치 추정
                 (테스트) linear_x = 1, self.theta = 1.5707(rad), self.period = 1 일 때

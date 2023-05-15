@@ -31,6 +31,7 @@ setup(
             'wall_tracking = gaggum_python.wall_tracking:main',
             'utils = gaggum_python.utils:main',
             'load_map = gaggum_python.load_map:main',
+            'navigation = gaggum_python.navigation:main',
         ],
     },
 )

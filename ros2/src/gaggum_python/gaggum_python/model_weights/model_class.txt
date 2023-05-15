@@ -1,4 +1,0 @@
-class   name
-0       plant0
-1       plant1
-2       plant2

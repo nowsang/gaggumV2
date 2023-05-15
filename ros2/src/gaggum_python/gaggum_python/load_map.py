@@ -8,11 +8,11 @@ from squaternion import Quaternion
 from nav_msgs.msg import Odometry,OccupancyGrid,MapMetaData
 from math import pi
 
-
 class loadMap(Node):
 
     def __init__(self):
         super().__init__('load_map')
+
         self.map_pub = self.create_publisher(OccupancyGrid, 'map', 1)
         
         time_period=1  
@@ -22,8 +22,8 @@ class loadMap(Node):
         self.map_size_x = 350
         self.map_size_y = 350
         self.map_resolution = 0.05
-        self.map_offset_x = 0.0
-        self.map_offset_y = 0.0
+        self.map_offset_x = -8.75
+        self.map_offset_y = -8.75
         self.map_data = [0 for i in range(self.map_size_x*self.map_size_y)]
 
         grid=np.array(self.map_data)
@@ -46,7 +46,7 @@ class loadMap(Node):
         # 로직 2. 맵 데이터 읽고, 2차원 행렬로 변환
         full_path = os.path.abspath(__file__)
         # 상대경로로 작성
-        full_path = full_path.replace('install/gaggum/lib/python3.8/site-packages/gaggum/load_map.py', '/src/gaggum/map/map.txt')
+        full_path = full_path.replace('install/gaggum_python/lib/python3.8/site-packages/gaggum_python/load_map.py', 'src/gaggum_python/map/map.txt')
         # 읽기 모드로 열기
         self.f = open(full_path, 'r')
         line = self.f.readline()
@@ -67,12 +67,12 @@ class loadMap(Node):
                 if grid[x][y] == 100:
                     # 그 좌표를 127로 바꿔주고
 
-                    for i in range(y-5, y+5):
+                    for i in range(y-3, y+3):
                         if i < 0 or i >= self.map_size_y:
                             continue
                         if grid[x][i] != 100:
                             grid[x][i] = 127
-                        for j in range(x-5, x+5):
+                        for j in range(x-3, x+3):
                             if j < 0 or j >= self.map_size_x:
                                 continue
                             if grid[j][i] != 100:

@@ -6,7 +6,7 @@ import base64
 from rclpy.node import Node
 from sensor_msgs.msg import CompressedImage
 from geometry_msgs.msg import Twist, Point, Point32, Pose, PoseStamped
-from gaggum_msgs.msg import TurtlebotStatus, Detection, Tts
+from gaggum_msgs.msg import Detection
 from squaternion import Quaternion
 from nav_msgs.msg import Odometry,Path
 from math import pi,cos,sin,sqrt,atan2, pow
@@ -108,10 +108,6 @@ class followTheCarrot(Node):
         # 카메라에서 이미지 정보를 받아옴
         self.subs_img = self.create_subscription(CompressedImage, '/image_jpeg/compressed', self.img_callback, 1)
 
-        # 물 주기 완료 후 TTS
-        self.tts_pub = self.create_publisher(Tts, '/tts', 10)
-
-
 
         self.is_odom = False
         self.is_path = False
@@ -156,12 +152,11 @@ class followTheCarrot(Node):
         self.robot_pose_y = 0
 
         # 백에서 넘어오는 trigger
-        # self.triggers = {
-        #     # 'data': [
-        #     #     {'plant_number': 3, 'plant_original_name': 'plant3', 'plant_position_x': -7.54, 'plant_position_y': 3.53},
-        #     #     {'plant_number': 5, 'plant_original_name': 'plant5', 'plant_position_x': -3.0, 'plant_position_y': 15.54}
-        #     # ], 
-        #     # 'mode': 100  
+        self.triggers = {
+            'data': [
+                {'plant_number': 3, 'plant_original_name': 'plant3', 'plant_position_x': 1.5023, 'plant_position_y': 0.9781},
+            ], 
+            'mode': 100  
         #     'data': [
         #         {'plant_number': 1, 'plant_original_name': 'plant1', 'plant_position_x': -4.87, 'plant_position_y': 3.48},
         #         {'plant_number': 2, 'plant_original_name': 'plant2', 'plant_position_x': -2.92, 'plant_position_y': 3.49}
@@ -174,7 +169,7 @@ class followTheCarrot(Node):
         #         {'sunspot_number': 4, 'sunspot_isplant': 0, 'sunspot_x_position': -2.11, 'sunspot_y_position': 9.34},
         #         {'sunspot_number': 5, 'sunspot_isplant': 0, 'sunspot_x_position': -2.07, 'sunspot_y_position': 10.1}
         #     ]
-        # }
+        }
         
         # trigger 정보
         self.goal_x = 0

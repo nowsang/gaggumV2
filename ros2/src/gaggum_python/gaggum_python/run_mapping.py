@@ -129,6 +129,7 @@ class Mapping:
     Mapping Class
     """
     def __init__(self, params_map):
+        self.odom_msg = Odometry()
 
         self.map_resolution = params_map["MAP_RESOLUTION"]
         self.map_size = np.array(params_map["MAP_SIZE"]) / self.map_resolution
@@ -230,7 +231,6 @@ class Mapper(Node):
         self.map_size=int(params_map["MAP_SIZE"][0]\
             /params_map["MAP_RESOLUTION"]*params_map["MAP_SIZE"][1]/params_map["MAP_RESOLUTION"])
         
-
         m = MapMetaData()
         m.resolution = params_map["MAP_RESOLUTION"]
         m.width = int(params_map["MAP_SIZE"][0]/params_map["MAP_RESOLUTION"])
