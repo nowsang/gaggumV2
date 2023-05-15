@@ -8,14 +8,13 @@
     tools:context=".MainFragment">
 
 
-    <Button
+    <ImageView
+        android:src="@drawable/logout"
         android:id="@+id/logoutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로그아웃"
-        android:layout_marginTop="8dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="8dp"
-        android:background="@drawable/radius_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
