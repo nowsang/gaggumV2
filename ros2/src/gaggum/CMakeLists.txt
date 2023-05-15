@@ -50,8 +50,9 @@ add_executable(auto_move nodes/auto_move.cpp)
 ament_target_dependencies(auto_move rclcpp sioclient)
 target_link_libraries(auto_move sioclient Boost::system)
 
-add_executable(wall_tracking nodes/wall_tracking.cpp)
-ament_target_dependencies(wall_tracking rclcpp sensor_msgs geometry_msgs nav_msgs)
+add_executable(gaggum_socket nodes/gaggum_socket.cpp)
+ament_target_dependencies(gaggum_socket rclcpp sioclient gaggum_msgs)
+target_link_libraries(gaggum_socket sioclient Boost::system)
 
 
 # 실행 파일을 찾을 수 있도록 섹션 추가
@@ -63,7 +64,7 @@ install(TARGETS
   socket_sub
   time_control
   auto_move
-  wall_tracking
+  gaggum_socket
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

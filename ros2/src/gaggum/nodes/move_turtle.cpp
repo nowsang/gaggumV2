@@ -12,7 +12,7 @@ class TurtlebotController : public rclcpp::Node
 {
 public:
   TurtlebotController()
-  : Node("turtlebot_controller")
+  : Node("turtlebot_controller"), once(false)
   {
     move_pub = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
     move_timer = this->create_wall_timer(2000ms, std::bind(&TurtlebotController::timer_callback, this));
@@ -29,13 +29,22 @@ public:
   }
 
 private:
+  bool once;
+
   void timer_callback()
   {
-    
-    auto state_msg = std_msgs::msg::Int32();
-    state_msg.data = 3;
-    move_state->publish(state_msg);
-    cout << state_msg.data << '\n';
+    // int motor_state;
+    // cin >> motor_state;
+    // cout << "motor state" << " " << motor_state << "\n";
+    if (!once) {
+      once = true;
+      auto state_msg = std_msgs::msg::Int32();
+      state_msg.data = 1;
+      move_state->publish(state_msg);
+      cout << state_msg.data << '\n';
+
+    }
+
 
 
     // auto twist_msg = geometry_msgs::msg::Twist();

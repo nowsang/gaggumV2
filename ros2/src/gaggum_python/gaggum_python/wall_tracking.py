@@ -41,11 +41,11 @@ class wallTracking(Node):
 
         # 영역별 장애물과의 거리
         self.regions = {
-            'right': 0,
-            'front_right': 0,
-            'front_left': 0,
-            'front': 0,
             'left': 0,
+            'front_left': 0,
+            'front_right': 0,
+            'front': 0,
+            'right': 0,
         }
 
         # 장애물 충돌여부
@@ -84,9 +84,11 @@ class wallTracking(Node):
             if self.state == 0:
                 self.find_wall()
             elif self.state == 1:
-                self.turn_right()
+                self.turn_left()
             elif self.state == 2:
                 self.follow_the_wall()
+            elif self.state == 3:
+                self.turn_right()
             else:
                 print('오류 발생!!')
 
@@ -118,18 +120,22 @@ class wallTracking(Node):
     def take_action(self):
         
         d = 0.6
-
-        if self.regions['front'] > d:                # 전방 널널
-            if self.regions['front_right'] > d:      # 우측 널널
-                if self.regions['front_left'] > d:   # 좌측 널널
-                    self.change_state(0)             # 왼쪽 벽 찾기
-                elif self.regions['front_left'] < d: # 좌측 근접
-                    self.change_state(2)             # 왼쪽 벽 따라가기
-            elif self.regions['front_right'] < d:    # 우측 근접
-                    self.change_state(0)             # 왼쪽 벽 찾기
-                    
-        elif self.regions['front'] < d:              # 전방 근접
-            self.change_state(1)                     # 멈추고 오른쪽으로 회전
+        print("front", self.regions['front'], "left", self.regions['front_left'], "right", self.regions['front_right'])
+        if self.regions['front'] > d:                 # front 
+            if self.regions['front_left'] > d:        # left
+                if self.regions['front_right'] > d:   # right
+                    self.change_state(0)              # find wall
+                elif self.regions['front_right'] < d: # !right
+                    self.change_state(2)              # follow wall
+            elif self.regions['front_left'] < d:      # !left
+                    self.change_state(0)              # find wall
+        elif self.regions['front'] < d:               # !front
+            # if self.regions['front_right'] > d:       # right
+            #     self.change_state(0)                  # find wall
+            #     if self.regions['front_left'] < d:    # !left
+            #         self.change_state(3)              # turn right
+            # else:                                     # !right
+                self.change_state(1)                  # trun left
 
         else:
             print('예외상황 발생!!')
@@ -141,7 +147,7 @@ class wallTracking(Node):
         self.cmd_msg.angular.z = -0.2
 
     
-    def turn_right(self):
+    def turn_left(self):
 
         self.cmd_msg.angular.z = 0.2
 
@@ -150,7 +156,10 @@ class wallTracking(Node):
 
         self.cmd_msg.linear.x = 0.06
 
-    
+    def turn_right(self):
+
+        self.cmd_msg.angular.z = -0.2
+
     def odom_callback(self, msg):
 
         # 제자리에 멈추고 행동 취하기 충돌 방지
@@ -165,14 +174,15 @@ class wallTracking(Node):
 
     def lidar_callback(self, msg):
         
-        print("lidar_msg", msg)
+        self.lidar_msg = msg
+        # print("lidar_msg", msg)
         self.lidar_msg = msg
         self.regions = {
-            'front': min(msg.ranges[345:358]+msg.ranges[:15]),
-            'front_left': min(msg.ranges[15:60]),
-            'front_right': min(msg.ranges[270:345]),
-            'left': min(msg.ranges[60:120]),
-            'right': min(msg.ranges[210:270]),
+            'front': min(msg.ranges[345:358]+msg.ranges[:70]),
+            'front_right': min(msg.ranges[70:90]),
+            'front_left': min(msg.ranges[260:300]),
+            'right': min(msg.ranges[90:120]),
+            'left': min(msg.ranges[210:260]),
         }
 
         self.take_action()
