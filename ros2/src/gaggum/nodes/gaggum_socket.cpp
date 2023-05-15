@@ -3,6 +3,7 @@
 #include <string>
 
 #include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/int32.hpp"
 #include "gaggum_msgs/msg/map_scan.hpp"
 #include <sio_client.h>
 
@@ -21,17 +22,22 @@ public:
     
     // Connect to the Socket.IO server
     sio_client_.set_open_listener(std::bind(&GaggumSocketNode::on_connected, this));
-    sio_client_.connect("http://localhost:3001");
-    // sio_client_.connect("https://k8b101.p.ssafy.io:3001");
+    // sio_client_.connect("http://localhost:3001");
+    sio_client_.connect("https://k8b101.p.ssafy.io:3001");
     
-    sio_client_.socket()->on("message", [](sio::event& event) {  
 
-      cout << "assd" << "\n";
+    // motor control
+    sio_client_.socket()->on("run_motor", [](sio::event& event) {  
+
+      cout << "motor control" << "\n";
 
       cout << event.get_message()->get_int() << "\n";
 
+      move_state->publish(event.get_message()->get_int());
+
     });
 
+    //map scan
     sio_client_.socket()->on("run_walltracking", [this](sio::event& event) {
 
       cout << "run_walltracking Socket" << "\n";
