@@ -2,7 +2,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/int32.hpp"
-#include "gaggum_msgs/msg/test.hpp"
+#include "gaggum_msgs/msg/map_scan.hpp"
 #include "gaggum_msgs/msg/detection.hpp"
 
 using std::placeholders::_1;
@@ -14,8 +14,8 @@ class MinimalSubscriber : public rclcpp::Node
     MinimalSubscriber()
     : Node("minimal_subscriber")
     {
-      subscription_ = this->create_subscription<gaggum_msgs::msg::Test>(
-      "topic", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
+      subscription_ = this->create_subscription<gaggum_msgs::msg::MapScan>(
+      "MapScan", 10, std::bind(&MinimalSubscriber::scan_callback, this, _1));
 
       sub_ = this->create_subscription<gaggum_msgs::msg::Detection>(
       "yolo", 10, std::bind(&MinimalSubscriber::yolo_callback, this, _1));
@@ -29,9 +29,11 @@ class MinimalSubscriber : public rclcpp::Node
     }
 
   private:
-    void topic_callback(const gaggum_msgs::msg::Test::SharedPtr msg) const
+    void scan_callback(const gaggum_msgs::msg::MapScan::SharedPtr msg) const
     {
-      RCLCPP_INFO(this->get_logger(), "I heard: '%d'", msg->num);
+      int scan_msg = msg->run;
+      cout << scan_msg << "\n";
+      // RCLCPP_INFO(this->get_logger(), "I heard: '%d'", msg->num);
     }
 
     void yolo_callback(const gaggum_msgs::msg::Detection::SharedPtr msg) const
@@ -60,7 +62,7 @@ class MinimalSubscriber : public rclcpp::Node
     rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr motor_sub;
     rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr motor_end;
     rclcpp::Subscription<gaggum_msgs::msg::Detection>::SharedPtr sub_;
-    rclcpp::Subscription<gaggum_msgs::msg::Test>::SharedPtr subscription_;
+    rclcpp::Subscription<gaggum_msgs::msg::MapScan>::SharedPtr subscription_;
 };
 
 int main(int argc, char * argv[])

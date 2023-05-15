@@ -67,7 +67,7 @@ class wallTracking(Node):
    
     def timer_callback(self):
         # 맵핑 종료 조건
-        #print(self.is_odom, self.is_path, self.is_status, self.is_lidar)
+        # print(self.is_odom, self.is_path, self.is_status, self.is_lidar)
         if self.is_odom and self.is_lidar:
             # 로봇의 현재 위치
             robot_pose_x = self.odom_msg.pose.pose.position.x
@@ -75,7 +75,7 @@ class wallTracking(Node):
             #print(robot_pose_x, robot_pose_y)
             #print(self.is_comback, self.is_mapping_end)
             # 로봇이 시작 위치 ()에 5 반경을 벗어나면
-            if not (-0.3 <= robot_pose_x <= 0.3 and -0.3 <= robot_pose_y <= 0.3):
+            if not (-0.1 <= robot_pose_x <= 0.1 and -0.1 <= robot_pose_y <= 0.1):
                 self.is_comback = True
             elif self.is_comback:
                 self.is_mapping_end = True
@@ -90,6 +90,7 @@ class wallTracking(Node):
         print('left   :', self.regions['left'])
         print('=================================================')
 
+        print(self.is_start, self.is_mapping_end)
         if self.is_start and not self.is_mapping_end:
             if self.state == 0:
                 self.find_wall()
@@ -130,24 +131,23 @@ class wallTracking(Node):
 
 
     def take_action(self):
-        
-        if self.regions['front'] > 0.4:                         # 전방이 크면
-            if self.regions['front_right'] < 0.3:               # 전방 오른쪽이 작으면
-                self.change_state(1)                            # 왼쪽으로 돌아라(집게 충돌 방지)
-            else:
-                if self.regions['right'] > 0.7:                 # 오른쪽이 크면
-                    self.change_state(0)
-                    if self.regions['right_turn_check'] > 0.1:  # 오른쪽에 벽이 없으면
-                        self.change_state(3)                    # 오른쪽으로 돌아라
+        if self.regions['front_right'] < 0.3:                       # 전방 오른쪽이 작으면
+            self.change_state(1)                                    # 왼쪽으로 돌아라(집게 충돌 방지)
+        else:
+            if self.regions['front'] > 0.4:                         # 전방이 크면
+                if self.regions['right'] > 0.5:                     # 오른쪽이 크면
+                    if self.regions['right_turn_check'] > 0.1:      # 오른쪽 뒤에 벽이 없으면
+                        self.change_state(3)                        # 오른쪽으로 돌아라
+                    elif self.regions['left'] > 0.6:                # 왼쪽이 크면
+                        self.change_state(0)                        # 벽을 찾아라
                 else:
                     self.change_state(2)            
-        elif self.regions['front'] < 0.4:           # 전방이 작으면
-            self.change_state(1)                    # 왼쪽으로 돌아라
-            if self.regions['right'] > 1.3 and self.regions['left'] < 0.3:         # 오른쪽이 크면
-                self.change_state(3)
-
-        else:
-            print('예외상황 발생!!')
+            elif self.regions['front'] < 0.4:                       # 전방이 작으면
+                self.change_state(1)                                # 왼쪽으로 돌아라
+                if self.regions['right'] > 1.0:
+                    self.change_state(3)
+            else:
+                print('예외상황 발생!!')
 
 
     def find_wall(self):
