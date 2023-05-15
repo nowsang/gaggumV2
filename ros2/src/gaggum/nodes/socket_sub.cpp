@@ -14,8 +14,7 @@ class SocketIOSubNode : public rclcpp::Node
 public:
   SocketIOSubNode() : Node("socketiosub_node")
   {
-    // map_scan pub
-    move_state = this->create_publisher<std_msgs::msg::Int32>("motor", 10);
+    // map_scan pub    
     map_scan_pub = this->create_publisher<gaggum_msgs::msg::MapScan>("MapScan", 10);
     // map_scan_sub = this->create_subsc
     
@@ -72,7 +71,6 @@ private:
   }
 
   sio::client sio_client_;
-  rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr move_state;
   rclcpp::Publisher<gaggum_msgs::msg::MapScan>::SharedPtr map_scan_pub; 
 
 };

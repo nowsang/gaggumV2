@@ -15,9 +15,10 @@ class GaggumSocketNode : public rclcpp::Node
 public:
   GaggumSocketNode() : Node("socketiosub_node")
   {
-    // map_scan pub
+
+    move_state = this->create_publisher<std_msgs::msg::Int32>("motor", 10);
     map_scan_pub = this->create_publisher<gaggum_msgs::msg::MapScan>("MapScan", 10);
-    // map_scan_sub = this->create_subsc
+
     
     
     // Connect to the Socket.IO server
@@ -27,13 +28,16 @@ public:
     
 
     // motor control
-    sio_client_.socket()->on("run_motor", [](sio::event& event) {  
+    sio_client_.socket()->on("run_motor", [this](sio::event& event) {  
 
       cout << "motor control" << "\n";
 
       cout << event.get_message()->get_int() << "\n";
 
-      move_state->publish(event.get_message()->get_int());
+      auto motor_msg = std_msgs::msg::Int32();
+      motor_msg.data = event.get_message()->get_int();
+      move_state->publish(motor_msg);
+    //   move_state->publish(event.get_message()->get_int());
 
     });
 
@@ -63,6 +67,7 @@ private:
   }
 
   sio::client sio_client_;
+  rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr move_state;
   rclcpp::Publisher<gaggum_msgs::msg::MapScan>::SharedPtr map_scan_pub; 
 
 };
