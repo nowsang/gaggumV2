@@ -14,14 +14,14 @@ class wallTracking(Node):
 
         super().__init__('wall_Tracking')
         self.cmd_pub = self.create_publisher(Twist,'cmd_vel',10)
-        self.lidar_sub = self.create_subscription(LaserScan,'/scan',self.scan_callback,qos_profile=qos_profile_sensor_data)
+        self.lidar_sub = self.create_subscription(LaserScan,'/scan',self.lidar_callback, qos_profile_sensor_data)
         self.subscription = self.create_subscription(Odometry,'/odom',self.odom_callback,10)
         self.twist_sub= self.create_subscription(Twist,'/cmd_vel',self.twist_callback,10)
 
-        # # 맵 만들 때 필요한 변수를 저장하는 주소 publish
-        # self.map_scan_publisher = self.create_publisher(MapScan, '/map_scan', 100)
-        # # socket에서 받아온 맵 만들기 실행 여부 정보 받기
-        # self.create_map_sub = self.create_subscription(MapScan, '/map_scan', self.map_scan_callback, 100)
+        # 맵 만들 때 필요한 변수를 저장하는 주소 publish
+        self.map_scan_publisher = self.create_publisher(MapScan, '/map_scan', 100)
+        # socket에서 받아온 맵 만들기 실행 여부 정보 받기
+        self.create_map_sub = self.create_subscription(MapScan, '/MapScan', self.map_scan_callback, 100)
 
         self.cmd_msg = Twist()
         time_period = 0.1
@@ -40,27 +40,26 @@ class wallTracking(Node):
 
         # 영역별 장애물과의 거리
         self.regions = {
-            'front': 0,
-            'front_right': 0,
-            'right': 0,
             'left': 0,
-            'right_turn_check': 0,
+            'front_left': 0,
+            'front_right': 0,
+            'front': 0,
+            'right': 0,
         }
         # 장애물 충돌여부
         self.collision = False
 
         # wall_following 시작 조건
-        self.is_start = True
+        self.is_start = False
 
 
     # wall_tracking 작동하기 위한 함수
     def map_scan_callback(self, msg):
 
         # map_scan은 0 or 1로 들어옴
-        # self.is_start = msg.map_scan
+        self.is_start = msg.run
 
-        #print("wall_tracking 데이터 값", msg)
-        pass
+        print("wall_tracking 데이터 값", msg.run)
    
     def timer_callback(self):
         # 맵핑 종료 조건
@@ -100,11 +99,11 @@ class wallTracking(Node):
                 print('오류 발생!!')
 
         # 맵 종료 되면 -1 data 전달. why? 종료하기 위해서.
-        # elif self.is_mapping_end:
-            #print("맵 스캔이 종료되었습니다!!!")
-        #     msg = MapScan()
-        #     msg.map_scan = -1
-        #     self.map_scan_publisher.publish(msg)
+        elif self.is_mapping_end:
+            print("맵 스캔이 종료되었습니다!!!")
+            msg = MapScan()
+            msg.run = -1
+            self.map_scan_publisher.publish(msg)
             
         #     self.is_mapping_end = False
 
