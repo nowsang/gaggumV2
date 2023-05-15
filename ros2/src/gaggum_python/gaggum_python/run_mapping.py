@@ -223,7 +223,9 @@ class Mapper(Node):
         self.subscription = self.create_subscription(LaserScan,'/scan',self.scan_callback,qos_profile=qos_profile_sensor_data)
         self.map_pub = self.create_publisher(OccupancyGrid, '/map', 1)
         self.odom_sub = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
-        
+        self.imu_sub = self.create_subscription(Imu,'/imu', self.imu_callback, 10)
+
+
         self.map_msg=OccupancyGrid()
         self.map_msg.header.frame_id="map"
         self.map_size=int(params_map["MAP_SIZE"][0]\
@@ -246,7 +248,6 @@ class Mapper(Node):
 
         # is_map_create 변수가 True면 mapping 시작, std_msg에서 받아온 값으로 확인
         self.is_map_create = True
-
         # 로직 2 : mapping 클래스 생성
         self.mapping = Mapping(params_map)
 
@@ -257,13 +258,29 @@ class Mapper(Node):
     #     # self.is_map_create = msg.map_scan
     #     print("runmapping의 데이터 값", msg)
 
-    def odom_callback(self, msg):
-        self.odom_pose_x = msg.pose.pose.position.x
-        self.odom_pose_y = msg.pose.pose.position.y
-        self.odom_heading = msg.pose.pose.orientation.w
-        
+    def imu_callback(self, msg):
+        self.is_imu = True
+        '''
+        로직 3. IMU 에서 받은 quaternion을 euler angle로 변환해서 사용(라디안 단위)
+        각도(도) = 라디안 * 180/π
+        '''
+        global robot_yaw
+        imu_q= Quaternion(msg.orientation.w,msg.orientation.x,msg.orientation.y,msg.orientation.z)
+        _,_,robot_yaw = imu_q.to_euler()
+        # print(f"robot_yaw : {robot_yaw}")
+    
 
-        self.is_odom = True
+    def odom_callback(self, msg):
+        global robot_yaw   
+
+        if self.is_imu:
+        
+            self.odom_pose_x = msg.pose.pose.position.x
+            self.odom_pose_y = msg.pose.pose.position.y
+            self.odom_heading = robot_yaw
+            # self.odom_heading = msg.pose.pose.orientation.w
+
+            self.is_odom = True
 
 
     def scan_callback(self, msg):
@@ -274,7 +291,6 @@ class Mapper(Node):
         # heading=msg.time_increment
 
         if self.is_odom:
-            print("들어온다!!!")
 
             pose_x = self.odom_pose_x
             pose_y = self.odom_pose_y

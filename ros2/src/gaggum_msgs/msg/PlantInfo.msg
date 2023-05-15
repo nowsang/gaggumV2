@@ -1,0 +1,4 @@
+int32 plant_number
+string plant_original_name
+float32 plant_position_x
+float32 plant_position_y

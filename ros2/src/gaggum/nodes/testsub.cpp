@@ -21,10 +21,10 @@ class MinimalSubscriber : public rclcpp::Node
       "yolo", 10, std::bind(&MinimalSubscriber::yolo_callback, this, _1));
 
       motor_sub = this->create_subscription<std_msgs::msg::Int32>(
-      "motor_sub", 10, std::bind(&MinimalSubscriber::motor_callback, this, _1));
+      "motor", 10, std::bind(&MinimalSubscriber::motor_callback, this, _1));
 
       motor_end = this->create_subscription<std_msgs::msg::Int32>(
-      "end_pub", 10, std::bind(&MinimalSubscriber::end_callback, this, _1));
+      "end_motor", 10, std::bind(&MinimalSubscriber::end_callback, this, _1));
 
     }
 
