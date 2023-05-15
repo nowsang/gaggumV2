@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 
 from geometry_msgs.msg import Twist, Point, Point32
-# from gaggum_msgs.msg import MapScan
+from gaggum_msgs.msg import MapScan
 from squaternion import Quaternion
 from nav_msgs.msg import Odometry,Path
 from sensor_msgs.msg import LaserScan, PointCloud
@@ -37,20 +37,24 @@ class wallTracking(Node):
 
         self.is_comback = False
         self.is_mapping_end = False
+        self.lidar_msg = LaserScan()
 
         # 영역별 장애물과의 거리
         self.regions = {
-            'left': 0,
-            'front_left': 0,
-            'front_right': 0,
             'front': 0,
+            'front_right': 0,
+            'right_turn_check': 0,
             'right': 0,
+            'left': 0,        
         }
         # 장애물 충돌여부
         self.collision = False
 
         # wall_following 시작 조건
         self.is_start = False
+
+        # 터틀봇 시작 좌표
+        self.start_point = (0.0, 0.0)
 
 
     # wall_tracking 작동하기 위한 함수
@@ -70,8 +74,8 @@ class wallTracking(Node):
             robot_pose_y = self.odom_msg.pose.pose.position.y
             #print(robot_pose_x, robot_pose_y)
             #print(self.is_comback, self.is_mapping_end)
-            # 로봇이 시작 위치 (-5.818, 6.399)에 5 반경을 벗어나면
-            if not (-5.818 - 0.3 <= robot_pose_x <= -5.818 + 0.3 and 6.399 - 0.3 <= robot_pose_y <= 6.399 + 0.3):
+            # 로봇이 시작 위치 ()에 5 반경을 벗어나면
+            if not (-0.3 <= robot_pose_x <= 0.3 and -0.3 <= robot_pose_y <= 0.3):
                 self.is_comback = True
             elif self.is_comback:
                 self.is_mapping_end = True
@@ -97,6 +101,8 @@ class wallTracking(Node):
                 self.turn_right()
             else:
                 print('오류 발생!!')
+                
+            self.take_action()
 
         # 맵 종료 되면 -1 data 전달. why? 종료하기 위해서.
         elif self.is_mapping_end:
@@ -129,7 +135,7 @@ class wallTracking(Node):
             if self.regions['front_right'] < 0.3:               # 전방 오른쪽이 작으면
                 self.change_state(1)                            # 왼쪽으로 돌아라(집게 충돌 방지)
             else:
-                if self.regions['right'] > 0.6:                 # 오른쪽이 크면
+                if self.regions['right'] > 0.7:                 # 오른쪽이 크면
                     self.change_state(0)
                     if self.regions['right_turn_check'] > 0.1:  # 오른쪽에 벽이 없으면
                         self.change_state(3)                    # 오른쪽으로 돌아라
@@ -137,7 +143,7 @@ class wallTracking(Node):
                     self.change_state(2)            
         elif self.regions['front'] < 0.4:           # 전방이 작으면
             self.change_state(1)                    # 왼쪽으로 돌아라
-            if self.regions['right'] > 1.0 and self.regions['left'] < 0.3:         # 오른쪽이 크면
+            if self.regions['right'] > 1.3 and self.regions['left'] < 0.3:         # 오른쪽이 크면
                 self.change_state(3)
 
         else:
@@ -146,21 +152,21 @@ class wallTracking(Node):
 
     def find_wall(self):
 
-        self.cmd_msg.linear.x = 0.22
+        self.cmd_msg.linear.x = 1.0
         self.cmd_msg.angular.z = -0.1
 
     
     def turn_left(self):
 
-        self.cmd_msg.angular.z = 0.22
+        self.cmd_msg.angular.z = 1.0
 
     
     def follow_the_wall(self):
 
-        self.cmd_msg.linear.x = 0.2
+        self.cmd_msg.linear.x = 0.1
 
     def turn_right(self):
-        self.cmd_msg.angular.z = -0.22
+        self.cmd_msg.angular.z = -1.0
     
     def odom_callback(self, msg):
 
@@ -174,18 +180,16 @@ class wallTracking(Node):
         _,_,self.robot_yaw = q.to_euler()
 
 
-    def scan_callback(self, msg):
+    def lidar_callback(self, msg):
         self.is_lidar = True
         self.lidar_msg = msg
         self.regions = {
             'front': min(msg.ranges[:11] + msg.ranges[350:360]),
-            'front_right': min(msg.ranges[320:350]),
-            'right_turn_check': min(msg.ranges[180:360]),
-            'right': min(msg.ranges[270:280]),
-            'left': min(msg.ranges[70:90]),
+            'front_right': min(r for r in msg.ranges[320:350] if r > 0),
+            'right_turn_check': min(r for r in msg.ranges[180:360] if r > 0),
+            'right': min(r for r in msg.ranges[270:275] if r > 0),
+            'left': min(r for r in msg.ranges[70:90] if r > 0),
         }
-
-        self.take_action()
 
 
     def twist_callback(self,msg):

@@ -5,7 +5,7 @@ const Download = () => {
 
   return (
     <div className="download">
-      <a href={fileURL} download>
+      <a href={fileURL} download={fileURL}>
         <button className="download__btn">가꿈</button>
       </a>
     </div>
