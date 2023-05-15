@@ -187,7 +187,7 @@ class wallTracking(Node):
             'front': min(msg.ranges[:11] + msg.ranges[350:360]),
             'front_right': min(r for r in msg.ranges[320:350] if r > 0),
             'right_turn_check': min(r for r in msg.ranges[180:360] if r > 0),
-            'right': min(r for r in msg.ranges[270:275] if r > 0),
+            'right': min(r for r in msg.ranges[265:270] if r > 0),
             'left': min(r for r in msg.ranges[70:90] if r > 0),
         }
 
