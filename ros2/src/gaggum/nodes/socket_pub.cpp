@@ -39,7 +39,7 @@ private:
     // msg.push("Hello from ROS 2!");    
     
     // int
-    auto scan_msg = sio::int_message::create(-1);
+    auto scan_msg = sio::int_message::create(1);
     msg.push(scan_msg);
 
     // bool

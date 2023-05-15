@@ -8,6 +8,7 @@
 #include <sio_client.h>
 
 using namespace std;
+using std::placeholders::_1;
 
 
 class GaggumSocketNode : public rclcpp::Node
@@ -18,6 +19,8 @@ public:
 
     move_state = this->create_publisher<std_msgs::msg::Int32>("motor", 10);
     map_scan_pub = this->create_publisher<gaggum_msgs::msg::MapScan>("MapScan", 10);
+    map_scan_sub = this->create_subscription<gaggum_msgs::msg::MapScan>(
+      "MapScan", 10, std::bind(&GaggumSocketNode::map_scan_callback, this, _1));
 
     
     
@@ -66,9 +69,23 @@ private:
     RCLCPP_INFO(this->get_logger(), "Connected to Socket.IO server!");
   }
 
+  void map_scan_callback(const gaggum_msgs::msg::MapScan::SharedPtr msg)
+  {
+    sio::message::list socket_msg;
+    cout << "Map Scan Data" << '\n';
+    // int scan_msg = msg->run;
+    auto scan_msg = sio::int_message::create(msg->run);
+    socket_msg.push(scan_msg);
+    if (msg->run == -1) {
+      cout << "Here!!!!!!!!!!!!!!" << "\n";
+      sio_client_.socket()->emit("run_walltracking", socket_msg);
+    }
+  }
+
   sio::client sio_client_;
   rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr move_state;
   rclcpp::Publisher<gaggum_msgs::msg::MapScan>::SharedPtr map_scan_pub; 
+  rclcpp::Subscription<gaggum_msgs::msg::MapScan>::SharedPtr map_scan_sub;
 
 };
 
