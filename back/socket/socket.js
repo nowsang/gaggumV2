@@ -42,9 +42,9 @@ function socketStart() {
 
     console.log("connected from server");
 
-    socket.on("message", (data) => {
-      console.log("server socket test", data);
-      socket.to(roomName).emit("message", data);
+    socket.on("run_motor", (data) => {
+      console.log("run_motor", data);
+      socket.to(roomName).emit("run_motor", data);
     })
 
     // Map Auto Scan
