@@ -108,7 +108,7 @@ class RegisterFragment : Fragment() {
                 socket.emit("run_motor", jsonliftUp)
             }
         }
-
+//
         liftDown.setOnClickListener {
             if (socket.connected()) {
                 socket.emit("run_motor",jsonliftDown)
