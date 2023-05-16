@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
+<!--    알림 설정-->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 <!--    //카메라 설정-->
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -10,6 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Location -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -21,6 +24,9 @@
         android:theme="@style/Theme.Gaggum"
         android:usesCleartextTraffic="true"
         tools:targetApi="31" >
+        <service
+            android:name=".MyForegroundService"
+            />
         <activity
             android:name=".ImageViewActivity"
             android:exported="false" />

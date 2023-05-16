@@ -52,6 +52,9 @@ class RegisterFragment : Fragment() {
         val downArrow = binding.arrowDown
         val leftArrow = binding.arrowLeft
         val rightArrow = binding.arrowRight
+        val liftUp = binding.liftUpButton
+        val liftDown = binding.liftDownButton
+        val watering = binding.wateringButton
 
         upArrow.setOnTouchListener { _, event ->
             when (event.action) {
@@ -70,7 +73,7 @@ class RegisterFragment : Fragment() {
         }
 
         leftArrow.setOnTouchListener { _, event ->
-            when (event.action) {
+            when (event.action) { //모드
                 MotionEvent.ACTION_DOWN -> leftKeyDown = true
                 MotionEvent.ACTION_UP -> leftKeyDown = false
             }
@@ -83,6 +86,24 @@ class RegisterFragment : Fragment() {
                 MotionEvent.ACTION_UP -> rightKeyDown = false
             }
             true
+        }
+
+        liftUp.setOnClickListener {
+            if (socket.connected()) {
+                socket.emit("run_motor",2)
+            }
+        }
+
+        liftDown.setOnClickListener {
+            if (socket.connected()) {
+                socket.emit("run_motor",3)
+            }
+        }
+
+        watering.setOnClickListener {
+            if (socket.connected()) {
+                socket.emit("run_motor",1)
+            }
         }
 
         handler.post(repeatUpdateRunnable)

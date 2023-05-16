@@ -188,14 +188,14 @@ class DiaryFragment : Fragment() {
 
     }
 
-    private fun showOptionsDialog(options: List<String>, defaultOption: String, onOptionSelected: (String) -> Unit) {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setItems(options.toTypedArray()) { _, which ->
-            val selectedOption = if (which == 0) defaultOption else options[which]
-            onOptionSelected(selectedOption)
-        }
-        builder.create().show()
-    }
+//    private fun showOptionsDialog(options: List<String>, defaultOption: String, onOptionSelected: (String) -> Unit) {
+//        val builder = AlertDialog.Builder(requireContext())
+//        builder.setItems(options.toTypedArray()) { _, which ->
+//            val selectedOption = if (which == 0) defaultOption else options[which]
+//            onOptionSelected(selectedOption)
+//        }
+//        builder.create().show()
+//    }
 
     private fun showBottomDialog(title: String, items: List<String>, onItemSelected: (String) -> Unit) {
         val dialog = Dialog(requireContext(), R.style.BottomDialogAnimation)
