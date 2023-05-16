@@ -19,7 +19,7 @@ class wallTracking(Node):
         self.twist_sub= self.create_subscription(Twist,'/cmd_vel',self.twist_callback,10)
 
         # 맵 만들 때 필요한 변수를 저장하는 주소 publish
-        self.map_scan_publisher = self.create_publisher(MapScan, '/map_scan', 100)
+        self.map_scan_publisher = self.create_publisher(MapScan, '/MapScan', 100)
         # socket에서 받아온 맵 만들기 실행 여부 정보 받기
         self.create_map_sub = self.create_subscription(MapScan, '/MapScan', self.map_scan_callback, 100)
 
@@ -67,7 +67,7 @@ class wallTracking(Node):
    
     def timer_callback(self):
         # 맵핑 종료 조건
-        #print(self.is_odom, self.is_path, self.is_status, self.is_lidar)
+        # print(self.is_odom, self.is_path, self.is_status, self.is_lidar)
         if self.is_odom and self.is_lidar:
             # 로봇의 현재 위치
             robot_pose_x = self.odom_msg.pose.pose.position.x
@@ -75,7 +75,7 @@ class wallTracking(Node):
             #print(robot_pose_x, robot_pose_y)
             #print(self.is_comback, self.is_mapping_end)
             # 로봇이 시작 위치 ()에 5 반경을 벗어나면
-            if not (-0.3 <= robot_pose_x <= 0.3 and -0.3 <= robot_pose_y <= 0.3):
+            if not (-0.1 <= robot_pose_x <= 0.1 and -0.1 <= robot_pose_y <= 0.1):
                 self.is_comback = True
             elif self.is_comback:
                 self.is_mapping_end = True
@@ -90,6 +90,7 @@ class wallTracking(Node):
         print('left   :', self.regions['left'])
         print('=================================================')
 
+        print(self.is_start, self.is_mapping_end)
         if self.is_start and not self.is_mapping_end:
             if self.state == 0:
                 self.find_wall()
@@ -109,9 +110,10 @@ class wallTracking(Node):
             print("맵 스캔이 종료되었습니다!!!")
             msg = MapScan()
             msg.run = -1
+            self.is_start = False
             self.map_scan_publisher.publish(msg)
             
-        #     self.is_mapping_end = False
+            self.is_mapping_end = False
 
             
         else:
@@ -130,24 +132,23 @@ class wallTracking(Node):
 
 
     def take_action(self):
-        
-        if self.regions['front'] > 0.4:                         # 전방이 크면
-            if self.regions['front_right'] < 0.3:               # 전방 오른쪽이 작으면
-                self.change_state(1)                            # 왼쪽으로 돌아라(집게 충돌 방지)
-            else:
-                if self.regions['right'] > 0.7:                 # 오른쪽이 크면
-                    self.change_state(0)
-                    if self.regions['right_turn_check'] > 0.1:  # 오른쪽에 벽이 없으면
-                        self.change_state(3)                    # 오른쪽으로 돌아라
+        if self.regions['front_right'] < 0.3:                       # 전방 오른쪽이 작으면
+            self.change_state(1)                                    # 왼쪽으로 돌아라(집게 충돌 방지)
+        else:
+            if self.regions['front'] > 0.4:                         # 전방이 크면
+                if self.regions['right'] > 0.5:                     # 오른쪽이 크면
+                    if self.regions['right_turn_check'] > 0.1:      # 오른쪽 뒤에 벽이 없으면
+                        self.change_state(3)                        # 오른쪽으로 돌아라
+                    elif self.regions['left'] > 0.6:                # 왼쪽이 크면
+                        self.change_state(0)                        # 벽을 찾아라
                 else:
                     self.change_state(2)            
-        elif self.regions['front'] < 0.4:           # 전방이 작으면
-            self.change_state(1)                    # 왼쪽으로 돌아라
-            if self.regions['right'] > 1.3 and self.regions['left'] < 0.3:         # 오른쪽이 크면
-                self.change_state(3)
-
-        else:
-            print('예외상황 발생!!')
+            elif self.regions['front'] < 0.4:                       # 전방이 작으면
+                self.change_state(1)                                # 왼쪽으로 돌아라
+                if self.regions['right'] > 1.0:
+                    self.change_state(3)
+            else:
+                print('예외상황 발생!!')
 
 
     def find_wall(self):
@@ -187,7 +188,7 @@ class wallTracking(Node):
             'front': min(msg.ranges[:11] + msg.ranges[350:360]),
             'front_right': min(r for r in msg.ranges[320:350] if r > 0),
             'right_turn_check': min(r for r in msg.ranges[180:360] if r > 0),
-            'right': min(r for r in msg.ranges[270:275] if r > 0),
+            'right': min(r for r in msg.ranges[265:270] if r > 0),
             'left': min(r for r in msg.ranges[70:90] if r > 0),
         }
 

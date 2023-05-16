@@ -43,8 +43,18 @@ function socketStart() {
     console.log("connected from server");
 
     socket.on("run_motor", (data) => {
-      console.log("run_motor", data);
-      socket.to(roomName).emit("run_motor", data);
+      console.log("run_motor", data.mode);      
+      // motor control  (pot, watering)
+      if (data.mode == 'motor_status') {
+        socket.to(roomName).emit("run_motor", data);
+        console.log("motor_status", data);
+      }
+      // motor watering_end -> {{mode : "water_end"}, {plant : plant1}}
+      else if (data.mode == "water_end") {
+        socket.emit("run_motor", data);
+        console.log("water_end", data.plant)
+      }     
+      
     })
 
     // Map Auto Scan

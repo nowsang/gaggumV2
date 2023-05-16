@@ -30,11 +30,13 @@ class KeyCertificationActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO) {
             Log.e("지금 유저", user)
             val retrievedUser = db.clientDao().getTurtleId(user)
-            withContext(Dispatchers.Main) {
-                if (retrievedUser!!.turtleId != null) {
-                    val intent = Intent(baseContext, MainActivity::class.java)
-                    intent.putExtra("turtleId", retrievedUser.turtleId)
-                    startActivity(intent)
+            if (retrievedUser != null) {
+                withContext(Dispatchers.Main) {
+                    if (retrievedUser!!.turtleId != null) {
+                        val intent = Intent(baseContext, MainActivity::class.java)
+                        intent.putExtra("turtleId", retrievedUser.turtleId)
+                        startActivity(intent)
+                    }
                 }
             }
         }
