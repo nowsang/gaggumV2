@@ -37,7 +37,7 @@ class Navigation(Node):
         # 백에서 넘어오는 trigger 더미
         self.triggers = {
             'data': [
-                {'plant_number': 3, 'plant_original_name': 'plant3', 'plant_position_x': 3.0, 'plant_position_y': 0.3},
+                {'plant_number': 3, 'plant_original_name': 'plant3', 'plant_position_x': 1.5023, 'plant_position_y': 0.9781},
             ],
             'mode': 100  
             # 'data': [
@@ -65,23 +65,26 @@ class Navigation(Node):
             self.pose_msg.pose.orientation.w = 1.0
             print(self.is_twist)
 
-            # 터틀봇의 속도
-            self.twist_msg.linear.x = 0.05
-            self.twist_msg.angular.z = 0.05
-            # self.twist_pub.publish(self.twist_msg)
             
             if self.is_plan:
                 position = self.plan_msg.poses[0].pose.position
                 # 대략 0.2 정도의 오차가 발생함
                 # print(position.x, position.y)
                 # 목표 지점 1 범위 이내에 들어왔으면
-                if self.pose_msg.pose.position.x - 1 < position.x < self.pose_msg.pose.position.x + 1 and self.pose_msg.pose.position.y -1 < position.y <  self.pose_msg.pose.position.y + 1:
+                x = self.pose_msg.pose.position.x
+                y = self.pose_msg.pose.position.y
+
+                if x - 1 < position.x < x + 1 and y -1 < position.y <  y + 1:
                     print("목표 지점 도착")
                     self.is_plan = False
                     self.is_move = False
 
             # 메시지 publish 부분
             self.goal_pose_pub.publish(self.pose_msg)
+            
+            # 터틀봇의 속도
+            self.twist_msg.linear.x = 0.05
+            self.twist_pub.publish(self.twist_msg)
             
             # 코드 상태 확인용 print
             print('Publishing: "%s"' % self.pose_msg.pose.position)
