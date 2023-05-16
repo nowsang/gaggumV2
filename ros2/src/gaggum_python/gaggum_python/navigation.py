@@ -3,6 +3,7 @@ from rclpy.node import Node
 
 from geometry_msgs.msg import PoseStamped, Twist
 from nav_msgs.msg import Odometry, Path
+from std_msgs.msg import Int16
 
 class Navigation(Node):
     def __init__(self):
@@ -15,6 +16,8 @@ class Navigation(Node):
     # publisher------------------------------------
         self.goal_pose_pub = self.create_publisher(PoseStamped, '/goal_pose', 10)
         self.twist_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.water_pub = self.create_publisher(Int16, '/water', 10)
+        self.move_sun_pub = self.create_publisher(Int16, '/move_sun', 10)
 
     # timer_callback
         timer_period = 0.5  # seconds
@@ -31,9 +34,10 @@ class Navigation(Node):
         self.odom_msg = Odometry()      # odom
         self.plan_msg = Path()          # 터틀봇의 이동 경로 좌표
         self.twist_msg = Twist()        # 터틀봇 움직임 제어
+        self.water_msg = Int16()        # 물 주라는 메시지
+        self.move_sun_msg = Int16()          # 햇빛 이동
 
-    # 데이터----------------------------------------
-        
+    # 데이터------------------------------------------
         # 백에서 넘어오는 trigger 더미
         self.triggers = {
             'data': [
@@ -56,8 +60,12 @@ class Navigation(Node):
             # 터틀봇의 위치
             # self.pose_msg.pose.position.x = self.triggers['data']['plant_position_x']
             # self.pose_msg.pose.position.y = self.triggers['data']['plant_position_y']
-            self.pose_msg.pose.position.x = 0.0
-            self.pose_msg.pose.position.y = 0.0
+            
+            self.pose_msg.pose.position.x = 0.8
+            self.pose_msg.pose.position.y = -2.0
+
+            # self.pose_msg.pose.position.x = -0.7
+            # self.pose_msg.pose.position.y = 1.9
 
             # 터틀봇의 방향
             self.pose_msg.pose.orientation.x = 0.0
@@ -74,28 +82,41 @@ class Navigation(Node):
                 x = self.pose_msg.pose.position.x
                 y = self.pose_msg.pose.position.y
 
-                if x - 1 < position.x < x + 1 and y -1 < position.y <  y + 1:
+                if x - 0.1 < position.x < x + 0.1 and y -0.1 < position.y <  y + 0.1:
                     print("목표 지점 도착")
                     self.is_plan = False
                     self.is_move = False
 
-            # 메시지 publish 부분
-            self.goal_pose_pub.publish(self.pose_msg)
+          
             
             # 터틀봇의 속도
-            self.twist_msg.linear.x = 0.05
-            self.twist_pub.publish(self.twist_msg)
+            # self.twist_msg.linear.x = 0.05
+            # self.twist_pub.publish(self.twist_msg)
             
             # 코드 상태 확인용 print
             print('Publishing: "%s"' % self.pose_msg.pose.position)
 
         else:
+            # 터틀봇을 멈추고
+            self.twist_msg.linear.x = 0.0
+            self.twist_msg.angular.z = 0.0
             print('터틀봇 멈춤')
+
             if self.triggers['mode'] == 100:
                 print('물 주기')
                 # 물 주기 노드에 publish
+                self.water_msg.data = 1
+
             elif self.triggers['mode'] == 200:
                 print('햇빛 이동')
+                self.move_sun_msg.data = 1
+        self.water_msg.data = 1
+        self.move_sun_msg.data = 1
+        # 메시지 publish 부분
+        self.goal_pose_pub.publish(self.pose_msg)
+        self.twist_pub.publish(self.twist_msg)
+        self.water_pub.publish(self.water_msg)
+        self.move_sun_pub.publish(self.move_sun_msg)
 
     # callback 함수 ------------------------
     def odom_callback(self, msg):
