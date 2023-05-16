@@ -12,6 +12,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -53,6 +54,9 @@ import kotlinx.coroutines.withContext
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
+
+
+
     //    private lateinit var socket: Socket
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 //    lateinit var mSocket : Socket
@@ -115,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    Z
+
 
     private fun checkAllPermissions() {
         if(!isLocationServicesAvailable()) {

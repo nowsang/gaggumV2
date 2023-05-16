@@ -12,6 +12,7 @@ import com.gaggum.R
 import io.socket.client.IO
 import io.socket.client.Socket
 import com.gaggum.databinding.FragmentRegisterBinding
+import org.json.JSONObject
 
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
@@ -52,6 +53,9 @@ class RegisterFragment : Fragment() {
         val downArrow = binding.arrowDown
         val leftArrow = binding.arrowLeft
         val rightArrow = binding.arrowRight
+        val liftUp = binding.liftUpButton
+        val liftDown = binding.liftDownButton
+        val watering = binding.wateringButton
 
         upArrow.setOnTouchListener { _, event ->
             when (event.action) {
@@ -70,7 +74,7 @@ class RegisterFragment : Fragment() {
         }
 
         leftArrow.setOnTouchListener { _, event ->
-            when (event.action) {
+            when (event.action) { //모드
                 MotionEvent.ACTION_DOWN -> leftKeyDown = true
                 MotionEvent.ACTION_UP -> leftKeyDown = false
             }
@@ -85,6 +89,38 @@ class RegisterFragment : Fragment() {
             true
         }
 
+        val jsonliftUp = JSONObject()
+        jsonliftUp.put("mode", "motor_status")
+        jsonliftUp.put("motor", 2)
+
+        val jsonliftDown = JSONObject()
+        jsonliftDown.put("mode", "motor_status")
+        jsonliftDown.put("motor", 3)
+
+        val jsonWatering = JSONObject()
+        jsonWatering.put("mode", "motor_status")
+        jsonWatering.put("motor", 1)
+
+
+
+        liftUp.setOnClickListener {
+            if (socket.connected()) {
+                socket.emit("run_motor", jsonliftUp)
+            }
+        }
+//
+        liftDown.setOnClickListener {
+            if (socket.connected()) {
+                socket.emit("run_motor",jsonliftDown)
+            }
+        }
+
+        watering.setOnClickListener {
+            if (socket.connected()) {
+                socket.emit("run_motor",jsonWatering)
+            }
+        }
+
         handler.post(repeatUpdateRunnable)
     }
 
@@ -96,7 +132,7 @@ class RegisterFragment : Fragment() {
     private fun logKeyDown(direction: String, number: Int) {
         if (socket.connected()) {
 //            socket.emit("go_$direction", mapOf("name" to "go $direction", "data" to number))
-            socket.emit("connectReceive", mapOf("name" to "go $direction", "data" to number))
+            socket.emit("run_walltracking", mapOf("name" to "go $direction", "data" to number))
 
         }
     }
