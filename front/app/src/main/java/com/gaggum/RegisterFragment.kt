@@ -12,6 +12,7 @@ import com.gaggum.R
 import io.socket.client.IO
 import io.socket.client.Socket
 import com.gaggum.databinding.FragmentRegisterBinding
+import org.json.JSONObject
 
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
@@ -88,21 +89,35 @@ class RegisterFragment : Fragment() {
             true
         }
 
+        val jsonliftUp = JSONObject()
+        jsonliftUp.put("mode", "motor_status")
+        jsonliftUp.put("motor", 2)
+
+        val jsonliftDown = JSONObject()
+        jsonliftDown.put("mode", "motor_status")
+        jsonliftDown.put("motor", 3)
+
+        val jsonWatering = JSONObject()
+        jsonWatering.put("mode", "motor_status")
+        jsonWatering.put("motor", 1)
+
+
+
         liftUp.setOnClickListener {
             if (socket.connected()) {
-                socket.emit("run_motor",2)
+                socket.emit("run_motor", jsonliftUp)
             }
         }
 
         liftDown.setOnClickListener {
             if (socket.connected()) {
-                socket.emit("run_motor",3)
+                socket.emit("run_motor",jsonliftDown)
             }
         }
 
         watering.setOnClickListener {
             if (socket.connected()) {
-                socket.emit("run_motor",1)
+                socket.emit("run_motor",jsonWatering)
             }
         }
 
