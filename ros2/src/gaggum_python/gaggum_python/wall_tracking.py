@@ -19,7 +19,7 @@ class wallTracking(Node):
         self.twist_sub= self.create_subscription(Twist,'/cmd_vel',self.twist_callback,10)
 
         # 맵 만들 때 필요한 변수를 저장하는 주소 publish
-        self.map_scan_publisher = self.create_publisher(MapScan, '/map_scan', 100)
+        self.map_scan_publisher = self.create_publisher(MapScan, '/MapScan', 100)
         # socket에서 받아온 맵 만들기 실행 여부 정보 받기
         self.create_map_sub = self.create_subscription(MapScan, '/MapScan', self.map_scan_callback, 100)
 
@@ -110,9 +110,10 @@ class wallTracking(Node):
             print("맵 스캔이 종료되었습니다!!!")
             msg = MapScan()
             msg.run = -1
+            self.is_start = False
             self.map_scan_publisher.publish(msg)
             
-        #     self.is_mapping_end = False
+            self.is_mapping_end = False
 
             
         else:
