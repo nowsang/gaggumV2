@@ -79,9 +79,7 @@ class Navigation(Node):
         self.pose_msg.pose.position.x = 0.0
         self.pose_msg.pose.position.y = 0.0
         # 터틀봇의 방향
-        self.pose_msg.pose.orientation.x = 0.0
-        self.pose_msg.pose.orientation.y = 0.0
-        self.pose_msg.pose.orientation.w = 1.0
+        self.pose_msg.pose.orientation.z = 0.0
 
 
         # yolo 관련
@@ -102,11 +100,6 @@ class Navigation(Node):
                     # self.pose_msg.pose.position.y = self.triggers['data']['plant_position_y']
                     self.pose_msg.pose.position.x = 1.5
                     self.pose_msg.pose.position.y = 0.16
-
-                    # 터틀봇의 방향
-                    self.pose_msg.pose.orientation.x = 0.0
-                    self.pose_msg.pose.orientation.y = 0.0
-                    self.pose_msg.pose.orientation.w = 1.0
 
                     # 가독성을 위해 변수로 선언
                     position = self.plan_msg.poses[0].pose.position     # 터틀봇의 현재 좌표     
@@ -172,7 +165,12 @@ class Navigation(Node):
                         self.move_sun_pub.publish(self.move_sun_msg)
 
                         # 목표 좌표를 보냄
-                    # 집어서 내려놓음 
+                    # 내려놓음 
+                        # 그런대 햇빛이 이동은 경로에 방해되지 않에 창가쪽으로 놔둬야 함
+                        self.pose_msg.pose.orientation.z = 1.0
+                    # 내려 놓은 뒤에 원점으로 복귀 시켜야 함
+                        self.pose_msg.pose.position.x = 0.0
+                        self.pose_msg.pose.position.y = 0.0
 
                 self.twist_pub.publish(self.twist_msg)
 
