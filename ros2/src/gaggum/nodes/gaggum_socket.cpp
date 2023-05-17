@@ -118,6 +118,10 @@ public:
 
     });
 
+    //manual operation
+    sio_client_.socket()->on("auto_move", [this](sio::event& event) {
+      
+    });
   }
 
 private:
