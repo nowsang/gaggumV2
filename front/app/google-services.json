@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "657888669875",
+    "project_id": "gaggum-8f6f2",
+    "storage_bucket": "gaggum-8f6f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657888669875:android:71184d0f23319d9f7000c6",
+        "android_client_info": {
+          "package_name": "com.gaggum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657888669875-h68s25h76dmlis057jii56gbp2g7aj76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxuItNFKHlhL38j-QzhzMfxcokrGITwQs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657888669875-h68s25h76dmlis057jii56gbp2g7aj76.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

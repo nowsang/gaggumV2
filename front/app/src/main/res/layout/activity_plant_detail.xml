@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlantDetailActivity">
+
+  <ImageView
+      android:id="@+id/plantDetailImg"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:scaleType="centerCrop"
+      android:paddingBottom="8dp"
+      app:layout_constraintBottom_toTopOf="@+id/guideline1"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+      android:id="@+id/plantDetailSunlight"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toTopOf="@id/guideline4"
+      app:layout_constraintEnd_toStartOf="@id/plantDetailSpecies"
+      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toBottomOf="@id/guideline1" />
+
+  <TextView
+      android:id="@+id/plantDetailSpecies"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center"
+      android:fontFamily="@font/bmjua_ttf"
+      app:layout_constraintBottom_toTopOf="@id/guideline4"
+      app:layout_constraintEnd_toStartOf="@id/plantDetailBtn"
+      app:layout_constraintHorizontal_weight="3"
+      app:layout_constraintStart_toEndOf="@id/plantDetailSunlight"
+      app:layout_constraintTop_toBottomOf="@id/guideline1" />
+
+  <Button
+      android:id="@+id/plantDetailBtn"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:text="@string/btn_text"
+      android:textColor="@color/text_color"
+      android:fontFamily="@font/bmjua_ttf"
+      android:background="@drawable/radius_button"
+      app:layout_constraintBottom_toTopOf="@id/guideline4"
+      app:layout_constraintEnd_toStartOf="@id/guideline3"
+      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintStart_toEndOf="@id/plantDetailSpecies"
+      app:layout_constraintTop_toBottomOf="@id/guideline1" />
+
+  <TextView
+      android:id="@+id/plantDetailName"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center"
+      android:textColor="@color/text_color"
+      android:textSize="24sp"
+      android:textStyle="bold"
+      android:fontFamily="@font/bmjua_ttf"
+      app:layout_constraintBottom_toTopOf="@+id/guideline5"
+      app:layout_constraintEnd_toStartOf="@+id/guideline3"
+      app:layout_constraintStart_toStartOf="@+id/guideline2"
+      app:layout_constraintTop_toBottomOf="@+id/plantDetailSpecies" />
+
+  <TextView
+      android:id="@+id/plantDetailDday"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:textColor="@color/text_color"
+      android:gravity="center"
+      android:background="@drawable/view_round_top"
+      android:fontFamily="@font/bmjua_ttf"
+      app:layout_constraintVertical_weight="1"
+      app:layout_constraintEnd_toStartOf="@+id/guideline3"
+      app:layout_constraintStart_toStartOf="@+id/guideline2"
+      app:layout_constraintTop_toBottomOf="@+id/guideline5"
+      app:layout_constraintBottom_toTopOf="@id/plantDetailMemo"
+      />
+
+
+  <TextView
+      android:id="@+id/plantDetailMemo"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:textColor="@color/text_color"
+      android:gravity="center"
+      android:background="@drawable/view_round_bottom"
+      android:fontFamily="@font/bmjua_ttf"
+      android:textSize="20sp"
+      app:layout_constraintVertical_weight="3"
+      app:layout_constraintBottom_toTopOf="@+id/guideline6"
+      app:layout_constraintEnd_toStartOf="@+id/guideline3"
+      app:layout_constraintStart_toStartOf="@+id/guideline2"
+      app:layout_constraintTop_toBottomOf="@id/plantDetailDday"
+      />
+
+  <TextView
+      android:id="@+id/plantDetailWateringCycleTitle"
+      android:text="@string/detail_watering_cycle"
+      android:textColor="@color/text_color"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center"
+      android:textSize="20sp"
+      android:textStyle="bold"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:fontFamily="@font/bmjua_ttf"
+      app:layout_constraintBottom_toTopOf="@+id/guideline8"
+      app:layout_constraintTop_toTopOf="@+id/guideline7"
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintEnd_toStartOf="@id/plantDetailWateringAmountTitle"
+      />
+
+  <TextView
+      android:id="@+id/plantDetailWateringAmountTitle"
+      android:text="@string/detail_watering_amount"
+      android:textColor="@color/text_color"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center"
+      android:textSize="20sp"
+      android:textStyle="bold"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:fontFamily="@font/bmjua_ttf"
+      app:layout_constraintBottom_toTopOf="@+id/guideline8"
+      app:layout_constraintTop_toTopOf="@+id/guideline7"
+      app:layout_constraintStart_toEndOf="@id/plantDetailWateringCycleTitle"
+      app:layout_constraintEnd_toStartOf="@id/plantDetailWateringDayTitle"
+      />
+
+  <TextView
+      android:id="@+id/plantDetailWateringDayTitle"
+      android:text="@string/detail_watering_date"
+      android:textColor="@color/text_color"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center"
+      android:textSize="20sp"
+      android:textStyle="bold"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:fontFamily="@font/bmjua_ttf"
+      app:layout_constraintBottom_toTopOf="@+id/guideline8"
+      app:layout_constraintTop_toTopOf="@+id/guideline7"
+      app:layout_constraintStart_toEndOf="@id/plantDetailWateringAmountTitle"
+      app:layout_constraintEnd_toStartOf="@id/guideline3"
+      />
+
+  <TextView
+      android:id="@+id/plantDetailWateringCycle"
+      android:textColor="@color/text_color"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center"
+      android:background="@drawable/textview_rounded"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:fontFamily="@font/bmjua_ttf"
+      app:layout_constraintBottom_toTopOf="@+id/guideline9"
+      app:layout_constraintTop_toTopOf="@+id/guideline8"
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintEnd_toStartOf="@id/plantDetailWateringAmount"
+      />
+
+  <TextView
+      android:id="@+id/plantDetailWateringAmount"
+      android:textColor="@color/text_color"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center"
+      android:background="@drawable/textview_rounded"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:fontFamily="@font/bmjua_ttf"
+      app:layout_constraintBottom_toTopOf="@+id/guideline9"
+      app:layout_constraintTop_toTopOf="@+id/guideline8"
+      app:layout_constraintStart_toEndOf="@id/plantDetailWateringCycle"
+      app:layout_constraintEnd_toStartOf="@id/plantDetailWateringDay"
+      />
+
+  <TextView
+      android:id="@+id/plantDetailWateringDay"
+      android:textColor="@color/text_color"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center"
+      android:background="@drawable/textview_rounded"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:fontFamily="@font/bmjua_ttf"
+      app:layout_constraintBottom_toTopOf="@+id/guideline9"
+      app:layout_constraintTop_toTopOf="@+id/guideline8"
+      app:layout_constraintStart_toEndOf="@id/plantDetailWateringAmount"
+      app:layout_constraintEnd_toStartOf="@id/guideline3"
+      />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.45" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.05" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.95" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.5" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline5"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.55" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline6"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.7" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline7"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.75" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline8"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.8" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline9"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.93" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
