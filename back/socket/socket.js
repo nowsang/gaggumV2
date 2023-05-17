@@ -89,7 +89,7 @@ function socketStart() {
           // ROS로 급수 필요 식물 리스트 전달
           socket.to(roomName).emit("auto_move", waterNeedPlants);
         })();
-      } else if (data.environment.hour == 15) {
+      } else if (data.hour == 15) {
         (async () => {
           // db에서 햇빛이 필요한 식물과 햇빛 위치를 가져오기
           let sunNeedPlants = await plants.getSunNeedPlant();

@@ -18,6 +18,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Test.msg"
   "msg/Detection.msg"
   "msg/MapScan.msg"
+  "msg/PlantInfo.msg"
  )
 
 if(BUILD_TESTING)

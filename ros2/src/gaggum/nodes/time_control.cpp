@@ -14,7 +14,8 @@ public:
   TimeControlNode() : Node("timecontrol_node")
   {    
     sio_client_.set_open_listener(std::bind(&TimeControlNode::on_connected, this));
-    sio_client_.connect("http://localhost:3001");
+    // sio_client_.connect("http://localhost:3001");
+    sio_client_.connect("https://k8b101.p.ssafy.io:3001");
 
     
     timer_ = this->create_wall_timer(std::chrono::seconds(1), std::bind(&TimeControlNode::send_message, this));
