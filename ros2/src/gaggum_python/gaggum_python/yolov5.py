@@ -23,14 +23,14 @@ class detection_net_class():
         os_file_path = os.path.abspath(__file__)
         print(os_file_path) #/home/sangwon/Desktop/S08P31B101/ros2/build/gaggum_python/gaggum_python/yolov5.py
         full_path = os_file_path.replace('install/gaggum_python/lib/python3.8/site-packages/gaggum_python/yolov5.py', 
-                                        'src/gaggum_python/gaggum_python/model_weights/gaggum_weight_turtle_final_1.pt')
+                                        'src/gaggum_python/gaggum_python/model_weights/gaggum_weight_turtle_final_3.pt')
         # remote_yolov5_path = "ultralytics/yolov5"
         print(full_path)
         local_yolov5_path = os_file_path.replace('install/gaggum_python/lib/python3.8/site-packages/gaggum_python/yolov5.py', 'src/yolov5')
         print(local_yolov5_path)
         self.model = torch.hub.load(local_yolov5_path, 'custom', path=full_path, source='local', force_reload=True)
 
-        self.model.conf = 0.75
+        self.model.conf = 0.65
 
     def inference(self, image_np):
         
@@ -46,9 +46,9 @@ class detection_net_class():
         # 4  986.00  304.00  1028.0  420.0    0.286865      4  plant5
         
         idx_detect = info.index.to_numpy()
-        boxes_detect = info[info['confidence'] > 0.75][['xmin', 'ymin', 'xmax', 'ymax']].to_numpy()
+        boxes_detect = info[info['confidence'] > 0.65][['xmin', 'ymin', 'xmax', 'ymax']].to_numpy()
         classes_pick = info[['name']].T.to_numpy()
-        info_result = info[info['confidence'] > 0.75].to_numpy()
+        info_result = info[info['confidence'] > 0.65].to_numpy()
 
         return np.squeeze(results.render()), boxes_detect, classes_pick, info_result
 
@@ -68,6 +68,7 @@ def img_callback(msg):
     is_img_bgr = True
     np_arr = np.frombuffer(msg.data, np.uint8)
     img_bgr = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+    img_bgr = cv2.resize(img_bgr, (640, 480))
 
 def odom_callback(msg):
     global odom_msg
