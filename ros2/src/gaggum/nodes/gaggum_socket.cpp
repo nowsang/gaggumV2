@@ -96,11 +96,14 @@ public:
       string plant_detected_name = waterplant["plant_detected_name"]->get_string();
 
       cout << plant_position_x << "\n";
-      // auto plant_msg = gaggum_msgs::msg::PlantInfo();
-      // plant_msg.plant_id = ;
+      auto plant_msg = gaggum_msgs::msg::PlantInfo();
+      plant_msg.plant_id = plant_id;
+      plant_msg.plant_position_x = plant_position_x;
+      plant_msg.plant_position_y = plant_position_y;
+      plant_msg.plant_detected_name = plant_detected_name;
 
 
-      // plant_info_pub->publish(plant_msg);
+      plant_info_pub->publish(plant_msg);
 
 
 
