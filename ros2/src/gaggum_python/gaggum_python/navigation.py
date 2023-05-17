@@ -32,6 +32,7 @@ class Navigation(Node):
         self.is_twist = False           # Twist
         self.is_yolo = False            # yolo
         self.is_plant_detected = False  # 화분 감지 확인
+        self.is_center = False
 
     # 메시지------------------------------------------
         self.pose_msg = PoseStamped()   # nav2에 목표 좌표 보냄
@@ -70,16 +71,18 @@ class Navigation(Node):
 
 
         # yolo 관련
-        self.yolo_distance = 10     # 화분과의 거리
+        self.yolo_distance = 999    # 화분과의 거리
         self.yolo_number = 0        # 화분의 번호
         self.yolo_cx = 0            # 화분의 중심 x좌표
         self.yolo_cy = 0            # 화분의 중심 y좌표
         self.yolo_view_width = 640  # 카메라 이미지의 넓이
-        self.tolerance = 3          # 중심 맞추기 오차 허용치
 
+        # centerposion 관련
+        self.tolerance = 3          # 중심 맞추기 오차 허용치
+        self.check_center = 0       # 중심이 맞춰진 횟수
 
     def timer_callback(self):
-        
+        print(self.is_odom, self.is_yolo, self.is_plan, self.is_move, self.is_twist)
         if self.is_odom and self.is_yolo and self.is_twist: # 시작 조건 odom, yolo, twist의 값이 넘어올 때
         
             if self.is_move:    # 터틀봇이 이동 가능한 상태
@@ -89,8 +92,8 @@ class Navigation(Node):
                     # 터틀봇의 목표 위치
                     # self.pose_msg.pose.position.x = self.triggers['data']['plant_position_x']
                     # self.pose_msg.pose.position.y = self.triggers['data']['plant_position_y']
-                    self.pose_msg.pose.position.x = 1.3
-                    self.pose_msg.pose.position.y = 0.5
+                    self.pose_msg.pose.position.x = 1.0
+                    self.pose_msg.pose.position.y = 1.3
                     # self.pose_msg.pose.position.x = -0.7
                     # self.pose_msg.pose.position.y = 1.9
 
@@ -110,15 +113,15 @@ class Navigation(Node):
                         self.is_plan = False
                         self.is_move = False
                     else:            
-                        # 화분이 0.5 거리 이내에 감지되면
-                        if self.yolo_distance <= 0.5:
+                        # 화분이 50cm 거리 이내에 감지되면
+                        if self.yolo_distance <= 250:
                             print("화분 감지")
-                            if  self.yolo_number == self.plant_number - 1:  # 목표 화분인지 확인
-                                self.is_plan = False
-                                self.is_move = False
-                                self.is_plant_detected = True 
+                            # if  self.yolo_number == self.plant_number - 1:  # 목표 화분인지 확인
+                            self.is_plan = False
+                            self.is_move = False
+                            self.is_plant_detected = True 
 
-                    self.goal_pose_pub.publish(self.pose_msg)               
+                self.goal_pose_pub.publish(self.pose_msg)               
                 
                 # 코드 상태 확인용 print
                 print('Publishing: "%s"' % self.pose_msg.pose.position)
@@ -131,19 +134,20 @@ class Navigation(Node):
 
                 if self.is_plant_detected:      # 식물이 감지 되었으면
                     self.centerPositioning()    # 중심 맞추기
+                
 
-                if self.triggers['mode'] == 100:
+                if self.plant_datas['mode'] == 100:
                     print('물 주기')
                     # 물 주기 노드에 publish
                     self.water_msg.data = 1
                     self.water_pub.publish(self.water_msg)
 
-                elif self.triggers['mode'] == 200:
+                elif self.plant_datas['mode'] == 200:
                     print('햇빛 이동')
                     self.move_sun_msg.data = 1
                     self.move_sun_pub.publish(self.move_sun_msg)
             
-            self.twist_pub.publish(self.twist_msg)
+        self.twist_pub.publish(self.twist_msg)
             
             
 
@@ -163,16 +167,20 @@ class Navigation(Node):
     def yolo_callback(self, msg):
         self.is_yolo = True
         self.yolo_msg = msg
-
         # yolo 변수 할당
-        idx = self.yolo_msg.object_class.index(self.plan_number - 1)
-        self.yolo_distance = self.yolo_msg.distance[idx]
-        self.yolo_number = self.yolo_msg.object_class[idx]
-        self.yolo_cx = self.yolo_msg.cx[idx]
-        self.yolo_cy = self.yolo_msg.cy[idx]
+        # idx = self.yolo_msg.object_class.index(self.plant_number - 1)
+        try:
+            idx = 0
+            self.yolo_distance = self.yolo_msg.distance[idx]
+            self.yolo_number = self.yolo_msg.object_class[idx]
+            self.yolo_cx = self.yolo_msg.cx[idx]
+            self.yolo_cy = self.yolo_msg.cy[idx]
+        except:
+            pass
     
     # 커스텀 함수 ---------------------------
     def centerPositioning(self):
+        print('중심을 맞추자')
         point = self.yolo_view_width    
         min_x = self.yolo_view_width - self.tolerance
         max_x = self.yolo_view_width + self.tolerance
@@ -182,7 +190,7 @@ class Navigation(Node):
             self.twist_msg.linear.x = 0.01        # 천천히 전진
             self.twist_msg.angular.z = 0.0  
         else:                                     # 중심이 안 맞으면
-            if self.yolo_cx < point - 5:          # 중심이 왼쪽에 있으면  
+            if self.yolo_cx < min_x:              # 중심이 왼쪽에 있으면  
                 self.twist_msg.angular.z = -0.01  # 왼쪽으로 회전           
             else:                                 # 중심이 오른쪽에 있으면
                 self.twist_msg.angular.z = 0.01   # 오른쪽으로 회전
