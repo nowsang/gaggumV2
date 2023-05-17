@@ -131,6 +131,11 @@ function socketStart() {
       }
     });
 
+
+    socket.on("manual_control", (data) => {
+      console.log(data);
+    })
+
     // 터틀봇 수동조작 파트 앞, 뒤, 오른쪽, 왼쪽
     socket.on("go_straight", (data) => {
       socket.to(roomName).emit("go_straight", data);
