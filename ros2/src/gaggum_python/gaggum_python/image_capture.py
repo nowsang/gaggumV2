@@ -13,7 +13,7 @@ class IMGParser(Node):
         self.img_bgr = None
         self.timer_period = 0.1
         self.timer = self.create_timer(self.timer_period, self.timer_callback)
-        self.img_counter = 601
+        self.img_counter = 1001
         
     def img_callback(self, msg):
         np_arr = np.frombuffer(msg.data, np.uint8)
@@ -24,7 +24,7 @@ class IMGParser(Node):
         cv2.imshow("show and write image", img_bgr)
         key = cv2.waitKey(1) & 0xFF
 
-        save_directory = 'plants_gaggum'
+        save_directory = 'plants_gaggum_images'
 
         if not os.path.exists(save_directory):
             os.makedirs(save_directory)
