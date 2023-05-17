@@ -49,9 +49,11 @@ function socketStart() {
         socket.to(roomName).emit("run_motor", data);
         console.log("motor_status", data);
       }
+
       // motor watering_end -> {{mode : "water_end"}, {plant : plant1}}
       else if (data.mode == "water_end") {
         socket.emit("run_motor", data);
+        // -1 or plant1 or both
         console.log("water_end", data.plant)
       }     
       
