@@ -1,4 +1,4 @@
-int32 plant_number
-string plant_original_name
+int32 plant_id
+string plant_detected_name
 float32 plant_position_x
 float32 plant_position_y
