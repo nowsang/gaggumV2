@@ -119,8 +119,10 @@ public:
     });
 
     //manual operation
-    sio_client_.socket()->on("auto_move", [this](sio::event& event) {
-      
+    sio_client_.socket()->on("manual_control", [this](sio::event& event) {
+      int dir = event.get_message()->get_int();
+      cout << dir << '\n';
+      // msg.angular.z /// left : +, right : -
     });
   }
 
