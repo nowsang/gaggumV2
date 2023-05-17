@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiaryFragment"
-    >
+    tools:context=".DiaryFragment">
 
     <TextView
         android:id="@+id/diaryTitle"
@@ -15,51 +14,55 @@
         android:fontFamily="@font/bmjua_ttf"
         android:gravity="center"
         android:text="다이어리"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:textColor="@color/text_color"
+        android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="10dp" />
 
-<!--    hr-->
+    <!--    hr-->
     <View
         android:id="@+id/horizontalLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
+        android:background="@color/light_gray"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_start_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/diary_button"
-        android:text="+"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="parent"
- />
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/circle_background"
+        android:elevation="2dp"
+        android:src="@drawable/diary_plus_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/titleButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/diary_button"
         android:text="이름"
-        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toStartOf="@+id/yearButton"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline2" />
 
     <Button
         android:id="@+id/yearButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/diary_button"
         android:text="년"
-        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
@@ -67,15 +70,16 @@
     <Button
         android:id="@+id/monthButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/diary_button"
         android:text="월"
-
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toEndOf="@+id/yearButton"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/singRV"
@@ -85,7 +89,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/titleButton"
+        app:layout_constraintTop_toBottomOf="@+id/guideline18"
         tools:listitem="@layout/diary_item" />
 
 
@@ -95,18 +99,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.0998632" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -115,6 +121,12 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.89" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.17" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

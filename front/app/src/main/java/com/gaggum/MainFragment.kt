@@ -1,5 +1,6 @@
 package com.gaggum
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.location.Address
@@ -9,7 +10,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -58,6 +62,10 @@ class MainFragment() : Fragment() {
         user = Firebase.auth.currentUser!!.uid
 
     }
+//    private fun startMyService() {
+//        val serviceIntent = Intent(requireActivity(), MyForegroundService::class.java)
+//        ContextCompat.startForegroundService(requireActivity(), serviceIntent)
+//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -88,12 +96,34 @@ class MainFragment() : Fragment() {
 
         // Set the click listener for the button
         binding.mainMapScanBtn.setOnClickListener {
-            //            // MapScanActivity 시작하기 위한 Intent 생성
+            val dialogView = LayoutInflater.from(context).inflate(R.layout.map_scan_start_dialog, null)
+
+
+            val positiveButton = dialogView.findViewById<Button>(R.id.dialog_positive_button)
+            val negativeButton = dialogView.findViewById<Button>(R.id.dialog_negative_button)
+
+            val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .show()
+
+            positiveButton.setOnClickListener {
                 val intent = Intent(requireActivity(), MapScanActivity::class.java)
-            //
-            //    // 액티비티 시작
                 startActivity(intent)
+//                startMyService()
+                alertDialog.dismiss()
+            }
+
+            negativeButton.setOnClickListener {
+                alertDialog.dismiss()
+            }
         }
+
+
+
+
+
+
+
 
 
         var lat : String? = null
@@ -109,6 +139,10 @@ class MainFragment() : Fragment() {
             val intent = Intent(requireActivity(), SigninActivity::class.java)
             startActivity(intent)
         }
+
+
+
+
 
         fun updateUI() {
             locationProvider = LocationProvider(mainActivity)
