@@ -13,7 +13,7 @@ class odomReset(Node):
     # publisher------------------------------------
         self.odom_pub = self.create_publisher(Odometry, '/odom', 10)
 
-    # # timer_callback
+    # # timer_callbacksio_client_.socket()->on("auto_move", [this](sio::event& event) {
     #     timer_period = 0.5  # seconds
     #     self.timer = self.create_timer(timer_period, self.timer_callback)
         
