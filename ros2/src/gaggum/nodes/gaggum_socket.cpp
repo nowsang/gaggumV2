@@ -22,12 +22,13 @@ public:
     map_scan_pub = this->create_publisher<gaggum_msgs::msg::MapScan>("MapScan", 10);
     map_scan_sub = this->create_subscription<gaggum_msgs::msg::MapScan>(
       "MapScan", 10, std::bind(&GaggumSocketNode::map_scan_callback, this, _1));
-
+    motor_end_sub = this->create_subscription<std_msgs::msg::Int32>(
+      "motor_end", 10, std::bind(&GaggumSocketNode::motor_end_callback, this, _1));
     
     // Connect to the Socket.IO server
     sio_client_.set_open_listener(std::bind(&GaggumSocketNode::on_connected, this));
     // sio_client_.connect("http://localhost:3001");
-    // sio_client_.connect("https://k8b101.p.ssafy.io:3001");
+    sio_client_.connect("https://k8b101.p.ssafy.io:3001");
     
 
     // motor control
@@ -40,7 +41,7 @@ public:
       
       
       // motor 1, 2, 3
-      if (mode == "motor_status") {
+      if (mode == "motor_status") {        
         int motor = motor_control["motor"]->get_int();
         cout << motor << '\n';
 
@@ -48,6 +49,8 @@ public:
         motor_msg.data = motor;
         move_state->publish(motor_msg);
       }
+
+      // else if (mode == "water_end")
 
 
 
@@ -116,8 +119,26 @@ private:
     }
   }
 
+  void motor_end_callback(const std_msgs::msg::Int32::SharedPtr msg)
+  {
+    sio::message::list socket_msg;
+    cout << "motor_end" << '\n';
+
+    map<string, string> watering_plant = {{"mode", "water_end"}, {"plant", "plant1"}};
+    auto end_msg = sio::object_message::create();
+    for (const auto& [key, value] : plant) {
+        // value is Int type. -> sio::int_message
+        obj_msg->get_map()[key] = sio::string_message::create(value);
+    }   
+    socket_msg.push(end_msg);
+    sio_client_.socket()->emit("run_motor", socket_msg)
+
+  }
+
+
   sio::client sio_client_;
   rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr move_state;
+  rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr motor_end_sub;
   rclcpp::Publisher<gaggum_msgs::msg::MapScan>::SharedPtr map_scan_pub; 
   rclcpp::Subscription<gaggum_msgs::msg::MapScan>::SharedPtr map_scan_sub;
 
