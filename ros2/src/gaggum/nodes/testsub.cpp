@@ -4,6 +4,7 @@
 #include "std_msgs/msg/int32.hpp"
 #include "gaggum_msgs/msg/map_scan.hpp"
 #include "gaggum_msgs/msg/detection.hpp"
+#include "gaggum_msgs/msg/plant_info.hpp"
 
 using std::placeholders::_1;
 using namespace std;
@@ -20,8 +21,8 @@ class MinimalSubscriber : public rclcpp::Node
       sub_ = this->create_subscription<gaggum_msgs::msg::Detection>(
       "yolo", 10, std::bind(&MinimalSubscriber::yolo_callback, this, _1));
 
-      motor_sub = this->create_subscription<std_msgs::msg::Int32>(
-      "motor", 10, std::bind(&MinimalSubscriber::motor_callback, this, _1));
+      plant_info_sub = this->create_subscription<gaggum_msgs::msg::PlantInfo>(
+      "waterPlant", 10, std::bind(&MinimalSubscriber::plantinfo_callback, this, _1));
 
       motor_end = this->create_subscription<std_msgs::msg::Int32>(
       "end_motor", 10, std::bind(&MinimalSubscriber::end_callback, this, _1));
@@ -43,11 +44,11 @@ class MinimalSubscriber : public rclcpp::Node
 
     }
 
-    void motor_callback(const std_msgs::msg::Int32::SharedPtr msg) const
+    void plantinfo_callback(const gaggum_msgs::msg::PlantInfo::SharedPtr msg) const
     {
-      cout << "motor" << '\n';
-      int motor_msg = msg->data;
-      cout << motor_msg << '\n';
+      cout << "plantInfo" << '\n';
+      int plant_id = msg->plant_id;
+      cout << plant_id << '\n';
     }
 
     void end_callback(const std_msgs::msg::Int32::SharedPtr msg) const
@@ -59,10 +60,10 @@ class MinimalSubscriber : public rclcpp::Node
     }
 
 
-    rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr motor_sub;
     rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr motor_end;
     rclcpp::Subscription<gaggum_msgs::msg::Detection>::SharedPtr sub_;
     rclcpp::Subscription<gaggum_msgs::msg::MapScan>::SharedPtr subscription_;
+    rclcpp::Subscription<gaggum_msgs::msg::PlantInfo>::SharedPtr plant_info_sub;
 };
 
 int main(int argc, char * argv[])

@@ -26,7 +26,7 @@ include_directories(${sioclient_INCLUDE_DIRS})
 
 # 실행 파일 추가 및 이름 지정
 add_executable(talker nodes/testpub.cpp)
-ament_target_dependencies(talker rclcpp gaggum_msgs)
+ament_target_dependencies(talker rclcpp gaggum_msgs nav_msgs)
 
 add_executable(listener nodes/testsub.cpp)
 ament_target_dependencies(listener rclcpp gaggum_msgs std_msgs)
