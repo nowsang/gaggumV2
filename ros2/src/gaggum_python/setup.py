@@ -34,6 +34,7 @@ setup(
             'navigation = gaggum_python.navigation:main',
             'move_sun = gaggum_python.move_sun:main',
             'water = gaggum_python.water:main',
+            'odom_reset = gaggum_python.odom_reset:main',
         ],
     },
 )
