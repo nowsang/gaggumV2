@@ -13,4 +13,8 @@
     <string name="detail_watering_cycle">급수주기</string>
     <string name="detail_watering_amount">급수량</string>
     <string name="detail_watering_date">급수일</string>
+
+<!--    알람-->
+    <string name="channel_name">Your Channel Name</string>
+    <string name="channel_description">Your Channel Description</string>
 </resources>

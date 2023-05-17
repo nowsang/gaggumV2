@@ -44,7 +44,11 @@ data class editDiaryRequestBody (
 data class editDiaryResponseBody (
     @SerializedName("data")
     val data:EditDiaryResponseData
-)
+
+)data class EditDiaryResponseData(
+    val info: String,
+
+    )
 data class createDiaryRequestBody (
     @SerializedName("plant_id")
     val plantId: Int?,
@@ -59,9 +63,13 @@ data class createDiaryResponseBody (
     @SerializedName("data")
     val data:EditDiaryResponseData
 )
-data class EditDiaryResponseData(
-    val info: String,
-
+data class deleteDiaryRequestBody (
+    @SerializedName("diary_id")
+    val diaryId: Int?,
+)
+data class deleteDiaryResponseBody (
+    @SerializedName("data")
+    val data:EditDiaryResponseData
 )
 data class diaryInfo (
     @SerializedName("diary_title")

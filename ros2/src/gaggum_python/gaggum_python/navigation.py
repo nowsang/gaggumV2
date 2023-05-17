@@ -55,15 +55,13 @@ class Navigation(Node):
 
     def timer_callback(self):
 
-        if self.is_move:
+        if self.is_move:    # 터틀봇이 이동 중
             self.pose_msg.header.frame_id = "map"
-            # 터틀봇의 위치
+            # 터틀봇의 목표 위치
             # self.pose_msg.pose.position.x = self.triggers['data']['plant_position_x']
             # self.pose_msg.pose.position.y = self.triggers['data']['plant_position_y']
-            
-            self.pose_msg.pose.position.x = 0.8
-            self.pose_msg.pose.position.y = -2.0
-
+            self.pose_msg.pose.position.x = 1.3
+            self.pose_msg.pose.position.y = 0.5
             # self.pose_msg.pose.position.x = -0.7
             # self.pose_msg.pose.position.y = 1.9
 
@@ -71,8 +69,6 @@ class Navigation(Node):
             self.pose_msg.pose.orientation.x = 0.0
             self.pose_msg.pose.orientation.y = 0.0
             self.pose_msg.pose.orientation.w = 1.0
-            print(self.is_twist)
-
             
             if self.is_plan:
                 position = self.plan_msg.poses[0].pose.position
@@ -88,10 +84,7 @@ class Navigation(Node):
                     self.is_move = False
 
           
-            
-            # 터틀봇의 속도
-            # self.twist_msg.linear.x = 0.05
-            # self.twist_pub.publish(self.twist_msg)
+            self.goal_pose_pub.publish(self.pose_msg)
             
             # 코드 상태 확인용 print
             print('Publishing: "%s"' % self.pose_msg.pose.position)
@@ -112,8 +105,8 @@ class Navigation(Node):
                 self.move_sun_msg.data = 1
         self.water_msg.data = 1
         self.move_sun_msg.data = 1
-        # 메시지 publish 부분
-        self.goal_pose_pub.publish(self.pose_msg)
+    
+        
         self.twist_pub.publish(self.twist_msg)
         self.water_pub.publish(self.water_msg)
         self.move_sun_pub.publish(self.move_sun_msg)
