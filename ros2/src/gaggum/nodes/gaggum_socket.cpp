@@ -20,7 +20,8 @@ public:
   {
 
     move_state = this->create_publisher<std_msgs::msg::Int32>("motor", 10);
-    plant_info_pub = this->create_publisher<gaggum_msgs::msg::PlantInfo>("waterPlant", 10);
+    sunplant_info_pub = this->create_publisher<gaggum_msgs::msg::PlantInfo>("sunPlant", 10);
+    waterplant_info_pub = this->create_publisher<gaggum_msgs::msg::PlantInfo>("waterPlant", 10);
     map_scan_pub = this->create_publisher<gaggum_msgs::msg::MapScan>("MapScan", 10);
     map_scan_sub = this->create_subscription<gaggum_msgs::msg::MapScan>(
       "MapScan", 10, std::bind(&GaggumSocketNode::map_scan_callback, this, _1));
@@ -103,7 +104,7 @@ public:
       plant_msg.plant_detected_name = plant_detected_name;
 
 
-      plant_info_pub->publish(plant_msg);
+      waterplant_info_pub->publish(plant_msg);
 
 
 
@@ -167,7 +168,8 @@ private:
   rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr motor_end_sub;
   rclcpp::Publisher<gaggum_msgs::msg::MapScan>::SharedPtr map_scan_pub; 
   rclcpp::Subscription<gaggum_msgs::msg::MapScan>::SharedPtr map_scan_sub;
-  rclcpp::Publisher<gaggum_msgs::msg::PlantInfo>::SharedPtr plant_info_pub;
+  rclcpp::Publisher<gaggum_msgs::msg::PlantInfo>::SharedPtr sunplant_info_pub;
+  rclcpp::Publisher<gaggum_msgs::msg::PlantInfo>::SharedPtr waterplant_info_pub;
 
 };
 
