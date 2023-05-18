@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/transparent"/> <!-- 배경을 투명하게 변경합니다. -->
+    <corners android:radius="130dp"/> <!-- 원의 반지름 설정 -->
+    <stroke android:width="2dp" android:color="#FFFFFF"/> <!-- 테두리를 흰색으로 추가합니다. -->
+</shape>

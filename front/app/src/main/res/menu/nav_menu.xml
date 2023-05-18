@@ -24,7 +24,7 @@
     />
     <item
         android:id="@+id/RegisterFragment"
-        android:icon="@drawable/nav_register"
+        android:icon="@drawable/nav_hand"
         android:title="식물 등록"
         android:fontFamily="@font/bmjua_ttf"
         app:showAsAction="ifRoom"
