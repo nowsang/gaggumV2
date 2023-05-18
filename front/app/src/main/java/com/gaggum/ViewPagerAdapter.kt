@@ -3,6 +3,7 @@ package com.gaggum
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.RoundedCorner
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,6 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.Request
+import com.bumptech.glide.request.RequestOptions
 
 class ViewPagerAdapter(var slides : List<allPlants>, val context: Context) : RecyclerView.Adapter<ViewPagerAdapter.SlideViewHolder>() {
 
@@ -32,6 +36,8 @@ class ViewPagerAdapter(var slides : List<allPlants>, val context: Context) : Rec
         Glide
             .with(context)
             .load(slide.plantImg)
+            .placeholder(R.drawable.ic_launcher_background)
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(24)))
             .into(holder.imageView)
         holder.textView.text = slide.plantName
         holder.imageView.setOnClickListener {
