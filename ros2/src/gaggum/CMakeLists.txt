@@ -42,7 +42,7 @@ target_link_libraries(gaggum_socket sioclient Boost::system)
 install(TARGETS
   time_13
   time_15
-  gaggum_socket
+  gaggum_socket  
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
