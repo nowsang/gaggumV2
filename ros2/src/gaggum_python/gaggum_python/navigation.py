@@ -153,7 +153,7 @@ class Navigation(Node):
                             
                             self.twist_msg.linear.x = 0.0   # 멈춤
 
-                    else:                                   # 
+                    else:                                  
                         self.centerPositioning()            # 중심 맞추기
                 else:                               # 식물이 감지 되지 않음
                     self.twist_msg.angular.z = 0.2  # 제자리 회전
