@@ -36,7 +36,6 @@ class Navigation(Node):
         self.is_plant_detected = False  # 화분 감지 확인
         self.is_center = False          # 중앙 정렬
         self.is_sonar = False           # 초음파 센서
-        self.is_approch = False         # 화분과 근접
 
     # 메시지------------------------------------------
         self.pose_msg = PoseStamped()   # nav2에 목표 좌표 보냄
@@ -62,24 +61,16 @@ class Navigation(Node):
             # 'sunSpots': [
             #     {'sunspot_number': 0, 'sunspot_isplant': 0, 'sunspot_x_position': 0, 'sunspot_y_position': 0},
         }
-        # 화분 관련
         self.plant_id = 0
         self.plant_detected_name = ''
         self.goal_x = 0
         self.goal_y = 0
+        self.plant_name = ''
 
         self.plant_id = self.plant_datas['data'][0]['plant_id']
         self.plant_detected_name = self.plant_datas['data'][0]['plant_detected_name']
         self.goal_x = self.plant_datas['data'][0]['plant_position_x']
         self.goal_y = self.plant_datas['data'][0]['plant_position_y']
-
-        # plan 관련
-        self.pose_msg.header.frame_id = "map"
-        # 터틀봇의 목표 위치
-        self.pose_msg.pose.position.x = 0.0
-        self.pose_msg.pose.position.y = 0.0
-        # 터틀봇의 방향
-        self.pose_msg.pose.orientation.z = 0.0
 
 
         # yolo 관련
@@ -89,70 +80,85 @@ class Navigation(Node):
         self.yolo_cy = 0            # 화분의 중심 y좌표
         self.yolo_view_width = 640  # 카메라 이미지의 넓이
 
+        # centerposion 관련
+        self.tolerance = 3          # 중심 맞추기 오차 허용치
+        self.check_center = 0       # 중심이 맞춰진 횟수
+
     def timer_callback(self):
         print(self.is_odom, self.is_yolo, self.is_plan, self.is_path_tracking, self.is_twist)
         if self.is_odom and self.is_yolo and self.is_twist: # 시작 조건 odom, yolo, twist의 값이 넘어올 때
-            if self.is_path_tracking:                       # 터틀봇이 길따라 가는 중
-                if self.is_plan:                            # 목표 좌표가 넘어오면
+        
+            if self.is_path_tracking:    # 터틀봇이 길따라 가는 중
+
+                if self.is_plan:    # 목표 좌표가 넘어오면
                     self.pose_msg.header.frame_id = "map"
                     # 터틀봇의 목표 위치
                     # self.pose_msg.pose.position.x = self.triggers['data']['plant_position_x']
                     # self.pose_msg.pose.position.y = self.triggers['data']['plant_position_y']
                     self.pose_msg.pose.position.x = 1.5
                     self.pose_msg.pose.position.y = 0.16
+                    # self.pose_msg.pose.position.x = -0.7
+                    # self.pose_msg.pose.position.y = 1.9
 
-                    # 가독성을 위해 변수로 선언
-                    position = self.plan_msg.poses[0].pose.position     # 터틀봇의 현재 좌표     
-                    x = self.pose_msg.pose.position.x                   # 목표의 x좌표
-                    y = self.pose_msg.pose.position.y                   # 목표의 y좌표
+                    # 터틀봇의 방향
+                    self.pose_msg.pose.orientation.x = 0.0
+                    self.pose_msg.pose.orientation.y = 0.0
+                    self.pose_msg.pose.orientation.w = 1.0
+                    position = self.plan_msg.poses[0].pose.position
+                    # 대략 0.2 정도의 오차가 발생함
+                    # print(position.x, position.y)
+                    x = self.pose_msg.pose.position.x
+                    y = self.pose_msg.pose.position.y
                     
-                    # 목표 지점 범위 이내에 들어왔으면
+                    # 목표 지점 1 범위 이내에 들어왔으면
+                    print("목표", x, y)
+                    print("현재", position.x, position.y)
                     if x - 0.3 < position.x < x + 0.3 and y - 0.3 < position.y <  y + 0.3:
                         print("목표 지점 도착")
                         self.is_plan = False
                         self.is_path_tracking = False
                     else:            
-                        if self.yolo_distance <= 300:                   # 화분을 감지했을때 목표 화분이면 멈추는 조건문
+                        # 화분이 50cm 거리 이내에 감지되면
+                        if self.yolo_distance <= 400:
                             print("화분 감지")
                             # if  self.yolo_number == self.plant_number - 1:  # 목표 화분인지 확인
-                            self.is_plan = False  
+                            self.is_plan = False
                             self.is_path_tracking = False
-                            
-                self.goal_pose_pub.publish(self.pose_msg)               # 먼저 publish를 보내야 subscribe 할 수 있음             
+                            self.is_plant_detected = True 
+
+                self.goal_pose_pub.publish(self.pose_msg)               
                 
                 # 코드 상태 확인용 print
                 print('Publishing: "%s"' % self.pose_msg.pose.position)
 
             else:
+                # 터틀봇을 멈춘 상태
                 self.twist_msg.linear.x = 0.0
                 self.twist_msg.angular.z = 0.0
                 print('터틀봇 멈춤')
-
-                if self.yolo_distance <= 300:               # yolo 카메라에서 화분 감지
+                # 
+                if self.yolo_distance <= 400: 
                     print("화분 감지")
-                    print("yolo 거리:",self.yolo_distance)
-                    if self.yolo_distance > 240:            # 화분과의 거리가 240이 될 때까지
-                        self.twist_msg.linear.x = 0.01      # 0.01의 속도로 전진
-
-                    print("초음파 거리: ", self.sonar_distance)
+                    # 식물이 감지 되었으면
+                    if self.yolo_distance > 240:    # 화분과의 거리가 230이 될 때까지 전진 
+                        self.twist_msg.linear.x = 0.01
+                    print("화분과의 거리:",self.yolo_distance)
                     if self.is_center:                      # 중심 맞춰지면
                         self.twist_msg.linear.x = 0.05      # 전진 
+                        print(self.sonar_distance)
                         if self.sonar_distance <= 27:       # 근접하면
                             print('근접 완료')
                             # 초음파 센서의 근접의 한계가 있기 때문에 의도적으로 조금만 더 앞으로 보냄
-                            self.twist_msg.linear.x = 0.05
-                            self.twist_pub.publish(self.twist_msg)
-                            time.sleep(1.0)
+                            self.twist_msg.linear.x = 0.1
+                            
                             self.twist_msg.linear.x = 0.0   # 멈춤
 
-                    else:                                   # 중심이 맞지 않으면
+                    else:                                  
                         self.centerPositioning()            # 중심 맞추기
+                else:                               # 식물이 감지 되지 않음
+                    self.twist_msg.angular.z = 0.2  # 제자리 회전
                 
-                else:                                       # 식물이 감지 되지 않음
-                    self.twist_msg.angular.z = 0.2          # 제자리 회전
-                
-                if self.is_approch:                         # 화분에 접근했으면
-                    # 집어서 들어올림
+                if self.sonar_distance <= 27:
                     if self.plant_datas['mode'] == 100:
                         print('물 주기')
                         # 물 주기 노드에 publish
@@ -163,19 +169,8 @@ class Navigation(Node):
                         print('햇빛 이동')
                         self.move_sun_msg.data = 1
                         self.move_sun_pub.publish(self.move_sun_msg)
-
-                        # 목표 좌표를 보냄
-                    # 내려놓음 
-                        # 그런대 햇빛이 이동은 경로에 방해되지 않에 창가쪽으로 놔둬야 함
-                        self.pose_msg.pose.orientation.z = 1.0
-                    # 내려 놓은 뒤에 원점으로 복귀 시켜야 함
-                        self.pose_msg.pose.position.x = 0.0
-                        self.pose_msg.pose.position.y = 0.0
-
-                self.twist_pub.publish(self.twist_msg)
-
-        elif self.is_twist == False:                        # twist도 한번 publish를 보내야 subscribe 할 수 있음
-            self.twist_pub.publish(self.twist_msg)
+        
+        self.twist_pub.publish(self.twist_msg)
             
             
 
@@ -214,9 +209,8 @@ class Navigation(Node):
     # 커스텀 함수 ---------------------------
     def centerPositioning(self):
         print('중심을 맞추자') 
-        # yolo화면의 중심좌표에서 허용치 3을적용
-        min_x = self.yolo_view_width / 2 - 3       
-        max_x = self.yolo_view_width / 2 + 3      
+        min_x = self.yolo_view_width / 2 - self.tolerance
+        max_x = self.yolo_view_width / 2 + self.tolerance
         
         print(min_x,'<=', self.yolo_cx, '<=', max_x)
         if min_x <= self.yolo_cx <= max_x:        # 중심 좌표가 허용치 내에 있으면
