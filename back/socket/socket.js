@@ -84,8 +84,8 @@ function socketStart() {
         (async () => {
           // db에서 물줘야하는 식물 리스트 가져오기          
           let waterNeedPlants = await plants.getWaterNeedPlant(turtle_id);
-          console.log("물줘야하는 식물들", waterNeedPlants);
           waterNeedPlants.mode = 100;
+          console.log("물줘야하는 식물들", waterNeedPlants);
           // ROS로 급수 필요 식물 리스트 전달
           socket.to(roomName).emit("auto_move", waterNeedPlants);
         })();
