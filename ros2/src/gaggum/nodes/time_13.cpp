@@ -11,7 +11,7 @@ using namespace std;
 class TimeControlNode : public rclcpp::Node
 {
 public:
-  TimeControlNode() : Node("timecontrol_node")
+  TimeControlNode() : Node("timecontrol_node"), once(false)
   {    
     sio_client_.set_open_listener(std::bind(&TimeControlNode::on_connected, this));
     // sio_client_.connect("http://localhost:3001");
@@ -22,6 +22,8 @@ public:
   }
 
 private:
+  bool once;
+
   void on_connected()
   {
     RCLCPP_INFO(this->get_logger(), "Connected to Socket.IO server!");
@@ -40,18 +42,21 @@ private:
     // msg.push(int_msg);
 
 
-    // map    
-    map<string, int> hour = {{"hour", 13}};
-    auto obj_msg = sio::object_message::create();
-    for (const auto& [key, value] : hour) {
-        // value is Int type. -> sio::int_message
-        obj_msg->get_map()[key] = sio::int_message::create(value);
-    }    
-    msg.push(obj_msg);
-    sio_client_.socket()->emit("time_control", msg);
+    if (!once) {
+      once = true;
+      map<string, int> hour = {{"hour", 13}};
+      auto obj_msg = sio::object_message::create();
+      for (const auto& [key, value] : hour) {
+          // value is Int type. -> sio::int_message
+          obj_msg->get_map()[key] = sio::int_message::create(value);
+      }    
+      msg.push(obj_msg);
+      sio_client_.socket()->emit("time_control", msg);
 
-    // Log the sent message
-    RCLCPP_INFO(this->get_logger(), "Sent message to Socket.IO server: 'Hello from ROS 2!'");
+      // Log the sent message
+      RCLCPP_INFO(this->get_logger(), "Sent message to Socket.IO server: 'Hello from ROS 2!'");
+    }
+    
   }
 
   sio::client sio_client_;

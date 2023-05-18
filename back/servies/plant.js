@@ -31,7 +31,7 @@ async function getWaterNeedPlant(turtleId) {
 async function getSunNeedPlant(turtleId) {
   try {
     const rows = await db.query(
-      `SELECT * from plants WHERE plant_sunlight==1 AND turtle_id = ${turtleId};`
+      `SELECT * from plants WHERE plant_sunlight=1 AND turtle_id = ${turtleId};`
     );
     const data = helper.emptyOrRows(rows);
 
@@ -140,7 +140,18 @@ async function createPlant(body) {
     throw error;
   }
 }
-
+async function getSunSpot(turtleId) {
+  try {
+    const rows = await db.query(`SELECT * from sunspots where turtle_id = ${turtleId}`);
+    const data = helper.emptyOrRows(rows);
+    return {
+      data,
+    };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 module.exports = {
   getPlants,
   getPlantById,
@@ -151,4 +162,5 @@ module.exports = {
   createPlant,
   getPlantByOriginName,
   getSunNeedPlant,
+  getSunSpot
 };
