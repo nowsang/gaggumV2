@@ -31,7 +31,7 @@ async function getWaterNeedPlant(turtleId) {
 async function getSunNeedPlant(turtleId) {
   try {
     const rows = await db.query(
-      `SELECT * from plants WHERE plant_sunlight==1 AND turtle_id = ${turtleId};`
+      `SELECT * from plants WHERE plant_sunlight=1 AND turtle_id = ${turtleId};`
     );
     const data = helper.emptyOrRows(rows);
 
