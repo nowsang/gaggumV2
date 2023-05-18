@@ -6,14 +6,11 @@
   justify-content: center;
   align-items: center;
   font-family: "bmjua";
-
-  background-image: url("./assets/app/background_bg.gif");
-  background-size: 100vw 100vh;
-  background-repeat: no-repeat;
+  background-color: #FCFAFC;
 }
 
 .gaggum__logo {
-  width: 30%;
+  width: 15vw;
 }
 
 .gaggum__title {
