@@ -94,9 +94,9 @@ function socketStart() {
           // db에서 햇빛이 필요한 식물과 햇빛 위치를 가져오기
           let sunNeedPlants = await plants.getSunNeedPlant(turtle_id);
           let sunSpots = await plants.getSunSpot(turtle_id);
-          console.log("햇빛 필요 식물들", sunNeedPlants);
           sunNeedPlants.mode = 200;
           sunNeedPlants.sunSpots = sunSpots.data;
+          console.log("햇빛 필요 식물들", sunNeedPlants);
           // ROS로 햇빛 필요 식물 리스트 전달
           socket.to(roomName).emit("auto_move", sunNeedPlants);
         })();
