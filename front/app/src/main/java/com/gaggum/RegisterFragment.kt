@@ -26,10 +26,10 @@ class RegisterFragment : Fragment() {
 
     private val repeatUpdateRunnable = object : Runnable {
         override fun run() {
-            if (upKeyDown) logKeyDown("straight", 2)
-            if (downKeyDown) logKeyDown("back", 3)
-            if (leftKeyDown) logKeyDown("left", 1)
-            if (rightKeyDown) logKeyDown("right", 4)
+            if (upKeyDown) logKeyDown( 2)
+            if (downKeyDown) logKeyDown( 3)
+            if (leftKeyDown) logKeyDown( 1)
+            if (rightKeyDown) logKeyDown( 4)
 
             handler.postDelayed(this, 100)
         }
@@ -56,6 +56,7 @@ class RegisterFragment : Fragment() {
         val liftUp = binding.liftUpButton
         val liftDown = binding.liftDownButton
         val watering = binding.wateringButton
+        val stopping = binding.stop
 
         upArrow.setOnTouchListener { _, event ->
             when (event.action) {
@@ -88,6 +89,14 @@ class RegisterFragment : Fragment() {
             }
             true
         }
+//        stopping.setOnTouchListener { _, event ->
+//            when (event.action) {
+//                MotionEvent.ACTION_DOWN -> rightKeyDown = true
+//                MotionEvent.ACTION_UP -> rightKeyDown = false
+//            }
+//            true
+//        }
+
 
         val jsonliftUp = JSONObject()
         jsonliftUp.put("mode", "motor_status")
@@ -101,6 +110,9 @@ class RegisterFragment : Fragment() {
         jsonWatering.put("mode", "motor_status")
         jsonWatering.put("motor", 1)
 
+//        val jsonStopping = JSONObject()
+//        jsonWatering.put("mode", "motor_status")
+//        jsonWatering.put("run_walltracking", 4)
 
 
         liftUp.setOnClickListener {
@@ -121,6 +133,12 @@ class RegisterFragment : Fragment() {
             }
         }
 
+        stopping.setOnClickListener {
+            if (socket.connected()) {
+                socket.emit("manual_control",5)
+            }
+        }
+
         handler.post(repeatUpdateRunnable)
     }
 
@@ -129,11 +147,10 @@ class RegisterFragment : Fragment() {
         socket.connect()
     }
 
-    private fun logKeyDown(direction: String, number: Int) {
+    private fun logKeyDown( number: Int) {
         if (socket.connected()) {
 //            socket.emit("go_$direction", mapOf("name" to "go $direction", "data" to number))
-            socket.emit("run_walltracking", mapOf("name" to "go $direction", "data" to number))
-
+            socket.emit("manual_control", number)
         }
     }
 
