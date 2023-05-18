@@ -142,7 +142,7 @@ async function createPlant(body) {
 }
 async function getSunSpot(turtleId) {
   try {
-    const rows = await db.query(`SELECT * from sunspot where turtle_id = ${turtleId}`);
+    const rows = await db.query(`SELECT * from sunspots where turtle_id = ${turtleId}`);
     const data = helper.emptyOrRows(rows);
     return {
       data,
