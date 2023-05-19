@@ -6,7 +6,8 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/int32.hpp"
 #include "gaggum_msgs/msg/map_scan.hpp"
-#include "gaggum_msgs/msg/plant_info.hpp"
+#include "gaggum_msgs/msg/sun_plant_info.hpp"
+#include "gaggum_msgs/msg/water_plant_info.hpp"
 #include <sio_client.h>
 
 using namespace std;
@@ -20,7 +21,8 @@ public:
   {
 
     move_state = this->create_publisher<std_msgs::msg::Int32>("motor", 10);
-    plant_info_pub = this->create_publisher<gaggum_msgs::msg::PlantInfo>("waterPlant", 10);
+    sunplant_info_pub = this->create_publisher<gaggum_msgs::msg::SunPlantInfo>("sunPlant", 10);
+    waterplant_info_pub = this->create_publisher<gaggum_msgs::msg::WaterPlantInfo>("waterPlant", 10);
     map_scan_pub = this->create_publisher<gaggum_msgs::msg::MapScan>("MapScan", 10);
     map_scan_sub = this->create_subscription<gaggum_msgs::msg::MapScan>(
       "MapScan", 10, std::bind(&GaggumSocketNode::map_scan_callback, this, _1));
@@ -85,42 +87,67 @@ public:
       cout << "auto move" << "\n";
 
       // // plant water INFO
-      auto custom_obj = event.get_message()->get_map();      
+      auto custom_obj = event.get_message()->get_map();
+      int mode = custom_obj["mode"]->get_int();
       auto plant_info = custom_obj["data"]->get_vector();
-      auto waterplant = plant_info[0]->get_map();
-
-      // info id
-      int plant_id = waterplant["plant_id"]->get_int();
-      double plant_position_x = waterplant["plant_position_x"]->get_double();
-      double plant_position_y = waterplant["plant_position_y"]->get_double();
-      string plant_detected_name = waterplant["plant_detected_name"]->get_string();
-
-      cout << plant_position_x << "\n";
-      auto plant_msg = gaggum_msgs::msg::PlantInfo();
-      plant_msg.plant_id = plant_id;
-      plant_msg.plant_position_x = plant_position_x;
-      plant_msg.plant_position_y = plant_position_y;
-      plant_msg.plant_detected_name = plant_detected_name;
 
 
-      plant_info_pub->publish(plant_msg);
+      //water plant
+      if (mode == 100) {
+        cout << "water" << '\n';
+        auto waterplant = plant_info[0]->get_map();
+
+        // info id
+        int plant_id = waterplant["plant_id"]->get_int();
+        double plant_position_x = waterplant["plant_position_x"]->get_double();
+        double plant_position_y = waterplant["plant_position_y"]->get_double();
+        string plant_detected_name = waterplant["plant_detected_name"]->get_string();       
+
+        auto plant_msg = gaggum_msgs::msg::WaterPlantInfo();
+        plant_msg.plant_id = plant_id;
+        plant_msg.plant_position_x = plant_position_x;
+        plant_msg.plant_position_y = plant_position_y;
+        plant_msg.plant_detected_name = plant_detected_name;
 
 
+        waterplant_info_pub->publish(plant_msg);
 
-      // for (int i = 0; i < plant_info.size(); i++) {        
-      //   auto waterplant = plant_info[i]->get_map();
-      //   //   int plant_id = plant_V["plant_id"]->get_int();
-      //   //   string plant_name = plant_V["plant_name"]->get_string();    
-      //   for (auto it : waterplant) {
-      //       cout << it.first << " " << it.second << '\n';
-      //   }
-      // } 
+      }
+
+      else if(mode == 200) {
+        cout << "sunSpot" << '\n';
+        auto sunSpots = custom_obj["sunSpots"]->get_vector();
+        auto sunSpot = sunSpots[0]->get_map();
+
+        auto sunPlant = plant_info[0]->get_map();
+
+        int plant_id = sunPlant["plant_id"]->get_int();
+        double plant_position_x = sunPlant["plant_position_x"]->get_double();
+        double plant_position_y = sunPlant["plant_position_y"]->get_double();
+        string plant_detected_name = sunPlant["plant_detected_name"]->get_string();
+        double sunspot_position_x = sunSpot["sunspot_position_x"]->get_double();
+        double sunspot_position_y = sunSpot["sunspot_position_y"]->get_double();
+
+        cout << sunspot_position_x << " " << sunspot_position_y << '\n';
+
+        auto plant_msg = gaggum_msgs::msg::SunPlantInfo();
+        plant_msg.plant_id = plant_id;
+        plant_msg.plant_position_x = plant_position_x;
+        plant_msg.plant_position_y = plant_position_y;
+        plant_msg.plant_detected_name = plant_detected_name;
+        plant_msg.sunspot_position_x = sunspot_position_x;
+        plant_msg.sunspot_position_y = sunspot_position_y;
+
+      }      
+
 
     });
 
     //manual operation
-    sio_client_.socket()->on("auto_move", [this](sio::event& event) {
-      
+    sio_client_.socket()->on("manual_control", [this](sio::event& event) {
+      int dir = event.get_message()->get_int();
+      cout << dir << '\n';
+      // msg.angular.z /// left : +, right : -
     });
   }
 
@@ -165,7 +192,8 @@ private:
   rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr motor_end_sub;
   rclcpp::Publisher<gaggum_msgs::msg::MapScan>::SharedPtr map_scan_pub; 
   rclcpp::Subscription<gaggum_msgs::msg::MapScan>::SharedPtr map_scan_sub;
-  rclcpp::Publisher<gaggum_msgs::msg::PlantInfo>::SharedPtr plant_info_pub;
+  rclcpp::Publisher<gaggum_msgs::msg::SunPlantInfo>::SharedPtr sunplant_info_pub;
+  rclcpp::Publisher<gaggum_msgs::msg::WaterPlantInfo>::SharedPtr waterplant_info_pub;
 
 };
 

@@ -79,24 +79,24 @@ function socketStart() {
       
 
       //현재 시간이 물주는 시간인지 체크
+      let turtle_id = 1;
       if (data.hour == 13) {
         (async () => {
-          // db에서 물줘야하는 식물 리스트 가져오기
-          let turtle_id = 1;
+          // db에서 물줘야하는 식물 리스트 가져오기          
           let waterNeedPlants = await plants.getWaterNeedPlant(turtle_id);
-          console.log("물줘야하는 식물들", waterNeedPlants);
           waterNeedPlants.mode = 100;
+          console.log("물줘야하는 식물들", waterNeedPlants);
           // ROS로 급수 필요 식물 리스트 전달
           socket.to(roomName).emit("auto_move", waterNeedPlants);
         })();
       } else if (data.hour == 15) {
         (async () => {
           // db에서 햇빛이 필요한 식물과 햇빛 위치를 가져오기
-          let sunNeedPlants = await plants.getSunNeedPlant();
-          let sunSpots = await plants.getSunSpot();
-          console.log("햇빛 필요 식물들", sunNeedPlants);
+          let sunNeedPlants = await plants.getSunNeedPlant(turtle_id);
+          let sunSpots = await plants.getSunSpot(turtle_id);
           sunNeedPlants.mode = 200;
           sunNeedPlants.sunSpots = sunSpots.data;
+          console.log("햇빛 필요 식물들", sunNeedPlants);
           // ROS로 햇빛 필요 식물 리스트 전달
           socket.to(roomName).emit("auto_move", sunNeedPlants);
         })();
@@ -132,30 +132,11 @@ function socketStart() {
     });
 
 
-    socket.on("manual_control", (data) => {
-      console.log(data);
-    })
-
     // 터틀봇 수동조작 파트 앞, 뒤, 오른쪽, 왼쪽
-    socket.on("go_straight", (data) => {
-      socket.to(roomName).emit("go_straight", data);
-      console.log("앞");
-    });
-
-    socket.on("go_back", (data) => {
-      socket.to(roomName).emit("go_back", data);
-      console.log("뒤");
-    });
-
-    socket.on("go_left", (data) => {
-      socket.to(roomName).emit("go_left", data);
-      console.log("왼쪽");
-    });
-
-    socket.on("go_right", (data) => {
-      socket.to(roomName).emit("go_right", data);
-      console.log("오른쪽");
-    });
+    socket.on("manual_control", (data) => {
+      console.log("manual_control", data);
+      socket.to(roomName).emit("manual_control", data);
+    })
 
     socket.on("disconnect", () => {
       console.log("disconnected from server");
