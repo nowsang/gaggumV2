@@ -21,7 +21,7 @@ class Navigation(Node):
 
     # publisher------------------------------------
         self.goal_pose_pub = self.create_publisher(PoseStamped, '/goal_pose', 100)
-        self.twist_pub = self.create_publisher(Twist, '/cmd_vel', 100)
+        self.twist_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.motor_pub = self.create_publisher(Int32, '/motor', 100)
 
     # timer_callback
@@ -98,7 +98,6 @@ class Navigation(Node):
     def timer_callback(self):
         print(self.is_odom, self.is_yolo, self.is_plan, self.is_path_tracking, self.is_twist)
         if self.is_odom and self.is_yolo and self.is_twist: # 시작 조건 odom, yolo, twist의 값이 넘어올 때
-            print('asdasdasd', self.is_path_tracking, self.is_plan)
             if self.is_path_tracking:    # 터틀봇이 길따라 가는 중
 
                 if self.is_plan:    # 목표 좌표가 넘어오면
@@ -108,10 +107,8 @@ class Navigation(Node):
                     # print(position.x, position.y)
                     x = self.pose_msg.pose.position.x
                     y = self.pose_msg.pose.position.y
-                
+
                     # 목표 지점 1 범위 이내에 들어왔으면
-                    print("목표", x, y)
-                    print("현재", position.x, position.y)
                     if x - 0.4 < position.x < x + 0.4 and y - 0.4 < position.y <  y + 0.4:
                         print("목표 지점 도착")
                         self.is_path_tracking = False
@@ -132,13 +129,13 @@ class Navigation(Node):
                         if self.is_center:                      # 중심 맞춰지면
                             self.twist_msg.linear.x = 0.05      # 전진 
                             self.twist_msg.angular.z = 0.0 
-
+                            
                             print(self.sonar_distance)
                             if self.sonar_distance <= 27:  # 근접하면
                                 print('근접 완료')
-                                self.twist_msg.linear.x = 0.02
+                                self.twist_msg.linear.x = 0.05
                                 self.twist_pub.publish(self.twist_msg)
-                                time.sleep(3.0)
+                                time.sleep(3.5) 
                                 self.twist_msg.linear.x = 0.0
                                 self.is_approch = True
                             elif self.sonar_distance <= 25:
@@ -155,8 +152,8 @@ class Navigation(Node):
                             self.motor_msg.data = 1
                             self.motor_pub.publish(self.motor_msg)
                             print('물 주는 중')
-                            time.sleep(3.0)
                             self.water_cnt += 1
+                            time.sleep(8.0)
                             
                             print('화분 드는 중')
                             self.motor_msg.data = 2
@@ -178,10 +175,10 @@ class Navigation(Node):
                             self.moveStartPoint()
                             self.is_working = False
 
-
                 else:
+                    print('뒤로 가는 중:', self.sonar_distance)
                     self.twist_msg.linear.x = -0.1
-                    if self.yolo_distance > 250:
+                    if self.sonar_distance > 250:
                         self.twist_msg.linear.x = 0.0
                         self.is_path_tracking = True
         
@@ -195,7 +192,6 @@ class Navigation(Node):
         self.odom_msg = msg
     
     def plan_callback(self, msg):
-        print('aasdfasdfasdasd')
         self.is_plan = True
         self.plan_msg = msg # 이동 좌표가에 담겨있음
 
@@ -225,7 +221,7 @@ class Navigation(Node):
     # 커스텀 함수 ---------------------------
     def centerPositioning(self):
         print('중심을 맞추자') 
-        center = 342
+        center = 338
         min_x = center - 2
         max_x = center + 2
         
@@ -233,6 +229,7 @@ class Navigation(Node):
         if min_x <= self.yolo_cx <= max_x:        # 중심 좌표가 허용치 내에 있으면
             self.count += 1
             print('중앙 정렬', self.count)
+            self.twist_msg.angular.z = 0.0
             if self.count > 5:
                 self.is_center = True
                 print('중앙 정렬 완료')
@@ -256,7 +253,7 @@ class Navigation(Node):
     def moveSunPoint(self):
         self.pose_msg.pose.position.x = 1.0
         self.pose_msg.pose.position.y = 1.27
-        self.pose_msg.pose.orientation.z = 1.0
+        self.pose_msg.pose.orientation.z = 0.7
 
 
 
