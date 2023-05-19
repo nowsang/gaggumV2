@@ -1750,3 +1750,26 @@ ROS_DISTRO=foxy
 ## 🌳 시연영상
 ---
 
+### 집스캔
+
+![집스캔](https://github.com/Hyokiz/Algorithm/assets/109258146/aafd3fc1-1332-41d5-869c-4eb8da8c02ae)
+
+### 집스캔 알람
+
+![집스캔_알람_고화질](https://github.com/Hyokiz/Algorithm/assets/109258146/62749994-39ab-4c49-8686-f7e6e07c3f23)
+
+### 화분 들기
+
+![화분_들기_고화질](https://github.com/Hyokiz/Algorithm/assets/109258146/9f7535d9-4b75-42e6-96fb-02773c6e54cf)
+
+### 물 주기
+
+![물주기](https://github.com/Hyokiz/Algorithm/assets/109258146/eb05d2de-30b7-45fb-8bae-27951cbf27c2)
+
+### 화분 이동
+
+![화분_이동](https://github.com/Hyokiz/Algorithm/assets/109258146/9b3a9167-8326-444c-a55d-8f2195df9ed9)
+
+### 화분 놓기
+
+![화분_놓기](https://github.com/Hyokiz/Algorithm/assets/109258146/1f0ea0fd-adbe-4379-9e97-393ed25a5aad)
