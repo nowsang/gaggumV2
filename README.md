@@ -1,8 +1,6 @@
 ## README
 # 가꿈 - 스마트홈 IoT 프로젝트
 
-## 🌳 프로젝트 주소 : https://k8b101.p.ssafy.io
-
 ---
 
 ## 🌳 소개 영상 보기 : [Youtube URL](https://youtu.be/X2S5y5FsOjA)
@@ -15,7 +13,6 @@
 
 2023.04.10 ~ 2023.05.19 (총 6주)
 
-SSAFY 8기 자율 프로젝트
 
 ## 🌳 팀원 및 역할
 
@@ -78,35 +75,24 @@ SSAFY 8기 자율 프로젝트
 - Python v3.8.10
 - Python-Socket.io v5.8.0
 - C++ 14
-- ROS2-eloquent(release 2020.01.24)
+- ROS2-foxy
 - opencv-contrib-python 4.5.3.56
 - opencv-python 4.5.3.56
 - openssl 1.0.2u
 - choco 0.10.15
 - rti 5.3.1
 - openslice 6.9.190403
-```
-ROS_VERSION=2
-ROS_PYTHON_VERSION=3
-ROS_DOMAIN_ID=35
-AMENT_PREFIX_PATH=/opt/ros/foxy
-PYTHONPATH=/opt/ros/foxy/lib/python3.8/site-packages
-LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib
-ROS_LOCALHOST_ONLY=0
-PATH=/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-ROS_DISTRO=foxy
-```
 
-### ROS GPU Setting
+###  GPU Setting
 - CUDA Toolkit 11.2.2(March 2021)
 - cuDNN v8.1.0 (January 26th, 2021) for CUDA 11.0, 11.1 and 11.2
 
-### ROS Pytorch
+### Pytorch
 - torch 1.8.1 + cu111
 - torchaudio 0.8.1
 - torchvision 0.9.1 + cu111
 
-### ROS YOLO
+### YOLOv5
 - numpy 1.21.1
 - Pillow 9.4.0
 - pandas 1.3.5
