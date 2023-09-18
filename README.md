@@ -238,7 +238,7 @@
 ## 🌳 시연영상
 ---
 
-https://youtu.be/iA0V6T-_ZjA
+시연영상:  https://youtu.be/iA0V6T-_ZjA
 
 ### 집스캔
 
